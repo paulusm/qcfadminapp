@@ -1,14 +1,45 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
+    <ion-title style="zoom:1.5">Home</ion-title>
+    <ion-buttons end>
+        <button ion-button icon-only (click)="logout()"><ion-icon name="power" style="zoom:1.5"></ion-icon></button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+<ion-content padding ng-app="fupApp">
+  
+    <button ion-button icon-left large>
+        <ion-icon name="home"></ion-icon>
+        Home
+      </button>
+      <br>
+      <!-- Float the icon right -->
+      <button ion-button icon-left large (click)="goToCompanyAdmin()">
+          <ion-icon name="construct"></ion-icon>
+        Company Setup
+      </button>
+      <br>
+      <!-- Only icon (no text) -->
+      <button ion-button icon-left large (click)="goToEventsAdmin()">
+      <ion-icon name="megaphone"></ion-icon>
+      Event Maintanance
+      </button>
+      <br>
+      <button ion-button icon-left large (click)="goToThemesAdmin()">
+          <ion-icon name="star"></ion-icon>
+          Theme Maintanance
+          </button>
+          <br>
+          <button ion-button icon-left large (click)="goToArticlesAdmin()">
+              <ion-icon name="paper"></ion-icon>
+              Article Maintanance
+              </button>
+              <br>
+              <button ion-button icon-left large (click)="goToStoriesAdmin()">
+                  <ion-icon name="people"></ion-icon>
+                  Stories Maintanance
+                  </button>
+                  <br>
+                  
 </ion-content>
