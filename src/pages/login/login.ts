@@ -6,7 +6,7 @@ import { NavController, LoadingController } from 'ionic-angular';
 import { Auth } from '../../providers/auth/auth';
 import { HomePage } from '../home/home';
 import { SignupPage } from '../signup/signup';
- 
+import { ForgotPage } from '../forgot/forgot';
 @Component({
   selector: 'login-page',
   templateUrl: 'login.html'
@@ -16,8 +16,12 @@ export class LoginPage {
     email: string;
     password: string;
     loading: any;
+    confirm:string;
+    newpassword:string;
+
  
-    constructor(public navCtrl: NavController, public authService: Auth, public loadingCtrl: LoadingController) {
+    constructor(public navCtrl: NavController, public authService: Auth, 
+        public loadingCtrl: LoadingController) {
  
     }
  
@@ -57,6 +61,7 @@ export class LoginPage {
         this.authService.login(credentials).then((result) => {
             this.loading.dismiss();
             console.log(result);
+            
             this.navCtrl.setRoot(HomePage);
         }, (err) => {
             this.loading.dismiss();
@@ -79,5 +84,17 @@ export class LoginPage {
         this.loading.present();
  
     }
+
+    launchresetchg(){
+        console.log("Loading Forgot Page.");
+        this.navCtrl.push(ForgotPage, this.email);
+    }
  
+    resetsubmit(){
+        console.log("Reset Submit.");
+    }
+
+    forgot(){
+        console.log("Forgot running");
+    }
 }

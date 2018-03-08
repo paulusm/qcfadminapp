@@ -7,7 +7,9 @@ import { Http, Response } from '@angular/http';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { Company } from '../../providers/companies/company';
 import { Companies } from '../../providers/companies/companies';
-import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
+import { Themes } from '../../providers/themes/themes';
+import { Theme} from '../../providers/themes/theme';
+import { FormControl, FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'company-admin',
@@ -16,25 +18,26 @@ import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
 export class CompanyAdmin implements OnInit {
  
   public uploader:FileUploader = new FileUploader({url:'https://ionic2-qcf-auth.herokuapp.com/api/files/upload'});
-  
- 
   public filePreviewPath: SafeUrl;
- 
   public companyForm : FormGroup;
-  model = new Company('','','','');
-  //companies:any;
+  model = new Company('','','','',null);
   loading: any;
- 
+  companies:any;
+  themescontrol = new FormControl();
+  themes:any;
+  selectedValues:string;
+
   constructor(public navCtrl: NavController, public modalCtrl: ModalController,
     public alertCtrl: AlertController, public authService: Auth, 
     public loadingCtrl: LoadingController, private sanitizer: DomSanitizer,
-    public companiesService:Companies) {
+    public companiesService:Companies, public themesService:Themes) {
  
       
   }
 
   ngOnInit(){
     
+    //this.uploader.
     this.uploader.onAfterAddingFile = (fileItem) => {
       console.log("onAfterAddingFile");
       this.filePreviewPath  = this.sanitizer.bypassSecurityTrustUrl((window.URL.createObjectURL(fileItem._file)));
@@ -47,6 +50,25 @@ export class CompanyAdmin implements OnInit {
       let obj = JSON.parse(response);
       this.model.filename = obj.filename;
     };
+
+    //get all companies and bind to select drop down
+    this.companiesService.getCompanies().then((data) => {
+      console.log(data);
+      this.companies = data;
+      //this.loadDataList();
+    },(err) => {
+      console.log("not allowed");
+    });
+    
+    this.themesService.getThemes().then((result) => {
+      //this.loading.dismiss();
+      console.log(result);
+      this.themes = result;
+    }, (err) => {
+      //this.loading.dismiss();
+      console.log(err);
+    });
+
   }
 
   save() {
@@ -74,6 +96,15 @@ get currentCompany()
 {
    return JSON.stringify(this.model); 
 }
+
+onSelectTheme(options){
+  
+  console.log(options); //Here I want the changed value
+  this.selectedValues = Array.apply(null,options)  // convert to real array
+  .filter(option => option.selected)
+  .map(option => option.value)
+}
+
 
 
 }

@@ -4,6 +4,7 @@ import { Auth } from '../../providers/auth/auth';
 import { Files} from '../../providers/files/files';
 import { LoginPage } from '../login/login';
 import { CompanyAdmin } from '../companyadmin/companyadmin';
+import { SignupPage } from '../signup/signup';
 import { ArticlesAdmin } from '../articlesadmin/articlesadmin';
 import { EventsAdmin } from '../eventsadmin/eventsadmin';
 import { StoriesAdmin } from '../storiesadmin/storiesadmin';
@@ -42,8 +43,12 @@ export class HomePage {
     
      }
 
-     goToCompanyAdmin(){
+    goToCompanyAdmin(){
       this.navCtrl.push(CompanyAdmin);
+    }
+
+    goToUserAdmin(){
+      this.navCtrl.push(SignupPage);
     }
    
     goToArticlesAdmin(){

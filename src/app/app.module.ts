@@ -12,6 +12,8 @@ import { ArticlesAdmin } from '../pages/articlesadmin/articlesadmin';
 import { EventsAdmin } from '../pages/eventsadmin/eventsadmin';
 import { StoriesAdmin } from '../pages/storiesadmin/storiesadmin';
 import { ThemesAdminComponent } from '../pages/themesadmin/themesadmin';
+import { ForgotPage } from '../pages/forgot/forgot';
+import { ResetPage } from '../pages/reset/reset';
 import { ImageUploadModule } from "angular2-image-upload";
 import { IonicStorageModule } from '@ionic/storage';
 import { Auth } from '../providers/auth/auth';
@@ -33,7 +35,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     EventsAdmin,
     StoriesAdmin,
     ThemesAdminComponent,
-    FileSelectDirective
+    FileSelectDirective,
+    ForgotPage,
+    ResetPage
   ],
   imports: [
     BrowserModule,
@@ -57,7 +61,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ArticlesAdmin,
     ThemesAdminComponent,
     EventsAdmin,
-    StoriesAdmin
+    StoriesAdmin,
+    ForgotPage,
+    ResetPage
   ],
   providers: [
     StatusBar,

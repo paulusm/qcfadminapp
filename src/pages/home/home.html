@@ -8,38 +8,45 @@
 </ion-header>
 
 <ion-content padding ng-app="fupApp">
-  
-    <button ion-button icon-left large>
+  <div class="row">
+        <div class="col-md-12">
+    <button class="customBtn" ion-button icon-left large>
         <ion-icon name="home"></ion-icon>
         Home
       </button>
       <br>
       <!-- Float the icon right -->
-      <button ion-button icon-left large (click)="goToCompanyAdmin()">
+      <button class="customBtn" ion-button icon-left large (click)="goToCompanyAdmin()">
           <ion-icon name="construct"></ion-icon>
         Company Setup
       </button>
       <br>
+      <button class="customBtn" ion-button icon-left large (click)="goToUserAdmin()">
+          <ion-icon name="construct"></ion-icon>
+        Register Users
+      </button>
+      <br>
       <!-- Only icon (no text) -->
-      <button ion-button icon-left large (click)="goToEventsAdmin()">
+      <button class="customBtn" ion-button icon-left large (click)="goToEventsAdmin()">
       <ion-icon name="megaphone"></ion-icon>
       Event Maintanance
       </button>
       <br>
-      <button ion-button icon-left large (click)="goToThemesAdmin()">
+      <button class="customBtn" ion-button icon-left large (click)="goToThemesAdmin()">
           <ion-icon name="star"></ion-icon>
           Theme Maintanance
           </button>
           <br>
-          <button ion-button icon-left large (click)="goToArticlesAdmin()">
+          <button class="customBtn" ion-button icon-left large (click)="goToArticlesAdmin()">
               <ion-icon name="paper"></ion-icon>
               Article Maintanance
               </button>
               <br>
-              <button ion-button icon-left large (click)="goToStoriesAdmin()">
+              <button class="customBtn" ion-button icon-left large (click)="goToStoriesAdmin()">
                   <ion-icon name="people"></ion-icon>
                   Stories Maintanance
                   </button>
                   <br>
-                  
+                  </div>
+</div>                 
 </ion-content>

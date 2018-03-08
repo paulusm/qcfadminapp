@@ -2,21 +2,16 @@
 //Type definition for Theme....
 
 import { Storage } from '@ionic/storage';
-
+import { areas } from '../themes/area';
 
 export class Theme {
+  
   constructor(
-    public name:string,
-    public areaname:string,
-    public subject:string,
-    public companyname:string,
-    public selected:string){
-      
-    }
-    //subThemes:subTheme[];
+    public name:string, 
+    public areas:[areas])
+    {
     
+  }
 
 }
-export class subTheme{
-  area:String;
-}
+    

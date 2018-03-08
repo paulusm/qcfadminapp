@@ -22,7 +22,11 @@
               </div>
           </div>
       </nav>
-
+      <div class="container">
+          <select [ngModel]="selectedValue" (ngModelChange)="selectItem($event)">
+                  <option [value]="company.companyname" *ngFor="let company of companies">{{company.companyname}}</option>
+              </select>
+      </div>
       <div class="row">
           <div class="col-md-12">
             <h2>Logo Upload (must complete before saving company details):</h2>
@@ -33,7 +37,7 @@
                 <form>
                     <div class="form-group">
                         <label for="single">Select Image File</label>
-                        <input type="file" class="form-control" name="single" ng2FileSelect [uploader]="uploader" />                                  
+                        <input type="file" class="form-control btn btn-warning btn-xs" name="single" ng2FileSelect [uploader]="uploader" />                                  
                     </div> 
                     <img [src]="filePreviewPath" width="200" *ngIf="filePreviewPath" />                                  
                 </form>
@@ -41,7 +45,6 @@
             </div>
             <div class="row">
             <div class="col-md-12">
-                <h3>File Upload with Angular 2 and Node</h3>
                 Queue length: {{ uploader?.queue?.length }}
 
                 <table class="table">
@@ -149,7 +152,14 @@
                       <!-- <small *ngIf="!themeForm.controls.subject.valid" class="text-danger">
                               subject is required (minimum 5 characters).
                       </small> -->
-              </div>
+                      <br>
+                    <select multiple name="selectedThemes" ngModel (change)=onSelectTheme($event.target.options)>
+                        <option *ngFor="let theme of themes" [ngValue]="theme">
+                            {{ theme.name }}
+                        </option>
+                    </select> 
+                </div>
+                <p>{{selectedValues | json}}</p>
               
                   <button type="submit" class="btn btn-success btn-s">Submit</button>
           </form>

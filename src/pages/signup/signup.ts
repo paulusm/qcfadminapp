@@ -12,6 +12,13 @@ export class SignupPage {
   role: string;
   email: string;
   password: string;
+  department: string;
+  companyid: string;
+  forename: string;
+  surname: string;
+  imagepath: string;
+  isfirstlogin: 'true';
+  displayname: string;
   loading: any;
 
   constructor(public navCtrl: NavController, public authService: Auth, public loadingCtrl: LoadingController) {
@@ -26,7 +33,13 @@ export class SignupPage {
     let details = {
         email: this.email,
         password: this.password,
-        role: this.role
+        role: this.role,
+        forname: this.forename,
+        surname: this.surname,
+        displayname: this.displayname,
+        companyid: this.companyid,
+        imagepath:this.imagepath,
+        department:this.department
     };
     console.log(details);
     this.authService.createAccount(details).then((result) => {

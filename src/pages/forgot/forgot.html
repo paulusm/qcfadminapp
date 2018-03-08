@@ -1,0 +1,23 @@
+ <ion-header>
+        <ion-navbar>
+            <ion-title>Forgot Password</ion-title>
+        </ion-navbar>
+      </ion-header>
+    
+      <ion-content>
+      
+<ion-row>
+    <ion-col>
+        
+        <ion-list inset>
+          <legend>Forgot Password</legend>
+          <label>Email</label>  
+        <ion-item>
+          <ion-input [(ngModel)]="contactemail" placeholder="email" type="text"></ion-input>
+          
+        </ion-item>
+        </ion-list>
+        <button ion-button full  color="primary" class="forgot-button" (click)="forgot()">Reset Password</button>
+    </ion-col>
+  </ion-row>
+</ion-content>

@@ -126,8 +126,77 @@ export class Auth {
  
   }
  
+  //First call for reset that gereates email with token for reset....
+  forgot(email){
+    return new Promise((resolve, reject) => {
+      
+             let headers = new Headers();
+             headers.append('Content-Type', 'application/json');
+
+             console.log(JSON.stringify(email));
+
+             this.http.post('https://ionic2-qcf-auth.herokuapp.com/api/auth/forgot', JSON.stringify(email), {headers: headers})
+               .subscribe(res => {
+      
+                 let data = res.json();
+                 //this.token = data.token;
+                 //this.role = data.user["role"];
+                 console.log("Called forgot service")
+                 //this.storage.set('token', data.token);
+                 //this.storage.set('role', data.user["role"]);
+                 resolve(data);
+      
+               }, (err) => {
+                //console.warn(jqxhr.responseText)
+                 reject(err);
+               });
+      
+         });
+  }
+
   logout(){
     this.storage.set('token', '');
   }
  
+
+  resetpassword(newpassword, token){
+
+    let credentials = {
+      newpassword: newpassword,
+      token: token
+    };
+
+    return new Promise((resolve, reject) => {
+      
+             let headers = new Headers();
+             headers.append('Content-Type', 'application/json');
+
+             console.log(JSON.stringify(credentials));
+
+             this.http.post('https://ionic2-qcf-auth.herokuapp.com/api/auth/resetchg', JSON.stringify(credentials), {headers: headers})
+               .subscribe(res => {
+      
+                 let data = res.json();
+                 //this.token = data.token;
+                 //this.role = data.user["role"];
+                 console.log("Called resetchange service")
+                 //this.storage.set('token', data.token);
+                 //this.storage.set('role', data.user["role"]);
+                 resolve(data);
+      
+               }, (err) => {
+                //console.warn(jqxhr.responseText)
+                 reject(err);
+               });
+      
+         });
+  }
+
+  changePassword(){
+
+  }
+
+  firstLogin(){
+
+  }
 }

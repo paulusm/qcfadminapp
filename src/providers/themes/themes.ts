@@ -39,10 +39,27 @@ export class Themes {
          let headers = new Headers();
          headers.append('Content-Type', 'application/json');
          headers.append('Authorization', this.authService.token);
+         var strtheme = JSON.stringify(theme).replace(/"area":/g,'');
 
-         console.log(JSON.stringify(theme));
+         strtheme = strtheme.replace("[{", "[");
+         strtheme = strtheme.replace(/},{/g, ",");
+         strtheme = strtheme.replace(/}]/g, "]");
 
-         this.http.post('https://ionic2-qcf-auth.herokuapp.com/api/themes', JSON.stringify(theme), {headers: headers})
+         strtheme = strtheme.replace(/\\n/g, "\\n")
+         strtheme = strtheme.replace(/\\n/g, "\\n")
+         strtheme = strtheme.replace(/\\n/g, "\\n")  
+         .replace(/\\'/g, "\\'")
+         .replace(/\\"/g, '\\"')
+         .replace(/\\&/g, "\\&")
+         .replace(/\\r/g, "\\r")
+         .replace(/\\t/g, "\\t")
+         .replace(/\\b/g, "\\b")
+         .replace(/\\f/g, "\\f");
+          // remove non-printable and other non-valid JSON chars
+          strtheme = strtheme.replace(/[\u0000-\u0019]+/g,""); 
+         console.log(strtheme);
+        
+         this.http.post('https://ionic2-qcf-auth.herokuapp.com/api/themes', strtheme, {headers: headers})
            .map(res => res.json())
            .subscribe(res => {
              console.log("Saved");
@@ -55,7 +72,7 @@ export class Themes {
        });
     
      }
-
+     
      deleteTheme(id){
         
            return new Promise((resolve, reject) => {
