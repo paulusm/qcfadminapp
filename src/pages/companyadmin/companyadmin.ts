@@ -37,6 +37,10 @@ export class CompanyAdmin implements OnInit {
 
   ngOnInit(){
     
+    this.uploader.onBeforeUploadItem = (item) => {
+      item.withCredentials = false;
+    }
+
     //this.uploader.
     this.uploader.onAfterAddingFile = (fileItem) => {
       console.log("onAfterAddingFile");
