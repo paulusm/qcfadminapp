@@ -20,11 +20,18 @@
               <ion-input [(ngModel)]="password" placeholder="password" type="password"></ion-input>
             </ion-item>
 
+            <ion-item *ngIf="changepassword == 'true'">
+              <ion-label><ion-icon name="lock"></ion-icon></ion-label>
+              <ion-input [(ngModel)]="newpassword" placeholder="newpassword" type="password"></ion-input>
+            </ion-item>
+
           </ion-list>
 
-          <button ion-button full (click)="login()" color="primary" class="login-button">Login</button>
-
+          <button *ngIf="changepassword == 'false'" ion-button full (click)="login()" color="primary" class="login-button">Login</button>
+          <button *ngIf="changepassword == 'true'" ion-button full (click)="loginpassword()" color="primary" class="login-button">Login?</button>
+          <button *ngIf="changepassword == 'true'" ion-button full (click)="loginchangepassword()" color="primary" class="login-button">Change Password</button>
           <button ion-button full (click)="launchresetchg()" color="primary" class="login-button">Forgot Password?</button>
+          <button *ngIf="changepassword == 'false'" ion-button full (click)="launchchangepassword()" color="primary" class="login-button">Change Password?</button>
 
           
       </ion-col>

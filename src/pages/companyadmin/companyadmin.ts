@@ -109,7 +109,20 @@ onSelectTheme(options){
   .map(option => option.value)
 }
 
-
+selectItem(company){
+  console.log(company);
+  this.companiesService.getCompanyByCompanyName(company).then((result) => {
+    //this.loading.dismiss();
+    console.log(result);
+    //this.causeitems = result;
+    console.log("company retrieved");
+ 
+    //this.model =result;
+}, (err) => {
+    //this.loading.dismiss();
+    console.log(err);
+});
+}
 
 }
  

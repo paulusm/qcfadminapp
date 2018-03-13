@@ -18,6 +18,7 @@ export class LoginPage {
     loading: any;
     confirm:string;
     newpassword:string;
+    changepassword:string = 'false';
 
  
     constructor(public navCtrl: NavController, public authService: Auth, 
@@ -69,6 +70,32 @@ export class LoginPage {
         });
  
     }
+
+    loginchangepassword(){
+        
+        console.log("Running loginchangepassword from code behind");
+               this.showLoader();
+        
+               //Build object to pass as parameter to provider...
+               let credentials = {
+                   email: this.email,
+                   password: this.password,
+                   newpassword:this.newpassword
+               };
+        
+               //Another call to the Auth provider....also handles response as success or error.
+               console.log("Calling loginchangepassword service");
+               this.authService.loginchangepassword(credentials).then((result) => {
+                   this.loading.dismiss();
+                   console.log(result);
+                   
+                   this.navCtrl.setRoot(HomePage);
+               }, (err) => {
+                   this.loading.dismiss();
+                   console.log(err);
+               });
+        
+    }
  
     launchSignup(){
         this.navCtrl.push(SignupPage);
@@ -89,7 +116,17 @@ export class LoginPage {
         console.log("Loading Forgot Page.");
         this.navCtrl.push(ForgotPage, this.email);
     }
+
+    launchchangepassword(){
+        console.log("Loading Change Password Page.");
+        //this.navCtrl.push(ForgotPage, this.email);
+        this.changepassword = "true";
+    }
  
+    loginpassword(){
+        this.changepassword = "false";
+    }
+
     resetsubmit(){
         console.log("Reset Submit.");
     }

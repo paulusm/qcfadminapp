@@ -30,6 +30,7 @@ export class SignupPage {
     console.log("Running Register");
     this.showLoader();
  
+ 
     let details = {
         email: this.email,
         password: this.password,
