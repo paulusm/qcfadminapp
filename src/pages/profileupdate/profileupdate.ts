@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { NavController, LoadingController } from 'ionic-angular';
 import { Auth } from '../../providers/auth/auth';
 import { HomePage } from '../home/home';
-import { Users } from '../../providers/users/users'
+import { Users } from '../../providers/users/users';
+import { Storage } from '@ionic/storage';
 
 @Component({
     selector: 'profileupdate',
@@ -24,18 +25,21 @@ import { Users } from '../../providers/users/users'
     user:any;
   
     constructor(public navCtrl: NavController, public authService: Auth, 
-        public loadingCtrl: LoadingController, public usersService: Users) {
+        public loadingCtrl: LoadingController, public usersService: Users, public storage: Storage) {
    
+        this.storage.get('user').then((value) => {
+                
+                           
         //bind properties to logged on user profile...
-        this.role = this.authService.user["role"];
-        this.email = this.authService.user["email"];
-        this.department = this.authService.user["department"];
-        this.companyid = this.authService.user["companyid"];
-        this.forename = this.authService.user["forename"];
-        this.surname = this.authService.user["surname"];
-        this.imagepath = this.authService.user["imagepath"];
-        this.displayname = this.authService.user["displayname"];
-
+        this.role = value["role"];
+        this.email =  value["email"];
+        this.department =  value["department"];
+        this.companyid =  value["companyid"];
+        this.forename =  value["forename"];
+        this.surname =  value["surname"];
+        this.imagepath =  value["imagepath"];
+        this.displayname =  value["displayname"];
+        });
     }
 
     updateprofile(){
@@ -55,6 +59,21 @@ import { Users } from '../../providers/users/users'
         this.usersService.updateProfile(details).then((result) => {
           //this.loading.dismiss();
           console.log(result);
+
+          this.storage.get('user').then((value) => {
+            //bind properties to logged on user profile...
+            console.log("User Forename after Update:" + value["forename"]);
+            this.role = value["role"];
+            this.email =  value["email"];
+            this.department =  value["department"];
+            this.companyid =  value["companyid"];
+            this.forename =  value["forename"];
+            this.surname =  value["surname"];
+            this.imagepath =  value["imagepath"];
+            this.displayname =  value["displayname"];
+            });
+
+
           this.navCtrl.setRoot(HomePage);
         }, (err) => {
             //this.loading.dismiss();

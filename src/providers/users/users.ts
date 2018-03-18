@@ -6,9 +6,9 @@ import 'rxjs/add/operator/map';
  
 @Injectable()
 export class Users {
-    
-    public role: any;
 
+    public role: any;
+    public user: any;
 
   constructor(public http: Http, public authService: Auth, public storage: Storage) {
  
@@ -31,9 +31,13 @@ export class Users {
                let data = res.json();
                //this.token = data.token;
                this.role = data.user["role"];
+               this.user = data.user;
+               this.authService.user = data.user;
                console.log("Role - " + this.role)
                //this.storage.set('token', data.token);
                this.storage.set('role', data.user["role"]);
+               this.storage.set('user', data.user);
+               
                resolve(data);
     
              }, (err) => {
