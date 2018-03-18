@@ -35,7 +35,7 @@ export class SignupPage {
         email: this.email,
         password: this.password,
         role: this.role,
-        forname: this.forename,
+        forename: this.forename,
         surname: this.surname,
         displayname: this.displayname,
         companyid: this.companyid,

@@ -9,12 +9,12 @@
 
 <ion-content padding ng-app="fupApp">
   <div class="row">
-        <div class="col-md-12">
-    <button class="customBtn" ion-button icon-left large>
+        <div class="col-md-5">
+    <!-- <button class="customBtn" ion-button icon-left large>
         <ion-icon name="home"></ion-icon>
         Home
       </button>
-      <br>
+      <br> -->
       <!-- Float the icon right -->
       <button class="customBtn" ion-button icon-left large (click)="goToCompanyAdmin()">
           <ion-icon name="construct"></ion-icon>
@@ -26,13 +26,22 @@
         Register Users
       </button>
       <br>
+      <button class="customBtn" ion-button icon-left large (click)="goToProfileUpdate()">
+        <ion-icon name="construct"></ion-icon>
+      Update Profile
+      </button>
+      <br>
       <!-- Only icon (no text) -->
       <button class="customBtn" ion-button icon-left large (click)="goToEventsAdmin()">
       <ion-icon name="megaphone"></ion-icon>
       Event Maintanance
       </button>
-      <br>
-      <button class="customBtn" ion-button icon-left large (click)="goToThemesAdmin()">
+      </div>
+      <div class="col-md-2">
+
+      </div>
+      <div class="col-md-5">
+        <button class="customBtn" ion-button icon-left large (click)="goToThemesAdmin()">
           <ion-icon name="star"></ion-icon>
           Theme Maintanance
           </button>
@@ -47,6 +56,8 @@
                   Stories Maintanance
                   </button>
                   <br>
-                  </div>
+      </div>
+      
+                  
 </div>                 
 </ion-content>

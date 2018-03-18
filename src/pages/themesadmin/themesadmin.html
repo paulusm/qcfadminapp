@@ -8,7 +8,9 @@
       </ion-header>
       
 <ion-content padding>  
-
+<ion-grid>
+    <ion-row>
+        <ion-col col-4>
         <div class="container">
                 <h2>Add theme</h2>
                 <form [formGroup]="myForm" novalidate (ngSubmit)="save(myForm)">
@@ -25,11 +27,11 @@
                         </div>
                     
                         <!-- list of addresses -->
-                        <div formArrayName="areas">
+                        <div formArrayName="areas" class="form-group">
                             <div *ngFor="let subtheme of myForm.controls.areas.controls; let i=index">
                                 <!-- address header, show remove button when more than one address available -->
                                 <div>
-                                    <span><h3>Sub Theme {{i + 1}}</h3></span>
+                                    <!-- <span><h3>Sub Theme {{i + 1}}</h3></span> -->
                                     <span *ngIf="myForm.controls.areas.controls.length > 1" (click)="removeSubTheme(i)">
                                     </span>
                                 </div>
@@ -42,7 +44,7 @@
                                         <input type="text" class="form-control" formControlName="area">
                                         <!--display error message if street is not valid-->
                                         <small [hidden]="myForm.controls.areas.controls[i].controls.area.valid">
-                                            Area is required
+                                            At least on subtheme is required
                                         </small>
                                     </div>
                 
@@ -50,23 +52,47 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="margin-20">
+                        <div class="margin-20" class="form-group">
                                 <a (click)="addSubTheme()" style="cursor: default">
                                   Add another sub theme +
                                 </a>
                         </div>
-                        <div class="margin-20">
+                        <div class="margin-20" class="form-group">
                             <button type="submit" class="btn btn-primary pull-right" [disabled]="!myForm.valid">Submit</button>
                         </div>
-                        <br><br>
-                        <div class="margin-20">
+                        <!-- <br><br>
+                        <div class="margin-20" class="form-group">
                                 <div>myForm details:-</div>
                                 <pre>Is myForm valid?: <br>{{myForm.valid | json}}</pre>
                                 <pre>form value: <br>{{myForm.value | json}}</pre>
-                        </div>
+                        </div> -->
                     </form>
                     
             </div>
+        </ion-col>
+        <ion-col col-1></ion-col>
+        <ion-col col-7 text-left>
+             <div class="form-group"><h2>Themes</h2>
+                        <ion-list>
+                            <ion-item item-left *ngFor="let theme of themes">
+                                    <span class="floatleft">{{theme.name}}</span>
+                                    <button type="button" class="btn btn-primary pull-right" (click)="deleteTheme(theme)">Delete</button>
+                                <ion-list>
+                                    <ion-item item-right *ngFor="let area of theme.areas">
+                                        <span class="floatright">{{area}}</span></ion-item>
+                                </ion-list>
+                            </ion-item>
+                        </ion-list>
+                    </div>
+                        
+               
+                     
+
+        </ion-col>
+    </ion-row>
+    
+</ion-grid>
+    
     </ion-content>
 
    

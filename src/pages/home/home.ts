@@ -9,7 +9,7 @@ import { ArticlesAdmin } from '../articlesadmin/articlesadmin';
 import { EventsAdmin } from '../eventsadmin/eventsadmin';
 import { StoriesAdmin } from '../storiesadmin/storiesadmin';
 import { ThemesAdminComponent } from '../themesadmin/themesadmin';
-
+import { ProfileUpdatePage } from '../profileupdate/profileupdate';
 //const URL = "https://ionic2-qcf-auth.herokuapp.com/api/files/upload";
 
 @Component({
@@ -64,6 +64,10 @@ export class HomePage {
    
     goToThemesAdmin(){
       this.navCtrl.push(ThemesAdminComponent);
+    }
+
+    goToProfileUpdate(){
+      this.navCtrl.push(ProfileUpdatePage);
     }
    
     

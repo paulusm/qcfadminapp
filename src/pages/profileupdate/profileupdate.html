@@ -1,0 +1,70 @@
+<ion-header>
+    
+     <ion-navbar color="secondary">
+       <ion-title>Update Account</ion-title>
+     </ion-navbar>
+    
+   </ion-header>
+    
+    
+   <ion-content padding>
+    
+       <ion-row class="account-form">
+           <ion-col>
+               <ion-list inset>
+    
+                   <ion-item>
+                       <ion-label><ion-icon name="mail"></ion-icon></ion-label>
+                       <ion-input [(ngModel)]="email" placeholder="Email" type="email"></ion-input>
+                   </ion-item>
+  
+                   <ion-item>
+                          <ion-label><ion-icon name="forename"></ion-icon></ion-label>
+                          <ion-input [(ngModel)]="forename" placeholder="Forename" type="text"></ion-input>
+                      </ion-item>
+  
+                      <ion-item>
+                              <ion-label><ion-icon name="surname"></ion-icon></ion-label>
+                              <ion-input [(ngModel)]="surname" placeholder="Surname" type="text"></ion-input>
+                          </ion-item>
+                          <ion-item>
+                                  <ion-label><ion-icon name="displayname"></ion-icon></ion-label>
+                                  <ion-input [(ngModel)]="displayname" placeholder="Displayname" type="text"></ion-input>
+                              </ion-item>
+                          <ion-item>
+                                  <ion-label><ion-icon name="department"></ion-icon></ion-label>
+                                  <ion-input [(ngModel)]="department" placeholder="Department" type="text"></ion-input>
+                              </ion-item>
+  
+                              <ion-item>
+                                      <ion-label><ion-icon name="imagepath"></ion-icon></ion-label>
+                                      <ion-input [(ngModel)]="imagepath" placeholder="Imagepath" type="text"></ion-input>
+                                  </ion-item>
+  
+                                  <ion-item>
+                                          <ion-label><ion-icon name="companyid"></ion-icon></ion-label>
+                                          <ion-input [(ngModel)]="companyid" placeholder="Companyid" type="text"></ion-input>
+                                      </ion-item>
+    
+                  <!--  <ion-item>
+                       <ion-label><ion-icon name="lock"></ion-icon></ion-label>
+                       <ion-input [(ngModel)]="password" placeholder="Password" type="password"></ion-input>
+                   </ion-item> -->
+    
+                   <ion-item>
+                       <ion-label>Role</ion-label>
+                       <ion-select [(ngModel)]="role">
+                           <ion-option value="Employee">Employee</ion-option>
+                           <ion-option value="BusinessAdmin">BusinessAdmin</ion-option>
+                           <ion-option value="QCFAdmin">QCFAdmin</ion-option>
+                       </ion-select>
+                   </ion-item>
+    
+               </ion-list>
+    
+               <button ion-button (click)="updateprofile()" class="continue-button">Update Profile</button>
+    
+           </ion-col>
+       </ion-row>
+    
+   </ion-content>

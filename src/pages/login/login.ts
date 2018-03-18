@@ -79,21 +79,47 @@ export class LoginPage {
                //Build object to pass as parameter to provider...
                let credentials = {
                    email: this.email,
-                   password: this.password,
-                   newpassword:this.newpassword
+                   password: this.password
+                   //newpassword:this.newpassword
                };
+               
         
                //Another call to the Auth provider....also handles response as success or error.
-               console.log("Calling loginchangepassword service");
-               this.authService.loginchangepassword(credentials).then((result) => {
-                   this.loading.dismiss();
+               console.log("Calling login service");
+               this.authService.login(credentials).then((result) => {
+                   //this.loading.dismiss();
+                   console.log("Logged in using original password");
                    console.log(result);
                    
-                   this.navCtrl.setRoot(HomePage);
+                        let credentialsnew = {
+                            email: this.email,
+                            password: this.newpassword
+                        }; 
+                        console.log("Calling loginchangepassword service");
+
+                        this.authService.loginchangepassword(credentialsnew).then((result) => {
+
+                            this.loading.dismiss();
+                            console.log("Logged in after password change");
+                            console.log(result);
+                        
+                            this.navCtrl.insert(0,HomePage);
+                            this.navCtrl.popToRoot();
+
+                        }, (err) => {
+
+                            this.loading.dismiss();
+                        
+                            console.log("Error in change password response");
+                            console.log(err);
+                        });
+                   //this.navCtrl.setRoot(HomePage);
                }, (err) => {
                    this.loading.dismiss();
                    console.log(err);
                });
+
+               
         
     }
  

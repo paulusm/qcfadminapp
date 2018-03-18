@@ -79,7 +79,7 @@ export class Themes {
         
                let headers = new Headers();
                headers.append('Authorization', this.authService.token);
-        
+              console.log(id);
                this.http.delete('https://ionic2-qcf-auth.herokuapp.com/api/themes/' + id, {headers: headers}).subscribe((res) => {
                    resolve(res);
                }, (err) => {

@@ -18,6 +18,7 @@ export class Auth {
  
   public token: any;
   public role: any;
+  public user: any;
  
   //Class constructor
   constructor(public http: Http, public storage: Storage) {
@@ -86,9 +87,11 @@ export class Auth {
             let data = res.json();
             this.token = data.token;
             this.role = data.user["role"];
+            this.user = data.user;
             console.log("Role - " + this.role)
             this.storage.set('token', data.token);
             this.storage.set('role', data.user["role"]);
+            this.storage.set('user',data.user);
             resolve(data);
  
           }, (err) => {
@@ -112,9 +115,11 @@ export class Auth {
             let data = res.json();
             this.token = data.token;
             this.role = data.user["role"];
+            this.user = data.user;
             console.log("Role - " + this.role)
             this.storage.set('token', data.token);
             this.storage.set('role', data.user["role"]);
+            this.storage.set('user',data.user);
             resolve(data);
  
             resolve(res.json());
@@ -134,6 +139,7 @@ export class Auth {
     
            let headers = new Headers();
            headers.append('Content-Type', 'application/json');
+           //headers.append('Authorization', this.token);
     
            this.http.post('https://ionic2-qcf-auth.herokuapp.com/api/auth/changepassword', JSON.stringify(credentials), {headers: headers})
              .subscribe(res => {
@@ -148,6 +154,7 @@ export class Auth {
     
                resolve(res.json());
              }, (err) => {
+               console.log("Error in Change Password");
                reject(err);
              });
     
