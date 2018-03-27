@@ -94,6 +94,18 @@ export class HomePage {
       this.navCtrl.push(ProfileUpdatePage);
     }
    
+    deleteImage(id){
+      console.log(id);
+      this.filesService.deleteFile(id).then((result) => {
+        //this.loading.dismiss();
+        console.log(result);
+        //this.causeitems = result;
+        console.log("file deleted");
+    }, (err) => {
+        //this.loading.dismiss();
+        console.log(err);
+    });
     
+    }
   
 }

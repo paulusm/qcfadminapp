@@ -81,7 +81,7 @@ export class Files {
         let headers = new Headers();
         headers.append('Authorization', this.authService.token);
  
-        this.http.delete('https://ionic2-qcf-auth.herokuapp.com/api/files/' + id, {headers: headers}).subscribe((res) => {
+        this.http.delete('https://ionic2-qcf-auth.herokuapp.com/api/files/deleteFile/' + id, {headers: headers}).subscribe((res) => {
             resolve(res);
         }, (err) => {
             reject(err);

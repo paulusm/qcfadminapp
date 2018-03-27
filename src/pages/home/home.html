@@ -9,63 +9,92 @@
 
 <ion-content padding ng-app="fupApp">
   <div class="row">
-        <div class="col-md-5">
+        <div class="col-md-3">
     <!-- <button class="customBtn" ion-button icon-left large>
         <ion-icon name="home"></ion-icon>
         Home
       </button>
       <br> -->
       <!-- Float the icon right -->
-      <button class="customBtn" ion-button icon-left large (click)="goToCompanyAdmin()">
-          <ion-icon name="briefcase"></ion-icon>
+      <button class="customBtn" ion-button icon-top large (click)="goToCompanyAdmin()">
+        <div>
+          <div>
+            <ion-icon name="briefcase"></ion-icon>
+          </div>
         Company Setup
+      </div>
+          
+        
       </button>
       <br>
       <button class="customBtn" ion-button icon-left large (click)="goToUserAdmin()">
-          <ion-icon name="person-add"></ion-icon>
-        Register Users
+          <div>
+              <div>  <ion-icon name="person-add"></ion-icon>
+              </div>
+                    Register Users
+          </div>
       </button>
       <br>
       <button class="customBtn" ion-button icon-left large (click)="goToProfileUpdate()">
-        <ion-icon name="contact"></ion-icon>
+          <div>
+              <div><ion-icon name="contact"></ion-icon>
+              </div>
       Update Profile
+          </div>
       </button>
       <br>
       <!-- Only icon (no text) -->
-      <button class="customBtn" ion-button icon-left large (click)="goToActivitiesAdmin()">
-      <ion-icon name="megaphone"></ion-icon>
-      Activities Maintanance
-      </button>
+     
       </div>
-      <div class="col-md-2">
+      <div class="col-md-1">
 
       </div>
-      <div class="col-md-5">
+      <div class="col-md-3">
         <button class="customBtn" ion-button icon-left large (click)="goToThemesAdmin()">
-          <ion-icon name="pricetags"></ion-icon>
+            <div>
+                <div><ion-icon name="pricetags"></ion-icon>
+                </div>
           Theme Maintanance
+            </div>
           </button>
           <br>
-          <button class="customBtn" ion-button icon-left large (click)="goToArticlesAdmin()">
-              <ion-icon name="bookmarks"></ion-icon>
+          <button class="customBtn" ion-button icon-left large (click)="goToActivitiesAdmin()">
+              <div>
+                  <div><ion-icon name="megaphone"></ion-icon>
+                  </div>
+          Activities Maintanance
+              </div>
+          </button>
+          <br>
+          <!-- <button class="customBtn" ion-button icon-left large (click)="goToArticlesAdmin()">
+              <div>
+                  <div><ion-icon name="bookmarks"></ion-icon>
+                  </div>
               Article Maintanance
+              </div>
               </button>
-              <br>
+              <br> -->
               <button class="customBtn" ion-button icon-left large (click)="goToStoriesAdmin()">
-                  <ion-icon name="people"></ion-icon>
+                  <div>
+                      <div><ion-icon name="people"></ion-icon>
+                      </div>
                   Stories Maintanance
+                  </div>
                   </button>
                   <br>
-                  <button class="customBtn" ion-button icon-left large (click)="goToNewsAdmin()">
-                      <ion-icon name="paper"></ion-icon>
+                  <!-- <button class="customBtn" ion-button icon-left large (click)="goToNewsAdmin()">
+                      <div>
+                          <div> <ion-icon name="paper"></ion-icon>
+                          </div>
                       News Maintanance
+                      </div>
                       </button>
-                      <br>
+                      <br> -->
       </div>
       
                   
-</div>      
-<div class="row">
+     
+<div class="col-md-5">
     <!-- <ion-segment [(ngModel)]="galleryType" color="primary">
         <ion-segment-button value="regular">
           Regular
@@ -88,11 +117,16 @@
         <div class="images" *ngSwitchCase="'pinterest'">
             <div class="one-image" *ngFor="let image of this.files">
               <img src="https://ionic2-qcf-auth.herokuapp.com/api/files/file/{{image.filename}}">
+<!--               <button class="customBtn" ion-button icon-right small (click)="deleteImage(image._id)">Delete</button> -->
             </div>
         </div>
        
      
       </div>
     
-</div>           
+</div>       
+<div class="col-md-5">
+    <img src="https://ionic2-qcf-auth.herokuapp.com/api/files/file/file-1522155929029.png">
+</div>
+</div>     
 </ion-content>
