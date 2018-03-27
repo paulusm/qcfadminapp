@@ -20,7 +20,7 @@ export class Themes {
       let headers = new Headers();
       headers.append('Authorization', this.authService.token);
  
-      this.http.get('https://ionic2-qcf-auth.herokuapp.com/api/themes', {headers: headers})
+      this.http.get('https://ionic2-qcf-auth.herokuapp.com/api/themes/getThemes', {headers: headers})
         .map(res => res.json())
         .subscribe(data => {
           resolve(data);
@@ -59,7 +59,7 @@ export class Themes {
           strtheme = strtheme.replace(/[\u0000-\u0019]+/g,""); 
          console.log(strtheme);
         
-         this.http.post('https://ionic2-qcf-auth.herokuapp.com/api/themes', strtheme, {headers: headers})
+         this.http.post('https://ionic2-qcf-auth.herokuapp.com/api/themes/createTheme', strtheme, {headers: headers})
            .map(res => res.json())
            .subscribe(res => {
              console.log("Saved");
@@ -80,7 +80,7 @@ export class Themes {
                let headers = new Headers();
                headers.append('Authorization', this.authService.token);
               console.log(id);
-               this.http.delete('https://ionic2-qcf-auth.herokuapp.com/api/themes/' + id, {headers: headers}).subscribe((res) => {
+               this.http.delete('https://ionic2-qcf-auth.herokuapp.com/api/themes/deleteTheme/' + id, {headers: headers}).subscribe((res) => {
                    resolve(res);
                }, (err) => {
                    reject(err);

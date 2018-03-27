@@ -42,11 +42,11 @@ ngOnInit() {
 
     this.themesService.getThemes().then((result) => {
         //this.loading.dismiss();
-        console.log("Result" + result);
-        console.log(result[0].name);
-        console.log(result[0].id);
+        //console.log("Result" + result);
+        //console.log(result[0].name);
+        //console.log(result[0].id);
         this.themes = result;
-        console.log(this.themes[0].name)
+        //console.log(this.themes[0].name)
       }, (err) => {
         //this.loading.dismiss();
         console.log(err);

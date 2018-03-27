@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar navbarColor>
     <ion-title style="zoom:1.5">Home</ion-title>
     <ion-buttons end>
         <button ion-button icon-only (click)="logout()"><ion-icon name="power" style="zoom:1.5"></ion-icon></button>
@@ -17,24 +17,24 @@
       <br> -->
       <!-- Float the icon right -->
       <button class="customBtn" ion-button icon-left large (click)="goToCompanyAdmin()">
-          <ion-icon name="construct"></ion-icon>
+          <ion-icon name="briefcase"></ion-icon>
         Company Setup
       </button>
       <br>
       <button class="customBtn" ion-button icon-left large (click)="goToUserAdmin()">
-          <ion-icon name="construct"></ion-icon>
+          <ion-icon name="person-add"></ion-icon>
         Register Users
       </button>
       <br>
       <button class="customBtn" ion-button icon-left large (click)="goToProfileUpdate()">
-        <ion-icon name="construct"></ion-icon>
+        <ion-icon name="contact"></ion-icon>
       Update Profile
       </button>
       <br>
       <!-- Only icon (no text) -->
-      <button class="customBtn" ion-button icon-left large (click)="goToEventsAdmin()">
+      <button class="customBtn" ion-button icon-left large (click)="goToActivitiesAdmin()">
       <ion-icon name="megaphone"></ion-icon>
-      Event Maintanance
+      Activities Maintanance
       </button>
       </div>
       <div class="col-md-2">
@@ -42,12 +42,12 @@
       </div>
       <div class="col-md-5">
         <button class="customBtn" ion-button icon-left large (click)="goToThemesAdmin()">
-          <ion-icon name="star"></ion-icon>
+          <ion-icon name="pricetags"></ion-icon>
           Theme Maintanance
           </button>
           <br>
           <button class="customBtn" ion-button icon-left large (click)="goToArticlesAdmin()">
-              <ion-icon name="paper"></ion-icon>
+              <ion-icon name="bookmarks"></ion-icon>
               Article Maintanance
               </button>
               <br>
@@ -56,8 +56,43 @@
                   Stories Maintanance
                   </button>
                   <br>
+                  <button class="customBtn" ion-button icon-left large (click)="goToNewsAdmin()">
+                      <ion-icon name="paper"></ion-icon>
+                      News Maintanance
+                      </button>
+                      <br>
       </div>
       
                   
-</div>                 
+</div>      
+<div class="row">
+    <!-- <ion-segment [(ngModel)]="galleryType" color="primary">
+        <ion-segment-button value="regular">
+          Regular
+        </ion-segment-button>
+        <ion-segment-button value="pinterest">
+          Pinterest
+        </ion-segment-button>
+      </ion-segment> -->
+     
+      <div [ngSwitch]="galleryType">
+        <!-- Responsive Layout with Ion Grid-->
+        <ion-grid *ngSwitchCase="'regular'">
+          <ion-row>
+            <ion-col col-6 col-md-4 col-xl-3 *ngFor="let image of this.files">
+              <div class="image-container" [style.background-image]="'url(https://ionic2-qcf-auth.herokuapp.com/api/files/file/' + image.filename + ')'"></div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+     
+        <div class="images" *ngSwitchCase="'pinterest'">
+            <div class="one-image" *ngFor="let image of this.files">
+              <img src="https://ionic2-qcf-auth.herokuapp.com/api/files/file/{{image.filename}}">
+            </div>
+        </div>
+       
+     
+      </div>
+    
+</div>           
 </ion-content>

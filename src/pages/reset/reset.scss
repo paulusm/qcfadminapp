@@ -1,10 +1,9 @@
 .ios, .md {
     reset-page{
 
-    ion-content {
-        background-color: rgb(43, 138, 175);
-    }
-
+        ion-content {
+            background-color: map-get($colors, pagebackground);
+        }
     scroll-content {
         display: flex;
         flex-direction: column;

@@ -58,6 +58,7 @@ getCompanyByCompanyName(companyname){
                  this.http.get('https://ionic2-qcf-auth.herokuapp.com/api/companies/getCompanyByCompanyName/' + companyname, {headers: headers})
                    .map(res => res.json())
                    .subscribe(data => {
+                    
                      resolve(data);
                    }, (err) => {
                      reject(err);
@@ -84,6 +85,40 @@ createCompany(company){
 
     });
 
+}
+
+updateCompany(company){
+
+    console.log("Running updateCompany");
+    return new Promise((resolve, reject) => {
+ 
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append('Authorization', this.authService.token);
+
+
+        this.http.post('https://ionic2-qcf-auth.herokuapp.com/api/companies/updateCompany', JSON.stringify(company), {headers: headers})
+          .subscribe(res => {
+ 
+            let data = res.json();
+            //this.token = data.token;
+            //this.role = data.user["role"];
+            //this.user = data.user;
+            //this.authService.user = data.user;
+            //console.log("Role - " + this.role)
+            //this.storage.set('token', data.token);
+            //this.storage.set('role', data.user["role"]);
+            //this.storage.set('user', data.user);
+            console.log(data);
+            resolve(data);
+ 
+          }, (err) => {
+            reject(err);
+          });
+ 
+    });
+ 
+  
 }
 
 deleteCompany(id){

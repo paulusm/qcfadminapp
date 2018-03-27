@@ -17,14 +17,14 @@ export class Files {
 
   }
  
-  getFiles(){
+  getFiles(filename){
  
     return new Promise((resolve, reject) => {
  
       let headers = new Headers();
       headers.append('Authorization', this.authService.token);
  
-      this.http.get('https://ionic2-qcf-auth.herokuapp.com/api/files', {headers: headers})
+      this.http.get('https://ionic2-qcf-auth.herokuapp.com/api/files/file/:' + filename, {headers: headers})
         .map(res => res.json())
         .subscribe(data => {
           resolve(data);
@@ -34,6 +34,24 @@ export class Files {
     });
  
   }
+
+  getAllFiles(){
+    
+       return new Promise((resolve, reject) => {
+    
+         let headers = new Headers();
+         headers.append('Authorization', this.authService.token);
+    
+         this.http.get('https://ionic2-qcf-auth.herokuapp.com/api/files/getFiles', {headers: headers})
+           .map(res => res.json())
+           .subscribe(data => {
+             resolve(data);
+           }, (err) => {
+             reject(err);
+           });
+       });
+    
+     }
  
   createFile(file){
   console.log("Creating File.");

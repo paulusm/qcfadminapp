@@ -7,43 +7,60 @@
         </ion-navbar>
       </ion-header>
 
-      <ion-content padding >
+<ion-content padding>
+       
 
-        
-
-        <nav class="navbar navbar-default">
-          <div class="container-fluid">
-              <div class="navbar-header">
-              <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                  
-                <h1>Company Configuration</h1>  
-               
-              </div>
-              </div>
-          </div>
-      </nav>
-      <div class="container">
-          <select [ngModel]="selectedValue" (ngModelChange)="selectItem($event)">
-                  <option [value]="company.companyname" *ngFor="let company of companies">{{company.companyname}}</option>
-              </select>
-      </div>
       <div class="row">
+            <div class="col-md-12">
+            <button type="button" class="btn btn-success btn-lg"
+            (click)="createnew()">
+            <span class="glyphicon glyphicon-plus"></span> Create New
+            </button>
+            <button type="button" class="btn btn-primary btn-lg"
+            (click)="updateexisting()">
+            <span class="glyphicon glyphicon-pencil"></span> Update Existing
+            </button>
+            </div>
+      </div>
+      <br><br>
+      <div class="row">
+          <div class="col-md-6">
+          <ion-item *ngIf="updateexistingcompany =='true'">
+          <ion-label item-left>Select Company...</ion-label>
+          <ion-select item-left  [ngModel]="selectedValue" (ngModelChange)="selectItem($event)">
+                  <ion-option [value]="company.companyname" *ngFor="let company of companies">{{company.companyname}}</ion-option>
+          </ion-select>
+        </ion-item>
+        </div>
+          
+      </div>
+      <br>
+      <div class="row" *ngIf="updateexistingcompany =='true' || createnewcompany =='true'" >
           <div class="col-md-12">
             <h2>Logo Upload (must complete before saving company details):</h2>
           </div>
       </div>
-        <div class="row">
-            <div class="col-md-12">
+  
+      
+        <div class="row"  *ngIf="updateexistingcompany =='true' || createnewcompany =='true'">
+            <div class="col-md-6">
                 <form>
                     <div class="form-group">
                         <label for="single">Select Image File</label>
-                        <input type="file" class="form-control btn btn-warning btn-xs" name="single" ng2FileSelect [uploader]="uploader" />                                  
+                        <input type="file" class="form-control-file btn btn-primary btn-s" name="single" ng2FileSelect [uploader]="uploader" />                                  
                     </div> 
-                    <img [src]="filePreviewPath" width="200" *ngIf="filePreviewPath" />                                  
+                                                      
                 </form>
             </div>
-            </div>
-            <div class="row">
+
+                <div class="col-md-6">
+                    <img [src]="filePreviewPath" width="200" *ngIf="filePreviewPath" />
+                    <img [src]="fileRetrievePath" width="200" *ngIf="fileRetrievePath" />
+                   
+                </div>
+
+        </div>
+            <div class="row"  *ngIf="updateexistingcompany =='true' || createnewcompany =='true'">
             <div class="col-md-12">
                 Queue length: {{ uploader?.queue?.length }}
 
@@ -89,40 +106,21 @@
                     </tbody>
                 </table>
 
-                <div>
-                    <div>
-                        Queue progress:
-                        <div class="progress" style="">
-                            <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
-                        </div>
-                    </div>
-                    <button type="button" class="btn btn-success btn-s"
-                            (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
-                        <span class="glyphicon glyphicon-upload"></span> Upload all
-                    </button>
-                    <button type="button" class="btn btn-warning btn-s"
-                            (click)="uploader.cancelAll()" [disabled]="!uploader.isUploading">
-                        <span class="glyphicon glyphicon-ban-circle"></span> Cancel all
-                    </button>
-                    <button type="button" class="btn btn-danger btn-s"
-                            (click)="uploader.clearQueue()" [disabled]="!uploader.queue.length">
-                        <span class="glyphicon glyphicon-trash"></span> Remove all
-                    </button>
-                </div>
+                
             </div>
         </div>
 <br>
 
-<div class="row">
+<div class="row"  *ngIf="updateexistingcompany =='true' || createnewcompany =='true'">
     <div class="col-md-12">
   <h4>Add Company Details</h4>
           
   </div>
 
 </div>
-      <div class="row">
+      <div class="row"  *ngIf="updateexistingcompany =='true' || createnewcompany =='true'">
           <div class="col-md-12">
-          <form  novalidate (ngSubmit)="save(companyForm)">
+          <form  novalidate >
               <!-- we will place our fields here -->
               <div class="form-group">
                       <label>Company Name</label>
@@ -153,22 +151,39 @@
                               subject is required (minimum 5 characters).
                       </small> -->
                       <br>
-                    <select multiple name="selectedThemes" ngModel (change)=onSelectTheme($event.target.options)>
-                        <option *ngFor="let theme of themes" [ngValue]="theme">
+                    <div class="row">
+                    <div class="col-md-6">
+                    <ion-item >
+                    <ion-label item-left>Select Themes...</ion-label>
+                    <ion-select multiple name="selectedThemes" [(ngModel)]="selectedThemes" (ngModelChange)="onSelectTheme($event)">
+                        <ion-option *ngFor="let theme of themes" [value]="theme.name">
                             {{ theme.name }}
-                        </option>
-                    </select> 
+                        </ion-option>
+                    </ion-select> 
+                    </ion-item>
+                    </div>
+                    <div class="col-md-6">
+                            <ion-list>
+                                    <ion-label item-left>Selected Themes...</ion-label>
+                                    <ion-item item-left *ngFor="let theme of selectedThemes">
+                                            <span class="floatleft">{{theme}}</span>
+                                    </ion-item>
+                                </ion-list>
+                            
+                            </div>
+                    </div>
                 </div>
-                <p>{{selectedValues | json}}</p>
+               <!--  <p>{{selectedValues | json}}</p> -->
               
-                  <button type="submit" class="btn btn-success btn-s">Submit</button>
+                  <button *ngIf="updateexistingcompany=='false'" (click)=save(companyForm) class="btn btn-success btn-lg"><span class="glyphicon glyphicon-plus"></span>&nbsp;Add</button>
+                  <button *ngIf="updateexistingcompany=='true'" (click)=update() class="btn btn-success btn-lg"><span class="glyphicon glyphicon-floppy-disk"></span>&nbsp;Update</button>
           </form>
           </div>
       </div>
-      <div>
+      <!-- <div>
               <h2>Model:</h2>
               {{ currentCompany }}
-      </div>
+      </div> -->
               
 
 

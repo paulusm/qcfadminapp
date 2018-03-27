@@ -6,7 +6,7 @@ import { LoginPage } from '../login/login';
 import { CompanyAdmin } from '../companyadmin/companyadmin';
 import { SignupPage } from '../signup/signup';
 import { ArticlesAdmin } from '../articlesadmin/articlesadmin';
-import { EventsAdmin } from '../eventsadmin/eventsadmin';
+import { ActivitiesAdmin } from '../activitiesadmin/activitiesadmin';
 import { StoriesAdmin } from '../storiesadmin/storiesadmin';
 import { ThemesAdminComponent } from '../themesadmin/themesadmin';
 import { ProfileUpdatePage } from '../profileupdate/profileupdate';
@@ -20,13 +20,32 @@ import { ProfileUpdatePage } from '../profileupdate/profileupdate';
 
 export class HomePage {
   loading: any;
+  files:any;
+  galleryType = 'pinterest';
+  //img1:string = "https://ionic2-qcf-auth.herokuapp.com/api/files/file/" file-1519663015207.jpg
 
-
-  constructor(public navCtrl: NavController, public authService: Auth,public loadingCtrl:LoadingController) {
- 
+  constructor(public navCtrl: NavController, public authService: Auth,
+    public loadingCtrl:LoadingController, public filesService: Files) {
+ //get all companies and bind to select drop down
+  this.filesService.getAllFiles().then((data) => {
+    console.log(data);
+    this.files = data;
+    
+    //this.loadDataList();
+  },(err) => {
+    console.log("not allowed");
+  });
  }
 
   
+ ngOnInit(){
+   
+
+  
+  
+ 
+}
+
   showLoader(){
     
        this.loading = this.loadingCtrl.create({
@@ -54,8 +73,13 @@ export class HomePage {
     goToArticlesAdmin(){
      this.navCtrl.push(ArticlesAdmin);
     }
-    goToEventsAdmin(){
-     this.navCtrl.push(EventsAdmin);
+
+    goToNewsAdmin(){
+      this.navCtrl.push(ArticlesAdmin);
+     }
+
+    goToActivitiesAdmin(){
+     this.navCtrl.push(ActivitiesAdmin);
     }
    
     goToStoriesAdmin(){

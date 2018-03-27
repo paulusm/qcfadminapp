@@ -9,7 +9,7 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { CompanyAdmin } from '../pages/companyadmin/companyadmin';
 import { ArticlesAdmin } from '../pages/articlesadmin/articlesadmin';
-import { EventsAdmin } from '../pages/eventsadmin/eventsadmin';
+import { ActivitiesAdmin } from '../pages/activitiesadmin/activitiesadmin';
 import { StoriesAdmin } from '../pages/storiesadmin/storiesadmin';
 import { ThemesAdminComponent } from '../pages/themesadmin/themesadmin';
 import { ForgotPage } from '../pages/forgot/forgot';
@@ -18,11 +18,12 @@ import { ProfileUpdatePage } from '../pages/profileupdate/profileupdate';
 import { ImageUploadModule } from "angular2-image-upload";
 import { IonicStorageModule } from '@ionic/storage';
 import { Auth } from '../providers/auth/auth';
-import { Events } from '../providers/events/events';
+import { Activities } from '../providers/activities/activities';
 import { Themes } from '../providers/themes/themes';
 import { Files } from '../providers/files/files';
 import { Users } from '../providers/users/users';
 import { Companies } from '../providers/companies/companies';
+import { Stories } from '../providers/stories/stories';
 import { FileSelectDirective } from 'ng2-file-upload';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -34,7 +35,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     SignupPage,
     CompanyAdmin,
     ArticlesAdmin,
-    EventsAdmin,
+    ActivitiesAdmin,
     StoriesAdmin,
     ThemesAdminComponent,
     FileSelectDirective,
@@ -63,7 +64,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CompanyAdmin,
     ArticlesAdmin,
     ThemesAdminComponent,
-    EventsAdmin,
+    ActivitiesAdmin,
     StoriesAdmin,
     ForgotPage,
     ResetPage,
@@ -75,10 +76,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     Auth,
     Themes,
-    Events,
+    Activities,
     Files,
     Companies,
-    Users
+    Users,
+    Stories
     
   ]
 })

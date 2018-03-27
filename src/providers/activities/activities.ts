@@ -4,20 +4,20 @@ import { Auth } from '../auth/auth';
 import 'rxjs/add/operator/map';
  
 @Injectable()
-export class Events {
+export class Activities {
  
   constructor(public http: Http, public authService: Auth) {
  
   }
  
-  getEvents(){
+  getActivities(){
  
     return new Promise((resolve, reject) => {
  
       let headers = new Headers();
       headers.append('Authorization', this.authService.token);
  
-      this.http.get('https://ionic2-qcf-auth.herokuapp.com/api/events', {headers: headers})
+      this.http.get('https://ionic2-qcf-auth.herokuapp.com/api/activities/getActivities', {headers: headers})
         .map(res => res.json())
         .subscribe(data => {
           resolve(data);
@@ -28,7 +28,7 @@ export class Events {
  
   }
  
-  createEvent(event){
+  createActivity(activity){
  
     return new Promise((resolve, reject) => {
  
@@ -36,7 +36,7 @@ export class Events {
       headers.append('Content-Type', 'application/json');
       headers.append('Authorization', this.authService.token);
  
-      this.http.post('https://ionic2-qcf-auth.herokuapp.com/api/events', JSON.stringify(event), {headers: headers})
+      this.http.post('https://ionic2-qcf-auth.herokuapp.com/api/activities/createActivity', JSON.stringify(activity), {headers: headers})
         .map(res => res.json())
         .subscribe(res => {
           resolve(res);
@@ -48,14 +48,14 @@ export class Events {
  
   }
  
-  deleteEvent(id){
+  deleteActivity(id){
  
     return new Promise((resolve, reject) => {
  
         let headers = new Headers();
         headers.append('Authorization', this.authService.token);
  
-        this.http.delete('https://ionic2-qcf-auth.herokuapp.com/api/events/' + id, {headers: headers}).subscribe((res) => {
+        this.http.delete('https://ionic2-qcf-auth.herokuapp.com/api/activities/deleteActivity/' + id, {headers: headers}).subscribe((res) => {
             resolve(res);
         }, (err) => {
             reject(err);

@@ -2,9 +2,9 @@
     
        signup {
     
-           ion-content {
-               background-color: map-get($colors, secondary);
-           }
+        ion-content {
+            background-color: map-get($colors, pagebackground);
+        }
     
            scroll-content {
                display: flex;

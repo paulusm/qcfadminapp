@@ -4,6 +4,7 @@ import { Auth } from '../../providers/auth/auth';
 import { HomePage } from '../home/home';
 import { Users } from '../../providers/users/users';
 import { Storage } from '@ionic/storage';
+import { LoginPage } from '../login/login';
 
 @Component({
     selector: 'profileupdate',
@@ -79,4 +80,11 @@ import { Storage } from '@ionic/storage';
             //this.loading.dismiss();
         });
     }
+
+    logout(){
+        
+           this.authService.logout();
+           this.navCtrl.setRoot(LoginPage);
+        
+         }
 }

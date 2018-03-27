@@ -1,0 +1,122 @@
+<ion-header>
+        <ion-navbar>
+          <ion-title style="zoom:1.5">Stories Admin</ion-title>
+          <ion-buttons end>
+              <button ion-button icon-only (click)="logout()"><ion-icon name="power" style="zoom:1.5"></ion-icon></button>
+          </ion-buttons>
+        </ion-navbar>
+      </ion-header>
+      
+<ion-content padding>  
+    <div class="row">
+        <div class="col-md-12">
+        <ion-item>
+                <ion-label>Story Name</ion-label>
+                <ion-input type="text" [(ngModel)]="model.storytitle" name="storytitle"></ion-input>
+        </ion-item>
+
+        <ion-item>
+                <ion-label>Story Text</ion-label>
+                <ion-textarea [(ngModel)]="model.story" name="story"></ion-textarea>
+        </ion-item>
+        <ion-item>
+                <ion-label>Author Name</ion-label>
+                <ion-input type="text" [(ngModel)]="model.storyauthor" name="storyauthor"></ion-input>
+        </ion-item>
+        <ion-item >
+            <ion-label item-left>Select Article Type...</ion-label>
+            <ion-select name="selectedArticleType" [(ngModel)]="selectedArticleType" (ngModelChange)="onselectedArticleType($event)">
+                <ion-option *ngFor="let type of articletypes" [value]="type">
+                    {{type}}
+                </ion-option>
+            </ion-select>
+        </ion-item>
+        </div>
+    </div>
+        
+    <div class="row">
+        <div class="col-md-12">
+            <ion-item >
+            <ion-label item-left>Select Themes...</ion-label>
+            <ion-select name="selectedThemes" [(ngModel)]="selectedThemes" (ngModelChange)="onSelectTheme($event)">
+                <ion-option *ngFor="let theme of themes" [value]="theme._id">
+                    {{ theme.name }}
+                </ion-option>
+            </ion-select> 
+            </ion-item>
+        </div>
+    </div> 
+
+
+    <div class="row">
+        <div class="col-md-6">
+            <form>
+                <div class="form-group">
+                    <label for="single">Select Image File</label>
+                    <input type="file" class="form-control-file btn btn-primary btn-s" name="single" ng2FileSelect [uploader]="uploader" />                                  
+                </div> 
+                                                    
+            </form>
+        </div>
+
+        <div class="col-md-6">
+            <img [src]="filePreviewPath" width="200" *ngIf="filePreviewPath" />
+            <img [src]="fileRetrievePath" width="200" *ngIf="fileRetrievePath" />
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            Queue length: {{ uploader?.queue?.length }}
+
+            <table class="table">
+                <thead>
+                <tr>
+                    <th width="50%">Name</th>
+                    <th>Size</th>
+                    <th>Progress</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let item of uploader.queue">
+                    <td><strong>{{ item.file.name }}</strong></td>
+                    <td nowrap>{{ item.file.size/1024/1024 | number:'.2' }} MB</td>
+                    <td>
+                        <div class="progress" style="margin-bottom: 0;">
+                            <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': item.progress + '%' }"></div>
+                        </div>
+                    </td>
+                    <td class="text-center">
+                        <span *ngIf="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
+                        <span *ngIf="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
+                        <span *ngIf="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
+                    </td>
+                    <td nowrap>
+                        <button type="button" class="btn btn-success btn-xs"
+                                (click)="item.upload()" [disabled]="item.isReady || item.isUploading || item.isSuccess">
+                            <span class="glyphicon glyphicon-upload"></span> Upload
+                        </button>
+                        <button type="button" class="btn btn-warning btn-xs"
+                                (click)="item.cancel()" [disabled]="!item.isUploading">
+                            <span class="glyphicon glyphicon-ban-circle"></span> Cancel
+                        </button>
+                        <button type="button" class="btn btn-danger btn-xs"
+                                (click)="item.remove()">
+                            <span class="glyphicon glyphicon-trash"></span> Remove
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+            
+        </div>
+    </div>
+    <div class="row">
+            <div class="col-md-12">
+            <button (click)=save() class="btn btn-success btn-lg"><span class="glyphicon glyphicon-plus"></span>&nbsp;Save</button>
+            </div>
+    </div>
+</ion-content>

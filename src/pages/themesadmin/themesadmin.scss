@@ -1,4 +1,10 @@
+.ios, .md {
+    
 themes-admin {
+    ion-content {
+        background-color: map-get($colors, pagebackground);
+    }
+
     .child-form {
         border: 1px solid black;
         margin-bottom: 20px;
@@ -22,4 +28,5 @@ themes-admin {
     .floatright {
         float:right;
     }
+}
 }

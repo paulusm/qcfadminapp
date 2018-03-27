@@ -11,7 +11,7 @@ constructor(
     public companydescription:string,
     public filename:string,
     public email:string,
-    public themes:[Theme]
+    public themes:string[]
 )
 {
    
