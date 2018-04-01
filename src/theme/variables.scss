@@ -22,15 +22,7 @@ $app-direction: ltr;
 // To view all the possible Ionic variables, see:
 // http://ionicframework.com/docs/theming/overriding-ionic-variables/
 
-.toolbar-background {
-  
-      background-image: -webkit-gradient(linear, left 0%, left 100%, from(#00aaff), to(#009eb9));
-      background-image: -webkit-linear-gradient(top, #00aaff, 0%, #009eb9, 100%);
-      background-image: -moz-linear-gradient(top, #00aaff 0%, #009eb9 100%);
-      background-image: linear-gradient(to bottom, #00aaff 0%, #009eb9 100%);
-      background-repeat: repeat-x;
-  
-  }
+
 
 
 // Named Color Variables
@@ -45,6 +37,10 @@ $toolbar-border-color: #123456;
 $toolbar-text-color: #123456;
 $toolbar-active-color: #123456;
 $toolbar-inactive-color: #123456;
+$toolbar-md-title-text-color: #777;
+$toolbar-ios-title-text-color: #777;
+$toolbar-wp-title-text-color: #777;
+
 $colors: (
   primary:    #488aff,
   secondary:  #5f32db,
@@ -52,8 +48,11 @@ $colors: (
   light:      #f4f4f4,
   dark:       #222,
   navbarColor:rgb(43, 138, 175),
-  pagebackground:  rgb(43, 138, 175)
+  pagebackground:  rgb(255, 255, 255)
 );
+
+
+$background-color: map-get($colors, pagebackground);
 
 
 // App iOS Variables

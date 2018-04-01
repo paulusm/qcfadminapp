@@ -10,6 +10,14 @@
 <ion-content padding>  
 <ion-grid>
     <ion-row>
+            <ion-col col-8>
+                    <div class="container">
+                            <h4>Use this page to add and delete themes. If you want to update an existing theme you<br/>
+                            you will need to delete it and add it back in.</h4>
+                    </div>
+            </ion-col>
+    </ion-row>
+    <ion-row>
         <ion-col col-4>
         <div class="container">
                 <h2>Add theme</h2>
@@ -58,7 +66,7 @@
                                 </a>
                         </div>
                         <div class="margin-20" class="form-group">
-                            <button type="submit" class="btn btn-primary pull-right" [disabled]="!myForm.valid">Submit</button>
+                            <button type="submit" class="btn btn-primary pull-right" [disabled]="!myForm.valid">Add..</button>
                         </div>
                         <!-- <br><br>
                         <div class="margin-20" class="form-group">
@@ -72,15 +80,16 @@
         </ion-col>
         <ion-col col-1></ion-col>
         <ion-col col-7 text-left>
-             <div class="form-group"><h2>Themes</h2>
+             <div><h2>Existing Themes</h2>
                         <ion-list>
                             <ion-item item-left *ngFor="let theme of themes">
                                     <span class="floatleft">{{theme.name}}</span>
-                                    <button type="button" class="btn btn-primary pull-right" (click)="deleteTheme(theme)">Delete</button>
-                                <ion-list>
-                                    <ion-item item-right *ngFor="let area of theme.areas">
-                                        <span class="floatright">{{area}}</span></ion-item>
-                                </ion-list>
+                                    <button type="button" class="btn btn-primary pull-right btn-sm" (click)="deleteTheme(theme)">Delete</button>
+                                    <ion-list>
+                                        <ion-item item-right *ngFor="let area of theme.areas">
+                                            <span class="floatright">{{area}}</span>
+                                        </ion-item>
+                                    </ion-list>
                             </ion-item>
                         </ion-list>
                     </div>

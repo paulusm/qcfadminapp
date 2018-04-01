@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar navbarColor>
-    <ion-title style="zoom:1.5">Home</ion-title>
+    <ion-title style="zoom:1.5">Quartet Community Foundation Application Administration</ion-title>
     <ion-buttons end>
         <button ion-button icon-only (click)="logout()"><ion-icon name="power" style="zoom:1.5"></ion-icon></button>
     </ion-buttons>
@@ -115,18 +115,18 @@
         </ion-grid>
      
         <div class="images" *ngSwitchCase="'pinterest'">
-            <div class="one-image" *ngFor="let image of this.files">
-              <img src="https://ionic2-qcf-auth.herokuapp.com/api/files/file/{{image.filename}}">
+           <!--  <div class="one-image" *ngFor="let image of this.files"> -->
+                <img class="image-container" src="https://ionic2-qcf-auth.herokuapp.com/api/files/file/file-1522155929029.png">
 <!--               <button class="customBtn" ion-button icon-right small (click)="deleteImage(image._id)">Delete</button> -->
-            </div>
+           <!--  </div> -->
         </div>
        
      
       </div>
     
 </div>       
-<div class="col-md-5">
+<!-- <div class="col-md-5">
     <img src="https://ionic2-qcf-auth.herokuapp.com/api/files/file/file-1522155929029.png">
-</div>
+</div> -->
 </div>     
 </ion-content>

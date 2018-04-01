@@ -27,14 +27,14 @@ export class HomePage {
   constructor(public navCtrl: NavController, public authService: Auth,
     public loadingCtrl:LoadingController, public filesService: Files) {
  //get all companies and bind to select drop down
-  this.filesService.getAllFiles().then((data) => {
+  /* this.filesService.getAllFiles().then((data) => {
     console.log(data);
     this.files = data;
     
     //this.loadDataList();
   },(err) => {
     console.log("not allowed");
-  });
+  }); */
  }
 
   

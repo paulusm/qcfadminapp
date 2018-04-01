@@ -1,6 +1,6 @@
 <ion-header>
         <ion-navbar>
-          <ion-title style="zoom:1.5">Activity Admin</ion-title>
+          <ion-title style="zoom:1.5" color="dark">Activity Admin</ion-title>
           <ion-buttons end>
               <button ion-button icon-only (click)="logout()"><ion-icon name="power" style="zoom:1.5"></ion-icon></button>
           </ion-buttons>
@@ -23,6 +23,10 @@
         (click)="createOther()">
         <span class="glyphicon glyphicon-plus"></span> Create General Activity
         </button>
+        <button type="button" class="btn btn-success btn-lg"
+        (click)="approveActvities()">
+        <span class="glyphicon glyphicon-plus"></span> Approve Activities
+        </button>
         </div>
 </div>
           <br><br>
@@ -40,36 +44,74 @@
     <form  novalidate >
         <!-- we will place our fields here -->
         <div class="form-group">
-                <label>Activity Name</label>
-                <input type="text" class="form-control" name="name" [(ngModel)]="model.activityname">
+                
+                <ion-item >
+                        <ion-label item-left>Activity Name</ion-label>
+                        <ion-input type="text" name="name" [(ngModel)]="model.activityname"></ion-input>
+                </ion-item>
                 <br>
-                <label>Description</label>
-                <input type="text"  class="form-control" name="activitydescription" [(ngModel)]="model.activitydescription">
+
+                <ion-item ><ion-label item-left>Description</ion-label>
+                <ion-input type="text"  name="activitydescription" [(ngModel)]="model.activitydescription"></ion-input>
+                </ion-item>
                 <br>
-                <label>Activity Owner</label>
-                <input type="text" class="form-control" name="activityowner" [(ngModel)]="model.activityowner">
+
+                <ion-item>
+                    <ion-label item-left>Activity Owner</ion-label>
+                    <ion-input type="text" name="activityowner" [(ngModel)]="model.activityowner"></ion-input>
+                </ion-item>
+
                 <br>
-                <label>Activity Type</label>
-                <input type="text" class="form-control" name="activitytype" [(ngModel)]="model.activitytype">
+
+                <ion-item >
+                        <ion-label item-left>Select Activity Type...</ion-label>
+                        <ion-select name="selectedActivityType" [(ngModel)]="selectedActivityType" (ngModelChange)="onselectedActivityType($event)">
+                            <ion-option *ngFor="let type of activitytypes" [value]="type">
+                                {{type}}
+                            </ion-option>
+                        </ion-select>
+                </ion-item>
+                <br>  
+
+                <ion-item>
+                    <ion-label item-left>Donation Matching Percentage</ion-label>
+                    <ion-input type="text" name="donationmatch" [(ngModel)]="model.donationmatch"></ion-input>
+                </ion-item>
                 <br>
-                <label>Donation Matching Percentage</label>
-                <input type="text" class="form-control" name="donationmatch" [(ngModel)]="model.donationmatch">
+
+                <!-- <ion-item>
+                    <ion-label item-left>Activity Approved</ion-label>
+                    <ion-input type="text" name="approved" [(ngModel)]="model.approved"></ion-input>
+                </ion-item> -->
                 <br>
-                <label>Activity Approved</label>
-                <input type="text" class="form-control" name="approved" [(ngModel)]="model.approved">
+
+                <ion-item>
+                    <ion-label item-left>Activity Company ID</ion-label>
+                    <ion-input type="text" name="companyid" [(ngModel)]="model.companyid"></ion-input>
+                </ion-item>
+                
                 <br>
-                <label>Activity Company ID</label>
-                <input type="text" class="form-control" name="companyid" [(ngModel)]="model.companyid">
+
+                <ion-item>
+                    <ion-label item-left>Activity Start Date</ion-label>
+                    <ion-datetime displayFormat="DD/MM/YYYY" name="startdate" [(ngModel)]="model.startdate"></ion-datetime>
+                </ion-item>
                 <br>
-                <label>Activity Start Date</label>
-                <input type="text" class="form-control" name="startdate" [(ngModel)]="model.startdate">
+
+                <ion-item>
+                    <ion-label item-left>Activity End Date</ion-label>
+                    <ion-datetime displayFormat="DD/MM/YYYY" name="enddate" [(ngModel)]="model.enddate"></ion-datetime>
+
+                </ion-item>
                 <br>
-                <label>Activity End Date</label>
-                <input type="text" class="form-control" name="enddate" [(ngModel)]="model.enddate">
+
+                <ion-item>
+                    <ion-label item-left>Activity Donate URL</ion-label>
+                    <ion-input type="text" name="mydonateurl" [(ngModel)]="model.mydonateurl"></ion-input>
+  
+                </ion-item>
                 <br>
-                <label>Activity Donate URL</label>
-                <input type="text" class="form-control" name="mydonateurl" [(ngModel)]="model.mydonateurl">
-                <br>
+
         </div>
             <button (click)=save() class="btn btn-success btn-lg"><span class="glyphicon glyphicon-plus"></span>&nbsp;Save</button>
 <!--             <button *ngIf="updateexistingcompany=='true'" (click)=update() class="btn btn-success btn-lg"><span class="glyphicon glyphicon-floppy-disk"></span>&nbsp;Update</button>

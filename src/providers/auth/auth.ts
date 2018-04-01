@@ -73,6 +73,21 @@ export class Auth {
      }
 
 
+getUser(){
+  return new Promise((resolve, reject) => {
+    
+           //Load token if exists
+           this.storage.get('user').then((value) => {
+    
+               this.user = value;
+              resolve(value);
+           }, (err) => {
+            console.log("Not already authorized");
+            reject(err);        
+           });
+       });
+}
+
   createAccount(details){
  
     console.log("Running createAccount");

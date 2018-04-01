@@ -9,6 +9,7 @@ import { LoginPage } from '../login/login';
 import { Validators, FormBuilder,FormControl, FormGroup, FormArray } from '@angular/forms';
 import * as _ from 'lodash';
 import { Location } from "@angular/common";
+import { HomePage } from '../home/home';
 
 @Component({
  // moduleId: module.id,
@@ -82,27 +83,53 @@ removeSubTheme(i: number) {
 }
 
 
-  save(model:Theme){
+save(model:Theme){
     console.log(this.myForm.value);
     //var ltheme = JSON.parse(this.myForm.value);
     console.log(this.myForm.controls['areas'].value);
     //model.name = 
 
     console.log("Name:" + this.model.name + "; subThemes:" + this.model.areas);
-        this.themesService.createTheme(this.myForm.value).then((result) => {
-            //this.loading.dismiss();
-            console.log(result);
-            //this.causeitems = result;
-            console.log("theme created");
-        }, (err) => {
-            //this.loading.dismiss();
-            console.log(err);
-        });
+    this.themesService.createTheme(this.myForm.value).then((result) => {
+        //this.loading.dismiss();
+        console.log(result);
+        //this.causeitems = result;
+        console.log("theme created");
+
+        let alert = this.alertCtrl.create({
+            title: 'Theme Created Successfully',
+            subTitle: 'This theme has been created and saved to the database.',
+            buttons: [{
+              text: 'OK',
+              role: 'cancel',
+              handler: () => {
+                console.log('Cancel clicked');
+                this.navCtrl.setRoot(HomePage);
+              }
+            }]
+          });
+          alert.present();
     
-    console.log(model);
-    //window.location.reload();
-    this.events.publish('updateScreen');
-  }
+      }, (err) => {
+    
+        let alert = this.alertCtrl.create({
+          title: 'Error Updating Theme',
+          subTitle: 'Please contact admin :-(',
+          buttons: [{
+            text: 'OK',
+            role: 'cancel',
+            handler: () => {
+              console.log('Cancel clicked');
+              this.navCtrl.setRoot(HomePage);
+            }
+          }]
+        });
+        alert.present();
+          //this.loading.dismiss();
+          console.log(err);
+      });
+    
+}
 
   deleteTheme(theme){
     this.themesService.deleteTheme(theme.name).then((result) => {
@@ -110,11 +137,38 @@ removeSubTheme(i: number) {
         console.log(result);
         //this.causeitems = result;
         console.log("theme deleted");
-    }, (err) => {
-        //this.loading.dismiss();
-        console.log(err);
-    });
-    this.events.publish('updateScreen');
+        let alert = this.alertCtrl.create({
+            title: 'Theme Deleted Successfully',
+            subTitle: 'This theme has been deleted and the database updated.',
+            buttons: [{
+              text: 'OK',
+              role: 'cancel',
+              handler: () => {
+                console.log('Cancel clicked');
+                this.navCtrl.setRoot(HomePage);
+              }
+            }]
+          });
+          alert.present();
+    
+      }, (err) => {
+    
+        let alert = this.alertCtrl.create({
+          title: 'Error Deleting Theme',
+          subTitle: 'Please contact admin :-(',
+          buttons: [{
+            text: 'OK',
+            role: 'cancel',
+            handler: () => {
+              console.log('Cancel clicked');
+              this.navCtrl.setRoot(HomePage);
+            }
+          }]
+        });
+        alert.present();
+          //this.loading.dismiss();
+          console.log(err);
+      });
   }
     
 private getThemeData(): Theme {
