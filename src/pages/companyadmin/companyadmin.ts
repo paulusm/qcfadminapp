@@ -36,7 +36,8 @@ export class CompanyAdmin implements OnInit {
   updateexistingcompany:any;
   createnewcompany:any;
   fileRetrievePath:string;
-
+  user:any;
+  role:string = 'Employee';
 
   constructor(public navCtrl: NavController, public modalCtrl: ModalController,
     public alertCtrl: AlertController, public authService: Auth, 
@@ -85,6 +86,20 @@ export class CompanyAdmin implements OnInit {
       console.log(err);
     });
 
+    this.authService.getUser().then((data) => {
+      //console.log("User Data:" + data);
+      this.user = data;
+      this.role = this.user.role;
+      //this.model.storyauthor = this.user._id;
+      //console.log("User _id:"+ this.user._id);
+      //this.model.companyid = this.user.companyid;
+      //console.log("Company _id:"+ this.user.companyid);
+      
+  
+    },(err) => {
+      console.log("not allowed");
+    });
+
   }
 
   
@@ -127,10 +142,10 @@ selectItem(company){
     this.selectedThemes = result['company']['themes'];
     this.fileRetrievePath = "https://ionic2-qcf-auth.herokuapp.com/api/files/file/" + result['company']['filename'];
 
-}, (err) => {
-    //this.loading.dismiss();
-    console.log(err);
-});
+  }, (err) => {
+      //this.loading.dismiss();
+      console.log(err);
+  });
 }
 
 //Button event handlers, used to change state of controls

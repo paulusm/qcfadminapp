@@ -32,8 +32,48 @@ themes-admin {
         min-height: 10px; /* <- this can be whatever you need */
     }
 
+    scroll-content {
+        display: flex;
+        flex-direction: column;
+    }
+
+    ion-item {
+        border-radius: 10px !important;
+        padding-left: 0px !important;
+        margin-bottom:0px;
+        margin: 0 0 0 0 !important;
+        padding:0 0 0 0 !important;
+        background-color: #f7e89f;
+        opacity: 0.7;
+        font-size: 1.7em;
+        color:#1a0155;
+        
+    }
+
+    ion-list {
+        margin: 0 0 0 0;
+        padding:0 0 0 0;
+        background-color: #ffffff;
+        color:#1a0155;
+    }
+
     ion-label {
-        margin: 1px 1px 1px 0;
-      }
+        font-size: 0.5em;
+        color: #1a0155;
+    }
+
+    ion-card {
+     background: #f7e89f;
+     border: 1px solid #bea203;
+     margin: 10px auto 0px;
+     padding: 10px;
+    }
+
+    ion-card-header {
+        font-size:2.0em;
+    }
+
+
+   
 }
 }

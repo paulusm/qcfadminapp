@@ -27,11 +27,21 @@
 
           </ion-list>
 
-          <button *ngIf="changepassword == 'false'" ion-button full (click)="login()" color="primary" class="login-button">Login</button>
-          <button *ngIf="changepassword == 'true'" ion-button full (click)="loginpassword()" color="primary" class="login-button">Login?</button>
-          <button *ngIf="changepassword == 'true'" ion-button full (click)="loginchangepassword()" color="primary" class="login-button">Change Password</button>
-          <button ion-button full (click)="launchresetchg()" color="primary" class="login-button">Forgot Password?</button>
-          <button *ngIf="changepassword == 'false'" ion-button full (click)="launchchangepassword()" color="primary" class="login-button">Change Password?</button>
+          <ion-item *ngIf="changepassword == 'false'">          
+            <button  ion-button  default (click)="login()" color="secondary" class="login-button">Login</button>
+</ion-item>
+          <ion-item *ngIf="changepassword == 'true'">          
+            <button  ion-button  default (click)="loginpassword()" color="secondary" class="login-button">Login?</button>
+</ion-item>
+          <ion-item *ngIf="changepassword == 'true'">          
+            <button  ion-button  default (click)="loginchangepassword()" color="secondary" class="login-button">Change Password</button>
+</ion-item>
+          <ion-item>          
+            <button ion-button  default (click)="launchresetchg()" color="secondary" class="login-button">Forgot Password?</button>
+</ion-item>
+          <ion-item *ngIf="changepassword == 'false'">          
+            <button  ion-button  default (click)="launchchangepassword()" color="secondary" class="login-button">Change Password?</button>
+</ion-item>
 
           
       </ion-col>
@@ -39,7 +49,9 @@
 
   <ion-row>
       <ion-col>
-          <button ion-button (click)="launchSignup()" class="create-account">Create an Account</button>
+        <ion-item *ngIf="admin == 'true'">
+                    <button ion-button default (click)="launchSignup()" class="login-button" color="secondary">Create an Account</button>
+        </ion-item>
       </ion-col>
   </ion-row>
 </ion-content>

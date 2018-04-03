@@ -19,7 +19,7 @@ export class LoginPage {
     confirm:string;
     newpassword:string;
     changepassword:string = 'false';
-
+    admin:string = 'false';
  
     constructor(public navCtrl: NavController, public authService: Auth, 
         public loadingCtrl: LoadingController) {

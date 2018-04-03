@@ -2,6 +2,10 @@
     
        stories-admin {
         
+        ion-textarea {
+            height:220px;
+        }
+
         ion-card {
             position: relative;
             text-align: left;
@@ -12,47 +16,61 @@
             height: 600px;
             }
 
-           scroll-content {
-               display: flex;
-               flex-direction: column;
-           }
-    
-           ion-item {
-               border-radius: 30px !important;
-               padding-left: 10px !important;
-               margin-bottom: 10px;
-               background-color: #f6f6f6;
-               opacity: 0.7;
-               font-size: 1.2em;
-           }
-    
-           ion-list {
-               margin: 0;
-           }
-    
-           .heading-text {
-               flex: 1;
-               align-items: center;
-               text-align: center;
-           }
-    
-           .heading-text h3 {
-               color: #fff;
-           }
-    
-    
-           .account-form {
-               flex: 1;
-           }
-    
-           .continue-button {
-               width: 100%;
-               border-radius: 30px;
-               margin-top: 30px;
-               font-size: 0.9em;
-               background-color: transparent;
-               border: 1px solid #fff;
-           }
+           /* scroll-content {
+            display: flex;
+            flex-direction: column;
+            } */
+ 
+        ion-item {
+            border-radius: 20px !important;
+            padding-left: 5px !important;
+            margin-bottom:5px;
+            background-color: #f7e89f;
+            opacity: 0.7;
+            font-size: 1.2em;
+            color:#1a0155;
+        }
+ 
+        ion-list {
+            margin: 0;
+            background-color: #ffffff;
+            color:#1a0155;
+        }
+
+        ion-label {
+            font-size: 1.5em;
+            color: #1a0155;
+            width:350px;
+        }
+ 
+        
+        .heading-text {
+            flex: 1;
+            align-items: center;
+            text-align: center;
+        }
+ 
+        .heading-text h3 {
+            color: #fff;
+        }
+ 
+        .file-label {
+            font-size:0.6em;
+            color:#1a0155;
+        }
+
+        .account-form {
+            flex: 1;
+        }
+ 
+        .continue-button {
+            width: 100%;
+            border-radius: 30px;
+            margin-top: 30px;
+            font-size: 0.9em;
+            background-color: transparent;
+            border: 1px solid #fff;
+        }
     
        }
     

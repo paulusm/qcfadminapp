@@ -14,8 +14,9 @@
   
      <ion-row class="account-form">
          <ion-col>
+             <ion-label>Input or paste a comma delimited list of email addresses below.</ion-label>
             <ion-item>
-                 <ion-input type="text" placeholder="accountnames.." [(ngModel)]="accountnames"></ion-input>
+                 <ion-input type="text" placeholder="list of account names..." [(ngModel)]="accountnames"></ion-input>
             </ion-item>
           
            
@@ -24,14 +25,16 @@
      </ion-row>
   <ion-row class="account-form">
       <ion-col>
+                    <ion-label item-left>Select Company for these Users...</ion-label>
                     <ion-item>
-                    <ion-label item-left>Select Company...</ion-label>
+                    <ion-label item-left>Company...</ion-label>
                     <ion-select item-left  [ngModel]="selectedValue" (ngModelChange)="selectCompany($event)">
                             <ion-option [value]="company._id" *ngFor="let company of companies">{{company.companyname}}</ion-option>
                     </ion-select>
                   </ion-item>
-
-                  <button ion-button (click)="register()" class="continue-button">Register</button>
+                  <ion-item>
+                  <button ion-button default (click)="register()" class="continue-button">Register</button>
+                  </ion-item>
       </ion-col>
   </ion-row>
  </ion-content>

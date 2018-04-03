@@ -37,7 +37,7 @@ export class StoriesAdmin {
   approveselected:boolean = false;
   stories:any;
   user:any;
-
+  role:string='Employee';
   constructor(public navCtrl: NavController, public modalCtrl: ModalController,
     public alertCtrl: AlertController, public authService: Auth, public loadingCtrl: LoadingController,
     public storiesService :Stories, public themesService:Themes, private sanitizer: DomSanitizer) {
@@ -64,8 +64,9 @@ ngOnInit(){
   };
 
   this.authService.getUser().then((data) => {
-    console.log(data);
+    console.log("User Data:" + data);
     this.user = data;
+    this.role = this.user.role;
     this.model.storyauthor = this.user._id;
     console.log("User _id:"+ this.user._id);
     this.model.companyid = this.user.companyid;
@@ -149,6 +150,23 @@ approveStories(){
   });
 }
 
+updateStories(){
+  this.news = false;
+  this.story = false;
+  this.approve = true;
+  this.article = false;
+  this.selectedArticleType = "";
+
+  this.storiesService.getStories().then((result) => {
+    //this.loading.dismiss();
+    console.log("Returned Stories:" + result);
+    this.stories = result;
+  }, (err) => {
+    //this.loading.dismiss();
+    console.log(err);
+  });
+}
+
 //Save current model.
 approveStory(){
 
@@ -195,6 +213,11 @@ approveStory(){
         });
 
 }
+
+updateStory(){
+
+}
+
 
 onSelectStory(storyid){
   console.log("StoryID:" + storyid);

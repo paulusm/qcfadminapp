@@ -23,11 +23,13 @@
                 <h2>Add theme</h2>
                 <form [formGroup]="myForm" novalidate (ngSubmit)="save(myForm)">
                         <!-- we will place our fields here -->
-                    
+                    <ion-card>
                         <!-- name -->
                         <div class="form-group">
                             <label>Theme</label>
-                            <input type="text" class="form-control" formControlName="name">
+                            <ion-item>
+                            <input default type="text" class="form-control" formControlName="name">
+                            </ion-item>
                             <!--display error message if name is not valid-->
                             <small *ngIf="!myForm.controls.name.valid" class="text-danger">
                                 Theme is required (minimum 5 characters).
@@ -51,7 +53,7 @@
                                         <label>Sub Theme</label>
                                         <input type="text" class="form-control" formControlName="area">
                                         <!--display error message if street is not valid-->
-                                        <small [hidden]="myForm.controls.areas.controls[i].controls.area.valid">
+                                        <small [hidden]="myForm.controls.areas.controls[i].controls.area.valid" class="text-danger">
                                             At least on subtheme is required
                                         </small>
                                     </div>
@@ -74,23 +76,24 @@
                                 <pre>Is myForm valid?: <br>{{myForm.valid | json}}</pre>
                                 <pre>form value: <br>{{myForm.value | json}}</pre>
                         </div> -->
+                    </ion-card>
                     </form>
                     
             </div>
         </ion-col>
         <ion-col col-1></ion-col>
-        <ion-col col-7 text-left>
+        <ion-col col-5 text-left>
              <div><h2>Existing Themes</h2>
                         <ion-list>
-                            <ion-item item-left *ngFor="let theme of themes">
-                                    <span class="floatleft">{{theme.name}}</span>
+                            <ion-card item-left *ngFor="let theme of themes">
+                                    <span >{{theme.name}}</span>
                                     <button type="button" class="btn btn-primary pull-right btn-sm" (click)="deleteTheme(theme)">Delete</button>
                                     <ion-list>
-                                        <ion-item item-right *ngFor="let area of theme.areas">
+                                        <ion-item item-right style="height:15px;" *ngFor="let area of theme.areas">
                                             <span class="floatright">{{area}}</span>
                                         </ion-item>
                                     </ion-list>
-                            </ion-item>
+                            </ion-card>
                         </ion-list>
                     </div>
                         

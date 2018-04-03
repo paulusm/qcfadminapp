@@ -12,11 +12,11 @@
 
       <div class="row">
             <div class="col-md-12">
-            <button type="button" class="btn btn-success btn-lg"
+            <button *ngIf="role == 'QCFAdmin'" type="button" class="btn btn-success btn-lg"
             (click)="createnew()">
             <span class="glyphicon glyphicon-plus"></span> Create New
             </button>
-            <button type="button" class="btn btn-primary btn-lg"
+            <button *ngIf="role == 'QCFAdmin' || role == 'BusinessAdmin'" type="button" class="btn btn-primary btn-lg"
             (click)="updateexisting()">
             <span class="glyphicon glyphicon-pencil"></span> Update Existing
             </button>
@@ -32,26 +32,19 @@
           </ion-select>
         </ion-item>
         </div>
-          
-      </div>
-      <br>
-      <div class="row" *ngIf="updateexistingcompany =='true' || createnewcompany =='true'" >
-          <div class="col-md-12">
-            <h2>Logo Upload (must complete before saving company details):</h2>
-          </div>
-      </div>
-  
-      
-        <div class="row"  *ngIf="updateexistingcompany =='true' || createnewcompany =='true'">
-            <div class="col-md-6">
-                <form>
-                    <div class="form-group">
-                        <label for="single">Select Image File</label>
-                        <input type="file" class="form-control-file btn btn-primary btn-s" name="single" ng2FileSelect [uploader]="uploader" />                                  
-                    </div> 
-                                                      
-                </form>
-            </div>
+          <div class="col-md-6" *ngIf="updateexistingcompany =='true' || createnewcompany =='true'">
+            <div class="row"  *ngIf="updateexistingcompany =='true' || createnewcompany =='true'">
+                <div class="col-md-6">
+                    <form>
+                        <div class="form-group">
+                            <ion-item>
+                            <label class="file-label" for="single">Logo Upload (complete before saving company details):</label>
+                            <input ion-button default type="file" class="form-control-file btn btn-primary btn-s" name="single" ng2FileSelect [uploader]="uploader" />                                  
+                        </ion-item>
+                        </div> 
+                                                        
+                    </form>
+                </div>
 
                 <div class="col-md-6">
                     <img [src]="filePreviewPath" width="200" *ngIf="filePreviewPath" />
@@ -59,7 +52,7 @@
                    
                 </div>
 
-        </div>
+            </div>
             <div class="row"  *ngIf="updateexistingcompany =='true' || createnewcompany =='true'">
             <div class="col-md-12">
                 Queue length: {{ uploader?.queue?.length }}
@@ -109,77 +102,74 @@
                 
             </div>
         </div>
-<br>
 
-<div class="row"  *ngIf="updateexistingcompany =='true' || createnewcompany =='true'">
-    <div class="col-md-12">
-  <h4>Add Company Details</h4>
-          
-  </div>
-
-</div>
-      <div class="row"  *ngIf="updateexistingcompany =='true' || createnewcompany =='true'">
-          <div class="col-md-12">
-          <form  novalidate >
-              <!-- we will place our fields here -->
-              <div class="form-group">
-                      <label>Company Name</label>
-                      <input type="text" class="form-control" name="name" [(ngModel)]="model.companyname">
-                      <!--display error message if name is not valid-->
-                      <!-- <small *ngIf="!themeForm.controls.name.valid" class="text-danger">
-                          Name is required (minimum 5 characters).
-                      </small> -->
-                      <br>
-                      <label>Description</label>
-                      <input type="text"  class="form-control" name="companydescription" [(ngModel)]="model.companydescription">
-                      <!--display error message if name is not valid-->
-                      <!-- <small *ngIf="!themeForm.controls.areaname.valid" class="text-danger">
-                          Areaname is required (minimum 5 characters).
-                      </small> -->
-                      <br>
-                      <label>Filename</label>
-                      <input type="text" class="form-control" name="filename" [(ngModel)]="model.filename">
-                      <!--display error message if name is not valid-->
-                      <!-- <small *ngIf="!themeForm.controls.companyname.valid" class="text-danger">
-                              companyname is required (minimum 5 characters).
-                      </small> -->
-                      <br>
-                      <label>Email</label>
-                      <input type="text" class="form-control" name="email" [(ngModel)]="model.email">
-                      <!--display error message if name is not valid-->
-                      <!-- <small *ngIf="!themeForm.controls.subject.valid" class="text-danger">
-                              subject is required (minimum 5 characters).
-                      </small> -->
-                      <br>
-                    <div class="row">
-                    <div class="col-md-6">
-                    <ion-item >
-                    <ion-label item-left>Select Themes...</ion-label>
-                    <ion-select multiple name="selectedThemes" [(ngModel)]="selectedThemes" (ngModelChange)="onSelectTheme($event)">
-                        <ion-option *ngFor="let theme of themes" [value]="theme.name">
-                            {{ theme.name }}
-                        </ion-option>
-                    </ion-select> 
-                    </ion-item>
-                    </div>
-                    <div class="col-md-6">
-                            <ion-list>
-                                    <ion-label item-left>Selected Themes...</ion-label>
-                                    <ion-item item-left *ngFor="let theme of selectedThemes">
-                                            <span class="floatleft">{{theme}}</span>
-                                    </ion-item>
-                                </ion-list>
-                            
-                            </div>
-                    </div>
-                </div>
-               <!--  <p>{{selectedValues | json}}</p> -->
-              
-                  <button *ngIf="updateexistingcompany=='false'" (click)=save(companyForm) class="btn btn-success btn-lg"><span class="glyphicon glyphicon-plus"></span>&nbsp;Add</button>
-                  <button *ngIf="updateexistingcompany=='true'" (click)=update() class="btn btn-success btn-lg"><span class="glyphicon glyphicon-floppy-disk"></span>&nbsp;Update</button>
-          </form>
-          </div>
+        </div>
       </div>
+    <div class="row"  *ngIf="updateexistingcompany =='true' || createnewcompany =='true'">
+    <div class="col-md-12">
+    <form  novalidate >
+        <!-- we will place our fields here -->
+        <div class="form-group">
+            <ion-card>
+                <ion-card-header>Add Company Details</ion-card-header>
+                <label>Company Name</label>
+                <input type="text" class="form-control" name="name" [(ngModel)]="model.companyname">
+                <!--display error message if name is not valid-->
+                <!-- <small *ngIf="!themeForm.controls.name.valid" class="text-danger">
+                    Name is required (minimum 5 characters).
+                </small> -->
+                <br>
+                <label>Description</label>
+                <input type="text"  class="form-control" name="companydescription" [(ngModel)]="model.companydescription">
+                <!--display error message if name is not valid-->
+                <!-- <small *ngIf="!themeForm.controls.areaname.valid" class="text-danger">
+                    Areaname is required (minimum 5 characters).
+                </small> -->
+                <br>
+                <label>Filename (do not edit, will be populated from fileupload completed above)</label>
+                <input type="text" class="form-control" name="filename" [(ngModel)]="model.filename">
+                <!--display error message if name is not valid-->
+                <!-- <small *ngIf="!themeForm.controls.companyname.valid" class="text-danger">
+                        companyname is required (minimum 5 characters).
+                </small> -->
+                <br>
+                <label>Email</label>
+                <input type="text" class="form-control" name="email" [(ngModel)]="model.email">
+                <!--display error message if name is not valid-->
+                <!-- <small *ngIf="!themeForm.controls.subject.valid" class="text-danger">
+                        subject is required (minimum 5 characters).
+                </small> -->
+                <br>
+            <div class="row">
+            <div class="col-md-6">
+            <ion-item >
+            <ion-label item-left>Select Themes...</ion-label>
+            <ion-select multiple name="selectedThemes" [(ngModel)]="selectedThemes" (ngModelChange)="onSelectTheme($event)">
+                <ion-option *ngFor="let theme of themes" [value]="theme.name">
+                    {{ theme.name }}
+                </ion-option>
+            </ion-select> 
+            </ion-item>
+            </div>
+            <div class="col-md-6">
+                    <ion-list>
+                            <ion-label item-left>Selected Themes...</ion-label>
+                            <ion-item item-left *ngFor="let theme of selectedThemes">
+                                    <span class="floatleft">{{theme}}</span>
+                            </ion-item>
+                        </ion-list>
+                    
+                    </div>
+            </div>
+        </ion-card>
+        </div>
+        <!--  <p>{{selectedValues | json}}</p> -->
+        
+            <button *ngIf="updateexistingcompany=='false'" (click)=save(companyForm) class="btn btn-success btn-lg"><span class="glyphicon glyphicon-plus"></span>&nbsp;Add</button>
+            <button *ngIf="updateexistingcompany=='true'" (click)=update() class="btn btn-success btn-lg"><span class="glyphicon glyphicon-floppy-disk"></span>&nbsp;Update</button>
+    </form>
+    </div>
+</div>
       <!-- <div>
               <h2>Model:</h2>
               {{ currentCompany }}
