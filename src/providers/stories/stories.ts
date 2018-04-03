@@ -27,6 +27,42 @@ export class Stories {
     });
  
   }
+
+  getApprovedStories(companyid){
+    
+       return new Promise((resolve, reject) => {
+    
+         let headers = new Headers();
+         headers.append('Authorization', this.authService.token);
+    
+         this.http.get('https://ionic2-qcf-auth.herokuapp.com/api/stories/getApprovedStories/' + companyid, {headers: headers})
+           .map(res => res.json())
+           .subscribe(data => {
+             resolve(data);
+           }, (err) => {
+             reject(err);
+           });
+       });
+    
+     }
+
+     getUnapprovedStories(companyid){
+        
+           return new Promise((resolve, reject) => {
+        
+             let headers = new Headers();
+             headers.append('Authorization', this.authService.token);
+        
+             this.http.get('https://ionic2-qcf-auth.herokuapp.com/api/stories/getUnapprovedStories/' + companyid, {headers: headers})
+               .map(res => res.json())
+               .subscribe(data => {
+                 resolve(data);
+               }, (err) => {
+                 reject(err);
+               });
+           });
+        
+         }
  
   createStory(story){
  

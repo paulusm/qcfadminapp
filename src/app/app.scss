@@ -16,10 +16,10 @@
 // automatically applied to the <body> element in the app.
 .toolbar-background {
     
-        background-image: -webkit-gradient(linear, left 0%, left 100%, from(#ffffff), to(#a9e2ff));
-        background-image: -webkit-linear-gradient(top, #ffffff, 0%, #a9e2ff, 100%);
-        background-image: -moz-linear-gradient(top, #ffffff 0%, #a9e2ff 100%);
-        background-image: linear-gradient(to bottom, #ffffff 0%, #a9e2ff 100%);
+        background-image: -webkit-gradient(linear, left 0%, left 100%, from(#ffffff), to(#bea203));
+        background-image: -webkit-linear-gradient(top, #ffffff, 75%, #bea203, 100%);
+        background-image: -moz-linear-gradient(top, #ffffff 75%, #bea203 100%);
+        background-image: linear-gradient(to bottom, #ffffff 75%, #bea203 100%);
         background-repeat: repeat-x;
     
     } 

@@ -33,6 +33,12 @@ export class ActivitiesAdmin {
   activitytypes:string[] = ['Volunteering','Sponsorship','Other'];
   selectedActivityType:any;
 
+//page controls
+  sponsorship:boolean = false;
+  volunteering:boolean = false;
+  general:boolean = false;
+  approval:boolean = false;
+
   public model = new Activity('','','','',0,false,'','','','',this.likes,this.volunteers,this.sponsors);
 
   constructor(public navCtrl: NavController, public modalCtrl: ModalController,
@@ -83,19 +89,35 @@ export class ActivitiesAdmin {
   }
 
   createVolunteer(){
-
+    this.sponsorship = false;
+    this.volunteering = true;
+    this.approval = false;
+    this.general = false;
+    this.selectedActivityType = "Volunteering";
   }
 
   createSponsorship(){
-
+    this.sponsorship = true;
+    this.volunteering = false;
+    this.approval = false;
+    this.general = false;
+    this.selectedActivityType = "Sponsorship";
   }
 
   createOther(){
-
+    this.sponsorship = false;
+    this.volunteering = false;
+    this.approval = false;
+    this.general = true;
+    this.selectedActivityType = "Other";
   }
 
   approveActvities(){
-
+    this.sponsorship = false;
+    this.volunteering = false;
+    this.approval = true;
+    this.general = false;
+    this.selectedActivityType = "";
   }
 
   onselectedActivityType(type){

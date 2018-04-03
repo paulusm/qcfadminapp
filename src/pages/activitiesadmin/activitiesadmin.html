@@ -10,28 +10,52 @@
 <ion-content padding>
 
 <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-7">
         <button type="button" class="btn btn-success btn-lg"
         (click)="createVolunteer()">
-        <span class="glyphicon glyphicon-plus"></span> Create Volunteering Activity
+        <span class="glyphicon glyphicon-plus"></span> Add Volunteering..
         </button>
         <button type="button" class="btn btn-success btn-lg"
         (click)="createSponsorship()">
-        <span class="glyphicon glyphicon-plus"></span> Create Sponsorship Activity
+        <span class="glyphicon glyphicon-plus"></span> Add Sponsorship..
         </button>
         <button type="button" class="btn btn-success btn-lg"
         (click)="createOther()">
-        <span class="glyphicon glyphicon-plus"></span> Create General Activity
+        <span class="glyphicon glyphicon-plus"></span> Add General..
         </button>
         <button type="button" class="btn btn-success btn-lg"
         (click)="approveActvities()">
-        <span class="glyphicon glyphicon-plus"></span> Approve Activities
+        <span class="glyphicon glyphicon-plus"></span> Approve..
         </button>
+        <br>
+        <ion-item>
+                <ion-label item-left>Activity Owner</ion-label>
+                <ion-input type="text" name="activityowner" readonly="true" [(ngModel)]="model.activityowner"></ion-input>
+        </ion-item>
+        <br>
+        
+        <ion-item>
+            <ion-label item-left>Activity Company ID</ion-label>
+            <ion-input type="text" name="companyid" readonly="true" [(ngModel)]="model.companyid"></ion-input>
+        </ion-item>
         </div>
+        <div class="col-md-4">
+                <ion-item *ngIf="sponsorship==true">
+                    <img class="image-container" src="https://ionic2-qcf-auth.herokuapp.com/api/files/file/file-1522588467911.jpg">
+                </ion-item>
+                <ion-item *ngIf="volunteering==true">
+                        <img class="image-container" src="https://ionic2-qcf-auth.herokuapp.com/api/files/file/file-1522589085006.jpg">
+                </ion-item>
+                <ion-item *ngIf="approval==true">
+                        <img class="image-container" src="https://ionic2-qcf-auth.herokuapp.com/api/files/file/file-1522589063351.jpg">
+                </ion-item>
+    </div>
 </div>
           <br><br>
 
-
+<div class="row">
+    
+</div>
 <div class="row">
     <div class="col-md-12">
     <h4>Add Activity Details</h4>
@@ -39,7 +63,8 @@
     </div>
 
 </div>
-<div class="row">
+
+<div class="row"  *ngIf="approval==false">
     <div class="col-md-12">
     <form  novalidate >
         <!-- we will place our fields here -->
@@ -52,15 +77,8 @@
                 <br>
 
                 <ion-item ><ion-label item-left>Description</ion-label>
-                <ion-input type="text"  name="activitydescription" [(ngModel)]="model.activitydescription"></ion-input>
+                <ion-textarea type="text"  name="activitydescription" [(ngModel)]="model.activitydescription"></ion-textarea>
                 </ion-item>
-                <br>
-
-                <ion-item>
-                    <ion-label item-left>Activity Owner</ion-label>
-                    <ion-input type="text" name="activityowner" [(ngModel)]="model.activityowner"></ion-input>
-                </ion-item>
-
                 <br>
 
                 <ion-item >
@@ -73,34 +91,20 @@
                 </ion-item>
                 <br>  
 
-                <ion-item>
+                <ion-item *ngIf="sponsorship==true">
                     <ion-label item-left>Donation Matching Percentage</ion-label>
                     <ion-input type="text" name="donationmatch" [(ngModel)]="model.donationmatch"></ion-input>
                 </ion-item>
                 <br>
-
-                <!-- <ion-item>
-                    <ion-label item-left>Activity Approved</ion-label>
-                    <ion-input type="text" name="approved" [(ngModel)]="model.approved"></ion-input>
-                </ion-item> -->
-                <br>
-
-                <ion-item>
-                    <ion-label item-left>Activity Company ID</ion-label>
-                    <ion-input type="text" name="companyid" [(ngModel)]="model.companyid"></ion-input>
-                </ion-item>
-                
-                <br>
-
-                <ion-item>
+                <ion-item item-left>
                     <ion-label item-left>Activity Start Date</ion-label>
-                    <ion-datetime displayFormat="DD/MM/YYYY" name="startdate" [(ngModel)]="model.startdate"></ion-datetime>
+                    <ion-datetime item-left displayFormat="DD/MM/YYYY" name="startdate" [(ngModel)]="model.startdate"></ion-datetime>
                 </ion-item>
                 <br>
 
-                <ion-item>
+                <ion-item item-left>
                     <ion-label item-left>Activity End Date</ion-label>
-                    <ion-datetime displayFormat="DD/MM/YYYY" name="enddate" [(ngModel)]="model.enddate"></ion-datetime>
+                    <ion-datetime item-left displayFormat="DD/MM/YYYY" name="enddate" [(ngModel)]="model.enddate"></ion-datetime>
 
                 </ion-item>
                 <br>

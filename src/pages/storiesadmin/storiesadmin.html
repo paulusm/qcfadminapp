@@ -8,7 +8,44 @@
       </ion-header>
       
 <ion-content padding>  
-    <div class="row">
+        <div class="row">
+                <div class="col-md-7">
+                <button type="button" class="btn btn-success btn-lg"
+                (click)="createStory()">
+                <span class="glyphicon glyphicon-plus"></span> Add Story..
+                </button>
+                <button type="button" class="btn btn-success btn-lg"
+                (click)="createArticle()">
+                <span class="glyphicon glyphicon-plus"></span> Add Article..
+                </button>
+                <button type="button" class="btn btn-success btn-lg"
+                (click)="createNews()">
+                <span class="glyphicon glyphicon-plus"></span> Add News..
+                </button>
+                <button type="button" class="btn btn-success btn-lg"
+                (click)="approveStories()">
+                <span class="glyphicon glyphicon-plus"></span> Approve..
+                </button>
+                <br>
+                </div>
+        </div>
+       
+    <div class="row" *ngIf="approve==true">
+            <div class="col-md-12">
+                <ion-item>
+                <ion-label item-left>Select Article...</ion-label>
+                <ion-select name="stories" [(ngModel)]="model" (ngModelChange)="onSelectStory($event)">
+                    <ion-option *ngFor="let story of stories" [value]="story">
+                        {{ story.storytitle }}
+                    </ion-option>
+                </ion-select> 
+                </ion-item>
+            </div>
+    </div> 
+
+<div class=row>
+    <div class="col-md-6">
+    <div class="row" >
         <div class="col-md-12">
         <ion-item>
                 <ion-label>Story Name</ion-label>
@@ -34,7 +71,7 @@
         </div>
     </div>
         
-    <div class="row">
+    <div class="row" >
         <div class="col-md-12">
             <ion-item >
             <ion-label item-left>Select Themes...</ion-label>
@@ -48,7 +85,7 @@
     </div> 
 
 
-    <div class="row">
+    <div class="row" >
         <div class="col-md-6">
             <form>
                 <div class="form-group">
@@ -65,7 +102,7 @@
         </div>
 
     </div>
-    <div class="row">
+    <div class="row" >
         <div class="col-md-12">
             Queue length: {{ uploader?.queue?.length }}
 
@@ -114,9 +151,41 @@
             
         </div>
     </div>
+</div>
+<div class="col-md-6">
     <div class="row">
+            <div class="col-md-12">
+            <ion-card>
+                    
+                    <ion-card-content>
+                            <ion-scroll scrollY="true">
+                    <img src="https://ionic2-qcf-auth.herokuapp.com/api/files/file/{{model.imagepath}}"/>
+                    <ion-card-title>
+                        {{model.storytitle}}
+                        </ion-card-title>
+                    <p>
+                        {{model.story}}
+                    </p>
+                            </ion-scroll>
+                    </ion-card-content>
+                </ion-card>
+            </div>
+    </div>
+</div>
+</div>
+    <div class="row" *ngIf="approve==false">
             <div class="col-md-12">
             <button (click)=save() class="btn btn-success btn-lg"><span class="glyphicon glyphicon-plus"></span>&nbsp;Save</button>
             </div>
     </div>
+    <div class="row" *ngIf="approve==true">
+            <div class="col-md-12">
+                <button type="button" class="btn btn-success btn-lg"
+                (click)="approveStory()">
+                <span class="glyphicon glyphicon-plus"></span> Approve this story..
+                </button>
+                <br>
+            </div>
+    </div>
+
 </ion-content>

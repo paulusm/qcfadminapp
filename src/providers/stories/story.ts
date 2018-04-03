@@ -13,7 +13,9 @@ constructor(
     public storyauthor:string,
     public publisheddate:string,
     public likes:string[],
-    public type:string
+    public type:string,
+    public approved:boolean,
+    public companyid:string
 )
 {
    

@@ -2,7 +2,16 @@
     
        stories-admin {
         
-          
+        ion-card {
+            position: relative;
+            text-align: left;
+            width:400px;
+            height:600px;
+          }
+          ion-scroll {
+            height: 600px;
+            }
+
            scroll-content {
                display: flex;
                flex-direction: column;
