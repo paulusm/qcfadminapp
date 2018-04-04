@@ -21,6 +21,8 @@ export class ThemesAdminComponent implements OnInit {
   model = new Theme('',null);
   loading: any;
   themes:any;
+  user:any;
+  role:string='Employee';
 
   
 
@@ -61,6 +63,12 @@ ngOnInit() {
     ])
     });
 
+    this.authService.getUser().then((data) => {
+        this.user = data;
+        this.role = this.user.role;
+      },(err) => {
+        console.log("not allowed");
+      });
 }
 
 initSubTheme() {
@@ -184,7 +192,12 @@ private getThemeData(): Theme {
     return null;
 
 }
-
+logout(){
+  
+     this.authService.logout();
+     this.navCtrl.setRoot(LoginPage);
+  
+   }
 }
 
 

@@ -1,7 +1,11 @@
 <ion-header>
   <ion-navbar navbarColor>
     <ion-title style="zoom:1.5">Quartet Community Foundation Application Administration</ion-title>
+    
     <ion-buttons end>
+            <button ion-button icon-only (click)="editprofile()"><ion-icon name="contact" style="zoom:1.5"></ion-icon></button>
+            <button ion-button>{{role}}</button>
+            
         <button ion-button icon-only (click)="logout()"><ion-icon name="power" style="zoom:1.5"></ion-icon></button>
     </ion-buttons>
   </ion-navbar>
@@ -35,11 +39,11 @@
           </div>
       </button>
       <br>
-      <button class="customBtn" ion-button icon-left large (click)="goToProfileUpdate()">
+      <button class="customBtn" ion-button icon-left large (click)="goToFAQUpdate()">
           <div>
               <div><ion-icon name="contact"></ion-icon>
               </div>
-      Update Profile
+      Update FAQs
           </div>
       </button>
       <br>

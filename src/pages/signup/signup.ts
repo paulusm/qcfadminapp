@@ -12,6 +12,9 @@ import { Companies } from '../../providers/companies/companies';
 })
 export class SignupPage {
  
+  roles:string[] = ['Employee','BusinessAdmin','QCFAdmin'];
+  
+  user:any;
   role: string;
   email: string;
   password: string;
@@ -21,7 +24,8 @@ export class SignupPage {
 
   accountnames:string;
   companies:any;
-  
+  selectedCompany:any;
+  selectedRole:any;
 
 
   constructor(public navCtrl: NavController, public authService: Auth, 
@@ -40,22 +44,35 @@ export class SignupPage {
       console.log("not allowed");
     });
     
-    
+    this.authService.getUser().then((data) => {
+      this.user = data;
+      this.role = this.user.role;
+      if(this.role != 'QCFAdmin' )
+      {
+        this.roles = ['Employee','BusinessAdmin'];
+      }
+    },(err) => {
+      console.log("not allowed");
+    });
   }
 
   selectCompany(companyid){
-   // console.log(company);
-   
-      //this.loading.dismiss();
-      console.log("Company ID: " + companyid);
-  
-      this.companyid =  companyid;
-     
-  
- 
+     this.companyid =  companyid;
+     if(companyid!='5ab7dbc0bc24e3001440543c')
+     {
+       this.selectedRole =  null;
+     }
   }
 
-  register(){
+  selectRole(role){
+    if(role=='QCFAdmin')
+    {
+      this.companyid = '5ab7dbc0bc24e3001440543c';
+      this.selectedCompany = '5ab7dbc0bc24e3001440543c';
+    }
+  }
+
+  registerEmployees(){
  
     console.log("Running Register");
     this.showLoader();

@@ -5,6 +5,8 @@ import { HomePage } from '../home/home';
 import { Users } from '../../providers/users/users';
 import { Storage } from '@ionic/storage';
 import { LoginPage } from '../login/login';
+import { Company } from '../../providers/companies/company';
+import { Companies } from '../../providers/companies/companies';
 
 @Component({
     selector: 'profileupdate',
@@ -24,8 +26,10 @@ import { LoginPage } from '../login/login';
     displayname: string;
     loading: any;
     user:any;
-  
-    constructor(public navCtrl: NavController, public authService: Auth, 
+    companies:any;
+    selectedCompany:any;
+
+    constructor(public navCtrl: NavController, public authService: Auth, public companiesService:Companies,
         public loadingCtrl: LoadingController, public usersService: Users, public storage: Storage) {
    
         this.storage.get('user').then((value) => {
@@ -42,6 +46,39 @@ import { LoginPage } from '../login/login';
         this.displayname =  value["displayname"];
         });
     }
+
+    ngOnInit(){
+        
+       /*  this.uploader.onBeforeUploadItem = (item) => {
+          item.withCredentials = false;
+        }
+    
+        //this.uploader.
+        this.uploader.onAfterAddingFile = (fileItem) => {
+          console.log("onAfterAddingFile");
+          this.filePreviewPath  = this.sanitizer.bypassSecurityTrustUrl((window.URL.createObjectURL(fileItem._file)));
+          
+          console.log(fileItem.file.name);
+        };
+    
+        this.uploader.onCompleteItem = (item:any, response:any, status:any, headers:any) => {
+          console.log("ImageUpload:uploaded:", item, status, response);
+          let obj = JSON.parse(response);
+          this.model.filename = obj.filename;
+        }; */
+    
+        //get all companies and bind to select drop down
+        this.companiesService.getCompanies().then((data) => {
+          console.log(data);
+          this.companies = data;
+          //this.loadDataList();
+        },(err) => {
+          console.log("not allowed");
+        });
+        
+        
+      }
+    
 
     updateprofile(){
 
@@ -80,6 +117,11 @@ import { LoginPage } from '../login/login';
             //this.loading.dismiss();
         });
     }
+
+selectItem(company){
+  console.log(company);
+  this.companyid = company;
+}
 
     logout(){
         

@@ -285,4 +285,10 @@ save(){
   
 }
 
+logout(){
+  
+     this.authService.logout();
+     this.navCtrl.setRoot(LoginPage);
+  
+   }
 }

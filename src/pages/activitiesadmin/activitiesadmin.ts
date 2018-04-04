@@ -175,4 +175,10 @@ export class ActivitiesAdmin {
   });
   }
 
+  logout(){
+    
+       this.authService.logout();
+       this.navCtrl.setRoot(LoginPage);
+    
+     }
 }

@@ -2,7 +2,12 @@
     
        profileupdate {
         
-       
+        ion-card {
+            background: #f7e89f;
+            border: 1px solid #bea203;
+            margin: 10px auto 0px;
+            padding: 10px;
+           }
     
            scroll-content {
                display: flex;
@@ -38,12 +43,10 @@
            }
     
            .continue-button {
-               width: 100%;
-               border-radius: 30px;
-               margin-top: 30px;
-               font-size: 0.9em;
-               background-color: transparent;
-               border: 1px solid #fff;
+            border-radius: 30px;
+            font-size: 1.5em;
+            //background-color: transparent;
+            border: 3px solid #fff;
            }
     
        }

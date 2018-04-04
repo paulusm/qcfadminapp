@@ -4,7 +4,8 @@ import { Auth } from '../../providers/auth/auth';
 import { HomePage } from '../home/home';
 import { SignupPage } from '../signup/signup';
 import { ResetPage } from '../reset/reset';
- 
+import { LoginPage } from '../login/login';
+
 @Component({
   selector: 'forgot-page',
   templateUrl: 'forgot.html'
@@ -55,4 +56,13 @@ export class ForgotPage {
             console.log(err);
         });
     }
+
+    logout(){
+        
+           this.authService.logout();
+           this.navCtrl.setRoot(LoginPage);
+        
+         }
+
+         
 }

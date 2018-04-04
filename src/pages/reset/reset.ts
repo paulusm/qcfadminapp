@@ -3,6 +3,7 @@ import { NavController, LoadingController, NavParams } from 'ionic-angular';
 import { Auth } from '../../providers/auth/auth';
 import { HomePage } from '../home/home';
 import { SignupPage } from '../signup/signup';
+import { LoginPage } from '../login/login';
 
 @Component({
     selector: 'reset-page',

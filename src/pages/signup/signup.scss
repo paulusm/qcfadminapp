@@ -3,7 +3,13 @@
        signup {
         
        
-    
+        ion-card {
+            background: #f7e89f;
+            border: 1px solid #bea203;
+            margin: 10px auto 0px;
+            padding: 10px;
+           }
+       
         
     
         scroll-content {
@@ -32,13 +38,6 @@
             color: #1a0155;
         }
  
-        ion-card {
-         background: #f7e89f;
-         border: 10px solid #bea203;
-         margin: 100px auto 10px;
-         padding: 10px;
-        }
-
         ion-card-header {
             font-size:2.0em;
         }

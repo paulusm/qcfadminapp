@@ -3,6 +3,7 @@ import { NavController, LoadingController } from 'ionic-angular';
 import { Auth } from '../../providers/auth/auth';
 import { Files} from '../../providers/files/files';
 import { LoginPage } from '../login/login';
+import { FAQUpdatePage } from '../faq/faq';
 import { CompanyAdmin } from '../companyadmin/companyadmin';
 import { SignupPage } from '../signup/signup';
 import { ArticlesAdmin } from '../articlesadmin/articlesadmin';
@@ -22,6 +23,8 @@ export class HomePage {
   loading: any;
   files:any;
   galleryType = 'pinterest';
+  user:any;
+  role:string = "Test";
   //img1:string = "https://ionic2-qcf-auth.herokuapp.com/api/files/file/" file-1519663015207.jpg
 
   constructor(public navCtrl: NavController, public authService: Auth,
@@ -35,13 +38,27 @@ export class HomePage {
   },(err) => {
     console.log("not allowed");
   }); */
+  
  }
 
   
  ngOnInit(){
    
 
-  
+  this.authService.checkRole().then((data) => {
+    //console.log("User Data:" + data);
+    console.log(data);
+    this.user = data;
+    this.role = this.user.role;
+    //this.model.storyauthor = this.user._id;
+    //console.log("User _id:"+ this.user._id);
+    //this.model.companyid = this.user.companyid;
+    //console.log("Company _id:"+ this.user.companyid);
+    
+
+  },(err) => {
+    console.log("not allowed");
+  });
   
  
 }
@@ -61,6 +78,13 @@ export class HomePage {
        this.navCtrl.setRoot(LoginPage);
     
      }
+
+     editprofile(){
+      
+         
+         this.navCtrl.push(ProfileUpdatePage);
+      
+       }
 
     goToCompanyAdmin(){
       this.navCtrl.push(CompanyAdmin);
@@ -90,8 +114,8 @@ export class HomePage {
       this.navCtrl.push(ThemesAdminComponent);
     }
 
-    goToProfileUpdate(){
-      this.navCtrl.push(ProfileUpdatePage);
+    goToFAQUpdate(){
+      this.navCtrl.push(FAQUpdatePage);
     }
    
     deleteImage(id){
