@@ -10,7 +10,7 @@
 <ion-content padding *ngIf="role == 'QCFAdmin' || role == 'BusinessAdmin'" >  
         <div class="row">
                 <div class="col-md-7" >
-                <button *ngIf="role == 'QCFAdmin' || role == 'BusinessAdmin'" type="button" class="btn btn-success btn-lg"
+                <!-- <button *ngIf="role == 'QCFAdmin' || role == 'BusinessAdmin'" type="button" class="btn btn-success btn-lg"
                 (click)="createStory()">
                 <span class="glyphicon glyphicon-plus"></span> Add Story..
                 </button>
@@ -21,7 +21,7 @@
                 <button *ngIf="role == 'QCFAdmin'" type="button" class="btn btn-success btn-lg"
                 (click)="createNews()">
                 <span class="glyphicon glyphicon-plus"></span> Add News..
-                </button>
+                </button> -->
                 <button *ngIf="role == 'QCFAdmin'" type="button" class="btn btn-success btn-lg"
                 (click)="approveStories()">
                 <span class="glyphicon glyphicon-plus"></span> Approve..
@@ -49,23 +49,27 @@
 
 <div class=row>
     <div class="col-md-6">
+        <ion-card>
     <div class="row" >
         <div class="col-md-12">
+            <ion-label>Story Name</ion-label>
         <ion-item>
-                <ion-label>Story Name</ion-label>
+                
                 <ion-input type="text" [(ngModel)]="model.storytitle" name="storytitle"></ion-input>
         </ion-item>
-
+        <ion-label>Story Text</ion-label>
         <ion-item>
-                <ion-label>Story Text</ion-label>
+                
                 <ion-textarea rows="10" [(ngModel)]="model.story" name="story"></ion-textarea>
             </ion-item>
+            <ion-label>Author Name</ion-label>
         <ion-item>
-                <ion-label>Author Name</ion-label>
+                
                 <ion-input type="text" [(ngModel)]="model.storyauthor" name="storyauthor"></ion-input>
         </ion-item>
+        <ion-label item-left>Select Article Type...</ion-label>
         <ion-item >
-            <ion-label item-left>Select Article Type...</ion-label>
+            
             <ion-select name="selectedArticleType" [(ngModel)]="selectedArticleType" (ngModelChange)="onselectedArticleType($event)">
                 <ion-option *ngFor="let type of articletypes" [value]="type">
                     {{type}}
@@ -77,8 +81,9 @@
         
     <div class="row" >
         <div class="col-md-12">
-            <ion-item >
             <ion-label item-left>Select Themes...</ion-label>
+            <ion-item >
+            
             <ion-select name="selectedThemes" [(ngModel)]="selectedThemes" (ngModelChange)="onSelectTheme($event)">
                 <ion-option *ngFor="let theme of themes" [value]="theme._id">
                     {{ theme.name }}
@@ -155,15 +160,16 @@
             
         </div>
     </div>
+</ion-card>
 </div>
 <div class="col-md-6">
     <div class="row">
             <div class="col-md-12">
                 <label>Article Preview</label>
-            <ion-card>
+            <ion-card class="ion-card-article">
                     
                     <ion-card-content>
-                            <ion-scroll scrollY="true">
+                            <ion-scroll class="ion-scroll-article" scrollY="true">
                     <img src="https://ionic2-qcf-auth.herokuapp.com/api/files/file/{{model.imagepath}}"/>
                     <ion-card-title>
                         {{model.storytitle}}

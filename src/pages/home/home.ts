@@ -24,7 +24,7 @@ export class HomePage {
   files:any;
   galleryType = 'pinterest';
   user:any;
-  role:string = "Test";
+  role:any;
   //img1:string = "https://ionic2-qcf-auth.herokuapp.com/api/files/file/" file-1519663015207.jpg
 
   constructor(public navCtrl: NavController, public authService: Auth,
@@ -48,8 +48,8 @@ export class HomePage {
   this.authService.checkRole().then((data) => {
     //console.log("User Data:" + data);
     console.log(data);
-    this.user = data;
-    this.role = this.user.role;
+    //this.user = data;
+    this.role = data;
     //this.model.storyauthor = this.user._id;
     //console.log("User _id:"+ this.user._id);
     //this.model.companyid = this.user.companyid;

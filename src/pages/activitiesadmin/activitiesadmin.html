@@ -11,36 +11,23 @@
 
 <div class="row">
         <div class="col-md-7">
-        <button type="button" class="btn btn-success btn-lg"
-        (click)="createVolunteer()">
-        <span class="glyphicon glyphicon-plus"></span> Add Volunteering..
-        </button>
-        <button type="button" class="btn btn-success btn-lg"
-        (click)="createSponsorship()">
-        <span class="glyphicon glyphicon-plus"></span> Add Sponsorship..
-        </button>
-        <button type="button" class="btn btn-success btn-lg"
-        (click)="createOther()">
-        <span class="glyphicon glyphicon-plus"></span> Add General..
-        </button>
-        <button type="button" class="btn btn-success btn-lg"
-        (click)="approveActvities()">
-        <span class="glyphicon glyphicon-plus"></span> Approve..
-        </button>
-        <br><br>
-        <ion-label item-left>Activity Owner</ion-label>
-        <ion-item>
-               
-                <ion-input type="text" name="activityowner" readonly="true" [(ngModel)]="model.activityowner"></ion-input>
-        </ion-item>
-        <br>
-        <ion-label item-left>Activity Company ID</ion-label>
-        <ion-item>
-            
-            <ion-input type="text" name="companyid" readonly="true" [(ngModel)]="model.companyid"></ion-input>
-        </ion-item>
-        </div>
-        <div class="col-md-4">
+            <button type="button" class="btn btn-success btn-lg"
+            (click)="createVolunteer()">
+            <span class="glyphicon glyphicon-plus"></span> Add Volunteering..
+            </button>
+            <button type="button" class="btn btn-success btn-lg"
+            (click)="createSponsorship()">
+            <span class="glyphicon glyphicon-plus"></span> Add Sponsorship..
+            </button>
+            <button type="button" class="btn btn-success btn-lg"
+            (click)="createOther()">
+            <span class="glyphicon glyphicon-plus"></span> Add General..
+            </button>
+            <button type="button" class="btn btn-success btn-lg"
+            (click)="approveActvities()">
+            <span class="glyphicon glyphicon-plus"></span> Approve..
+            </button>
+            <div class="col-md-4">
                 <ion-item *ngIf="sponsorship==true">
                     <img class="image-container" src="https://ionic2-qcf-auth.herokuapp.com/api/files/file/file-1522588467911.jpg">
                 </ion-item>
@@ -50,7 +37,25 @@
                 <ion-item *ngIf="approval==true">
                         <img class="image-container" src="https://ionic2-qcf-auth.herokuapp.com/api/files/file/file-1522589063351.jpg">
                 </ion-item>
-    </div>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <ion-card> 
+                <ion-label item-left>Activity Owner</ion-label>
+                    <ion-item>
+                        
+                            <ion-input type="text" name="activityowner" readonly="true" [(ngModel)]="model.activityowner"></ion-input>
+                    </ion-item>
+                    <br>
+                    <ion-label item-left>Activity Company ID</ion-label>
+                    <ion-item>
+                        
+                        <ion-input type="text" name="companyid" readonly="true" [(ngModel)]="model.companyid"></ion-input>
+                    </ion-item>
+            </ion-card>
+        
+        </div>
+        
 </div>
           <br><br>
 
@@ -59,57 +64,60 @@
 </div>
 
 <div class="row"  *ngIf="approval==false">
+    <ion-card>
     <div class="col-md-12">
-    <h4>Add Activity Details</h4>
+        
+    <ion-card-header>Add Activity Details</ion-card-header>
             
     </div>
     <div class="col-md-12">
     <form  novalidate >
         <!-- we will place our fields here -->
         <div class="form-group">
+                <label item-left>Activity Name</label>
+                <ion-item>
+                       
+                        <ion-input type="text" class="form-control"  name="name" [(ngModel)]="model.activityname"></ion-input>
+                </ion-item>
                 
+                <label item-left>Description</label>
                 <ion-item >
-                        <ion-label item-left>Activity Name</ion-label>
-                        <ion-input type="text" name="name" [(ngModel)]="model.activityname"></ion-input>
+                    
+                    <ion-textarea type="text"  class="form-control" name="activitydescription" [(ngModel)]="model.activitydescription"></ion-textarea>
                 </ion-item>
-                <br>
-
-                <ion-item ><ion-label item-left>Description</ion-label>
-                <ion-textarea type="text"  name="activitydescription" [(ngModel)]="model.activitydescription"></ion-textarea>
-                </ion-item>
-                <br>
-
+                
+                <label item-left>Select Activity Type...</label>
                 <ion-item >
-                        <ion-label item-left>Select Activity Type...</ion-label>
-                        <ion-select name="selectedActivityType" [(ngModel)]="selectedActivityType" (ngModelChange)="onselectedActivityType($event)">
+                        
+                        <ion-select  class="form-control" name="selectedActivityType" [(ngModel)]="selectedActivityType" (ngModelChange)="onselectedActivityType($event)">
                             <ion-option *ngFor="let type of activitytypes" [value]="type">
                                 {{type}}
                             </ion-option>
                         </ion-select>
                 </ion-item>
-                <br>  
-
+                
+                <label *ngIf="sponsorship==true" item-left>Donation Matching Percentage</label>
                 <ion-item *ngIf="sponsorship==true">
-                    <ion-label item-left>Donation Matching Percentage</ion-label>
-                    <ion-input type="text" name="donationmatch" [(ngModel)]="model.donationmatch"></ion-input>
+                    
+                    <ion-input type="text"  class="form-control" name="donationmatch" [(ngModel)]="model.donationmatch"></ion-input>
                 </ion-item>
-                <br>
+                
+                <label item-left>Activity Start Date</label>
                 <ion-item item-left>
-                    <ion-label item-left>Activity Start Date</ion-label>
-                    <ion-datetime item-left displayFormat="DD/MM/YYYY" name="startdate" [(ngModel)]="model.startdate"></ion-datetime>
+                    <ion-datetime class="form-control" item-left displayFormat="DD/MM/YYYY" name="startdate" [(ngModel)]="model.startdate"></ion-datetime>
                 </ion-item>
-                <br>
-
+                
+                <label item-left>Activity End Date</label>
                 <ion-item item-left>
-                    <ion-label item-left>Activity End Date</ion-label>
-                    <ion-datetime item-left displayFormat="DD/MM/YYYY" name="enddate" [(ngModel)]="model.enddate"></ion-datetime>
+                    
+                    <ion-datetime class="form-control" item-left displayFormat="DD/MM/YYYY" name="enddate" [(ngModel)]="model.enddate"></ion-datetime>
 
                 </ion-item>
-                <br>
-
+                
+                <label item-left>Activity Donate URL</label>
                 <ion-item>
-                    <ion-label item-left>Activity Donate URL</ion-label>
-                    <ion-input type="text" name="mydonateurl" [(ngModel)]="model.mydonateurl"></ion-input>
+                    
+                    <ion-input type="text" class="form-control" name="mydonateurl" [(ngModel)]="model.mydonateurl"></ion-input>
   
                 </ion-item>
                 <br>
@@ -119,5 +127,6 @@
 <!--             <button *ngIf="updateexistingcompany=='true'" (click)=update() class="btn btn-success btn-lg"><span class="glyphicon glyphicon-floppy-disk"></span>&nbsp;Update</button>
  -->    </form>
     </div>
+</ion-card>
 </div>
 </ion-content>

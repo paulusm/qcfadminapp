@@ -17,9 +17,8 @@
         <ion-card>
         <ion-row class="account-form">
                 <ion-col col-12>
-                              <ion-label item-left>Select the Role Type for these Users...</ion-label>
+                              <ion-label item-left>Select the Role Type for these Users...</ion-label><br>
                               <ion-item>
-                              <ion-label item-left>Role Type...</ion-label>
                               <ion-select item-left  [ngModel]="selectedRole" (ngModelChange)="selectRole($event)">
                                       <ion-option [value]="role" *ngFor="let role of roles">{{role}}</ion-option>
                               </ion-select>
@@ -41,7 +40,6 @@
       <ion-col col-12>
                     <ion-label item-left>Select Company for these Users...</ion-label>
                     <ion-item>
-                    <ion-label item-left>Company...</ion-label>
                     <ion-select item-left  [ngModel]="selectedCompany" (ngModelChange)="selectCompany($event)">
                             <ion-option [value]="company._id" *ngFor="let company of companies">{{company.companyname}}</ion-option>
                     </ion-select>

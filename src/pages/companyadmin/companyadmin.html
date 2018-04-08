@@ -22,19 +22,19 @@
             </button>
             </div>
       </div>
-      <br><br>
+      <ion-card>
       <div class="row">
           <div class="col-md-6">
-          <ion-item *ngIf="updateexistingcompany =='true'">
-          <ion-label item-left>Select Company...</ion-label>
-          <ion-select item-left  [ngModel]="selectedValue" (ngModelChange)="selectItem($event)">
-                  <ion-option [value]="company.companyname" *ngFor="let company of companies">{{company.companyname}}</ion-option>
-          </ion-select>
+            <label *ngIf="updateexistingcompany =='true'" item-left>Select Company...</label>
+            <ion-item *ngIf="updateexistingcompany =='true'">
+            <ion-select class="form-control" item-left  [ngModel]="selectedValue" (ngModelChange)="selectItem($event)">
+                    <ion-option [value]="company.companyname" *ngFor="let company of companies">{{company.companyname}}</ion-option>
+            </ion-select>
         </ion-item>
         </div>
           <div class="col-md-6" *ngIf="updateexistingcompany =='true' || createnewcompany =='true'">
             <div class="row"  *ngIf="updateexistingcompany =='true' || createnewcompany =='true'">
-                <div class="col-md-6">
+                <div class="col-md-8">
                     <form>
                         <div class="form-group">
                             <ion-item>
@@ -46,7 +46,7 @@
                     </form>
                 </div>
 
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <img [src]="filePreviewPath" width="200" *ngIf="filePreviewPath" />
                     <img [src]="fileRetrievePath" width="200" *ngIf="fileRetrievePath" />
                    
@@ -105,6 +105,7 @@
 
         </div>
       </div>
+      </ion-card>
     <div class="row"  *ngIf="updateexistingcompany =='true' || createnewcompany =='true'">
     <div class="col-md-12">
     <form  novalidate >
@@ -142,9 +143,9 @@
                 <br>
             <div class="row">
             <div class="col-md-6">
+            <label item-left>Select Themes...</label>
             <ion-item >
-            <ion-label item-left>Select Themes...</ion-label>
-            <ion-select multiple name="selectedThemes" [(ngModel)]="selectedThemes" (ngModelChange)="onSelectTheme($event)">
+            <ion-select multiple class="form-control" name="selectedThemes" [(ngModel)]="selectedThemes" (ngModelChange)="onSelectTheme($event)">
                 <ion-option *ngFor="let theme of themes" [value]="theme.name">
                     {{ theme.name }}
                 </ion-option>

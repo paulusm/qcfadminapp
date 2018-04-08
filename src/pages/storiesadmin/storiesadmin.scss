@@ -1,25 +1,25 @@
 .ios, .md {
     
        stories-admin {
-        
-        ion-textarea {
-            height:220px;
-        }
 
-        ion-card {
+        .ion-card-article{
             position: relative;
             text-align: left;
             width:400px;
             height:600px;
           }
-          ion-scroll {
-            height: 600px;
-            }
 
-           /* scroll-content {
-            display: flex;
-            flex-direction: column;
-            } */
+        .ion-scroll-article {
+            height: 600px;
+        }
+
+        /* ion-textarea {
+            height:220px;
+        }
+
+        
+
+          
  
         ion-item {
             border-radius: 20px !important;
@@ -70,7 +70,7 @@
             font-size: 0.9em;
             background-color: transparent;
             border: 1px solid #fff;
-        }
+        } */
     
        }
     
