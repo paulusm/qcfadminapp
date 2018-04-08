@@ -156,7 +156,8 @@ updateexisting(){
 
 createnew(){
   this.updateexistingcompany = 'false';
-  this.createnewcompany = 'true'
+  this.createnewcompany = 'true';
+  this.model = new Company('','','','',this.themes);
 }
 
 //CRUD methods for model in this form...

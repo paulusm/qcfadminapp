@@ -8,59 +8,65 @@
       </ion-header>
 
 <ion-content padding>
-
 <div class="row">
         <div class="col-md-7">
             <button type="button" class="btn btn-success btn-lg"
-            (click)="createVolunteer()">
-            <span class="glyphicon glyphicon-plus"></span> Add Volunteering..
+            (click)="createActivity()">
+            <span class="glyphicon glyphicon-plus"></span> Create New Activity..
             </button>
-            <button type="button" class="btn btn-success btn-lg"
-            (click)="createSponsorship()">
-            <span class="glyphicon glyphicon-plus"></span> Add Sponsorship..
-            </button>
-            <button type="button" class="btn btn-success btn-lg"
-            (click)="createOther()">
-            <span class="glyphicon glyphicon-plus"></span> Add General..
-            </button>
-            <button type="button" class="btn btn-success btn-lg"
+            <button type="button" class="btn btn-success btn-lg" 
             (click)="approveActvities()">
-            <span class="glyphicon glyphicon-plus"></span> Approve..
+            <span class="glyphicon glyphicon-plus"></span> View and Edit Approvals..
             </button>
-            <div class="col-md-4">
-                <ion-item *ngIf="sponsorship==true">
-                    <img class="image-container" src="https://ionic2-qcf-auth.herokuapp.com/api/files/file/file-1522588467911.jpg">
-                </ion-item>
-                <ion-item *ngIf="volunteering==true">
-                        <img class="image-container" src="https://ionic2-qcf-auth.herokuapp.com/api/files/file/file-1522589085006.jpg">
-                </ion-item>
-                <ion-item *ngIf="approval==true">
-                        <img class="image-container" src="https://ionic2-qcf-auth.herokuapp.com/api/files/file/file-1522589063351.jpg">
-                </ion-item>
-            </div>
+            
         </div>
         <div class="col-md-5">
-            <ion-card> 
-                <ion-label item-left>Activity Owner</ion-label>
+            <ion-card>
+                 <div class="row">
+                    <div class="col-md-6">
+                    <ion-label item-left>Activity Owner</ion-label>
                     <ion-item>
-                        
                             <ion-input type="text" name="activityowner" readonly="true" [(ngModel)]="model.activityowner"></ion-input>
                     </ion-item>
-                    <br>
+                    </div>
+                    <div class="col-md-6">
                     <ion-label item-left>Activity Company ID</ion-label>
                     <ion-item>
-                        
                         <ion-input type="text" name="companyid" readonly="true" [(ngModel)]="model.companyid"></ion-input>
                     </ion-item>
+                    </div>
+                </div>
             </ion-card>
         
         </div>
-        
-</div>
-          <br><br>
-
-<div class="row">
     
+</div>
+<div class="row" *ngIf="approval==true">
+    <div class="col-md-12">
+            <div class="images">
+            <ion-card class="ion-card-activity" *ngFor="let activity of activities">
+                    <ion-card-content>
+                            
+                                <ion-card-title class="ion-card-title">
+                                        {{activity.activityname}}
+                                </ion-card-title>
+                                <label>Activity Type:&nbsp; {{activity.activitytype}} </label><br>
+                                <label>Owner ID:&nbsp; {{activity.activityowner}} </label><br>
+                                <label>Approvalk Status:&nbsp; {{activity.approved}} </label><br>
+                                <label>Activity Description:&nbsp; {{activity.activitydescription}} </label><br>
+                                <button type="button" class="btn btn-success btn-lg"
+                                (click)="updateActivity(activity)">
+                                <span class="glyphicon glyphicon-plus"></span> Update Activity..
+                                </button>
+                                <button type="button" class="btn btn-success btn-lg"
+                                (click)="approveActivity(activity)">
+                                <span class="glyphicon glyphicon-plus"></span> Approve Activity..
+                                </button>
+                    </ion-card-content>
+            </ion-card>
+            </div>
+      
+    </div>
 </div>
 
 <div class="row"  *ngIf="approval==false">
@@ -89,7 +95,7 @@
                 <label item-left>Select Activity Type...</label>
                 <ion-item >
                         
-                        <ion-select  class="form-control" name="selectedActivityType" [(ngModel)]="selectedActivityType" (ngModelChange)="onselectedActivityType($event)">
+                        <ion-select  multiple class="form-control" name="selectedActivityType" [(ngModel)]="selectedActivityType" (ngModelChange)="onselectedActivityType($event)">
                             <ion-option *ngFor="let type of activitytypes" [value]="type">
                                 {{type}}
                             </ion-option>
@@ -129,4 +135,17 @@
     </div>
 </ion-card>
 </div>
+
+
+<!-- <div class="col-md-4">
+                <ion-item *ngIf="sponsorship==true">
+                    <img class="image-container" src="https://ionic2-qcf-auth.herokuapp.com/api/files/file/file-1522588467911.jpg">
+                </ion-item>
+                <ion-item *ngIf="volunteering==true">
+                        <img class="image-container" src="https://ionic2-qcf-auth.herokuapp.com/api/files/file/file-1522589085006.jpg">
+                </ion-item>
+                 <ion-item *ngIf="approval==true">
+                        <img class="image-container" src="https://ionic2-qcf-auth.herokuapp.com/api/files/file/file-1522589063351.jpg">
+                </ion-item> 
+            </div> -->
 </ion-content>

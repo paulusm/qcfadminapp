@@ -10,40 +10,34 @@
 <ion-content padding *ngIf="role == 'QCFAdmin' || role == 'BusinessAdmin'" >  
         <div class="row">
                 <div class="col-md-7" >
-                <!-- <button *ngIf="role == 'QCFAdmin' || role == 'BusinessAdmin'" type="button" class="btn btn-success btn-lg"
-                (click)="createStory()">
-                <span class="glyphicon glyphicon-plus"></span> Add Story..
+                <button *ngIf="role == 'QCFAdmin' || role == 'BusinessAdmin'" type="button" class="btn btn-success btn-lg"
+                (click)="createStories()">
+                <span class="glyphicon glyphicon-file"></span> Create New Story..
                 </button>
-                <button *ngIf="role == 'QCFAdmin'" type="button" class="btn btn-success btn-lg"
-                (click)="createArticle()">
-                <span class="glyphicon glyphicon-plus"></span> Add Article..
-                </button>
-                <button *ngIf="role == 'QCFAdmin'" type="button" class="btn btn-success btn-lg"
-                (click)="createNews()">
-                <span class="glyphicon glyphicon-plus"></span> Add News..
-                </button> -->
                 <button *ngIf="role == 'QCFAdmin'" type="button" class="btn btn-success btn-lg"
                 (click)="approveStories()">
-                <span class="glyphicon glyphicon-plus"></span> Approve..
+                <span class="glyphicon glyphicon-ok-sign"></span> Get Unapproved Items..
                 </button>
                 <button *ngIf="role == 'QCFAdmin' || role == 'BusinessAdmin'" type="button" class="btn btn-success btn-lg"
                 (click)="updateStories()">
-                <span class="glyphicon glyphicon-plus"></span> Update..
+                <span class="glyphicon glyphicon-pencil"></span> Get All Articles..
                 </button>
                 <br>
                 </div>
         </div>
        
-    <div class="row" *ngIf="approve==true">
+    <div class="row">
             <div class="col-md-6">
+                <ion-card>
+                <label item-left>Select Article...</label>
                 <ion-item>
-                <ion-label item-left>Select Article...</ion-label>
-                <ion-select name="stories" [(ngModel)]="model" (ngModelChange)="onSelectStory($event)">
+                <ion-select name="stories" class="form-control" [(ngModel)]="model" (ngModelChange)="onSelectStory($event)">
                     <ion-option *ngFor="let story of stories" [value]="story">
                         {{ story.storytitle }}
                     </ion-option>
                 </ion-select> 
                 </ion-item>
+            </ion-card>
             </div>
     </div> 
 
@@ -52,22 +46,22 @@
         <ion-card>
     <div class="row" >
         <div class="col-md-12">
-            <ion-label>Story Name</ion-label>
+            <label>Story Name</label>
         <ion-item>
                 
                 <ion-input type="text" [(ngModel)]="model.storytitle" name="storytitle"></ion-input>
         </ion-item>
-        <ion-label>Story Text</ion-label>
+        <label>Story Text</label>
         <ion-item>
                 
                 <ion-textarea rows="10" [(ngModel)]="model.story" name="story"></ion-textarea>
             </ion-item>
-            <ion-label>Author Name</ion-label>
+            <label>Author Name</label>
         <ion-item>
                 
                 <ion-input type="text" [(ngModel)]="model.storyauthor" name="storyauthor"></ion-input>
         </ion-item>
-        <ion-label item-left>Select Article Type...</ion-label>
+        <label item-left>Select Article Type...</label>
         <ion-item >
             
             <ion-select name="selectedArticleType" [(ngModel)]="selectedArticleType" (ngModelChange)="onselectedArticleType($event)">
@@ -81,7 +75,7 @@
         
     <div class="row" >
         <div class="col-md-12">
-            <ion-label item-left>Select Themes...</ion-label>
+            <label item-left>Select Themes...</label>
             <ion-item >
             
             <ion-select name="selectedThemes" [(ngModel)]="selectedThemes" (ngModelChange)="onSelectTheme($event)">
@@ -160,23 +154,42 @@
             
         </div>
     </div>
+    <div class="row" *ngIf="approve==false && story==false">
+            <div class="col-md-12">
+            <button (click)=save() class="btn btn-success btn-lg"><span class="glyphicon glyphicon-floppy-disk"></span>&nbsp;Save</button>
+            </div>
+    </div>
+    <div class="row" *ngIf="story==true">
+            <div class="col-md-12">
+            <button (click)=updateStory() class="btn btn-success btn-lg"><span class="glyphicon glyphicon-floppy-disk"></span>&nbsp;Save</button>
+            </div>
+    </div>
+    <div class="row" *ngIf="approve==true">
+            <div class="col-md-12">
+                <button type="button" class="btn btn-success btn-lg"
+                (click)="approveStory()">
+                <span class="glyphicon glyphicon-thumbs-up"></span> Approve this story..
+                </button>
+                <br>
+            </div>
+    </div>
 </ion-card>
 </div>
 <div class="col-md-6">
     <div class="row">
             <div class="col-md-12">
-                <label>Article Preview</label>
+            
             <ion-card class="ion-card-article">
-                    
+                    <label>Article Preview</label>
                     <ion-card-content>
                             <ion-scroll class="ion-scroll-article" scrollY="true">
-                    <img src="https://ionic2-qcf-auth.herokuapp.com/api/files/file/{{model.imagepath}}"/>
-                    <ion-card-title>
-                        {{model.storytitle}}
-                    </ion-card-title>
-                    <div>
-                           <pre> {{model.story}}</pre>
-                    </div>
+                                <img src="https://ionic2-qcf-auth.herokuapp.com/api/files/file/{{model.imagepath}}"/>
+                                <ion-card-title>
+                            {{model.storytitle}}
+                                </ion-card-title>
+                                <div>
+                                    <pre> {{model.story}}</pre>
+                                </div>
                             </ion-scroll>
                     </ion-card-content>
                 </ion-card>
@@ -184,19 +197,6 @@
     </div>
 </div>
 </div>
-    <div class="row" *ngIf="approve==false">
-            <div class="col-md-12">
-            <button (click)=save() class="btn btn-success btn-lg"><span class="glyphicon glyphicon-plus"></span>&nbsp;Save</button>
-            </div>
-    </div>
-    <div class="row" *ngIf="approve==true">
-            <div class="col-md-12">
-                <button type="button" class="btn btn-success btn-lg"
-                (click)="approveStory()">
-                <span class="glyphicon glyphicon-plus"></span> Approve this story..
-                </button>
-                <br>
-            </div>
-    </div>
+    
 
 </ion-content>

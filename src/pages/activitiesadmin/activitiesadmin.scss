@@ -5,11 +5,71 @@
     
     activities-admin {
        
+       
+        ion-card-header {
+            font-size:2.0em;
+        }
+
+        .ion-card-title{
+            color:black;
+            font-size:1.2em;
+            font-weight: bold;
+        }
+
+        ion-card-activity {
+            background: #f7e89f;
+            border: 1px solid #bea203;
+            margin: 10px auto 10px;
+            padding: 10px;
+            height:300px;
+            //width:300px;
+           }
+
+           ion-card{
+            margin: 1px auto 1px !important;
+            padding: 1px !important;
+           }
+
+        .image-container {
+            //min-height: 150px;
+            min-width:500px;
+            background-size: cover;
+        }
     
-       /*  scroll-content {
+        ion-item{
+            font-size:10px;
+            height:15px;
+            margin: 1px auto 1px;
+            padding: 1px;
+        }
+        @media (min-width: 0px) {
+            .images {
+                column-count: 2;
+            }
+        }
+     
+        @media (min-width: 420px) {
+            .images {
+                column-count: 3;
+            }
+        }
+     
+        @media (min-width: 720px) {
+            .images {
+                column-count: 4;
+            }
+        }
+     
+        .one-image {
+            margin: 2px;
+        }
+        
+        scroll-content {
             display: flex;
             flex-direction: column;
         }
+
+       /*  
  
         ion-item {
             border-radius: 20px !important;
@@ -33,16 +93,7 @@
             width:350px;
         }
  
-        ion-card {
-         background: #f7e89f;
-         border: 10px solid #bea203;
-         margin: 100px auto 10px;
-         padding: 10px;
-        }
-
-        ion-card-header {
-            font-size:2.0em;
-        }
+        
 
         .heading-text {
             flex: 1;

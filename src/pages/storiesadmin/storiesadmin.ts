@@ -71,16 +71,7 @@ ngOnInit(){
     console.log("User _id:"+ this.user._id);
     this.model.companyid = this.user.companyid;
     console.log("Company _id:"+ this.user.companyid);
-        //get all companies and bind to select drop down
-      /* this.companiesService.getCompanyByCompanyID(this.user.companyid).then((data) => {
-        console.log(data);
-        this.company = data;
-        //this.model.companyid= this.company.companyid;
-        //this.loadDataList();
-      },(err) => {
-        console.log("not allowed");
-      }); */
-
+      
   },(err) => {
     console.log("not allowed");
   });
@@ -133,6 +124,15 @@ createArticle(){
   this.selectedArticleType = "Article";
 }
 
+createStories(){
+  this.news = false;
+  this.story = false;
+  this.approve = false;
+  this.article = false;
+  this.selectedArticleType = "";
+  this.model = new Story('','','','','','',this.likes,'Story', false, '5ab7dbc0bc24e3001440543c');
+}
+
 approveStories(){
   this.news = false;
   this.story = false;
@@ -152,8 +152,8 @@ approveStories(){
 
 updateStories(){
   this.news = false;
-  this.story = false;
-  this.approve = true;
+  this.story = true;
+  this.approve = false;
   this.article = false;
   this.selectedArticleType = "";
 
@@ -215,6 +215,46 @@ approveStory(){
 }
 
 updateStory(){
+  console.log(this.model);
+  //this.model.publisheddate = Date(); 
+  this.storiesService.updateStory(this.model).then((result) => {
+      //this.loading.dismiss();
+      console.log(result);
+      //this.causeitems = result;
+      console.log("Article updated");
+
+      let alert = this.alertCtrl.create({
+        title: 'Article Updated Successfully',
+        subTitle: 'This article has been updated and saved to the database.',
+        buttons: [{
+          text: 'OK',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+            this.navCtrl.setRoot(HomePage);
+          }
+        }]
+      });
+      alert.present();
+
+  }, (err) => {
+
+    let alert = this.alertCtrl.create({
+      title: 'Error Updating Article',
+      subTitle: 'Please contact admin :-(',
+      buttons: [{
+        text: 'OK',
+        role: 'cancel',
+        handler: () => {
+          console.log('Cancel clicked');
+          this.navCtrl.setRoot(HomePage);
+        }
+      }]
+    });
+    alert.present();
+      //this.loading.dismiss();
+      console.log(err);
+  });
 
 }
 
@@ -236,14 +276,7 @@ onSelectStory(storyid){
 save(){
     // call API to save customer
     console.log(this.model);
-   /*  let lArticle = {
-    story : this.model.companyname,
-    companydescription : this.model.companydescription,
-    filename : this.model.filename,
-    email : this.model.email,
-    themes: this.model.themes
-    } */
-    this.model.publisheddate = '2018/04/01'; 
+    this.model.publisheddate = Date(); 
     this.storiesService.createStory(this.model).then((result) => {
         //this.loading.dismiss();
         console.log(result);

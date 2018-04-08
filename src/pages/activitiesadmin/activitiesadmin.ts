@@ -38,6 +38,7 @@ export class ActivitiesAdmin {
   volunteering:boolean = false;
   general:boolean = false;
   approval:boolean = false;
+  activities:any;
 
   public model = new Activity('','','','',0,false,'','','','',this.likes,this.volunteers,this.sponsors);
 
@@ -93,7 +94,7 @@ export class ActivitiesAdmin {
     this.volunteering = true;
     this.approval = false;
     this.general = false;
-    this.selectedActivityType = "Volunteering";
+    //this.selectedActivityType = "Volunteering";
   }
 
   createSponsorship(){
@@ -101,15 +102,18 @@ export class ActivitiesAdmin {
     this.volunteering = false;
     this.approval = false;
     this.general = false;
-    this.selectedActivityType = "Sponsorship";
+    //this.selectedActivityType = "Sponsorship";
   }
 
-  createOther(){
+  createActivity(){
     this.sponsorship = false;
     this.volunteering = false;
     this.approval = false;
-    this.general = true;
-    this.selectedActivityType = "Other";
+    this.general = false;
+    //this.selectedActivityType = "Other";
+    this.model = new Activity('','','','',0,false,'','','','',this.likes,this.volunteers,this.sponsors);
+    this.model.activityowner = this.user._id;
+    this.model.companyid = this.user.companyid;
   }
 
   approveActvities(){
@@ -118,10 +122,51 @@ export class ActivitiesAdmin {
     this.approval = true;
     this.general = false;
     this.selectedActivityType = "";
+    //Need to get all Activities for QCF, company ones for user...
+    this.activitiesService.getActivitiesUnapproved(this.user.companyid).then((result) => {
+      //this.loading.dismiss();
+      console.log(result);
+      this.activities = result;
+    }, (err) => {
+      //this.loading.dismiss();
+      console.log(err);
+    });
+
+  }
+
+  updateActivity(activity){
+
+    this.model = activity;
+    this.sponsorship = false;
+    this.volunteering = false;
+    this.approval = false;
+    this.general = false;
+    this.selectedActivityType = "";
+  }
+
+  approveActivity(activity){
+    activity.approved = true;
+    this.activitiesService.updateActivity(activity).then((result) => {
+      console.log(result);
+      this.model = new Activity('','','','',0,false,'','','','',this.likes,this.volunteers,this.sponsors);
+      this.sponsorship = false;
+      this.volunteering = false;
+      this.approval = false;
+      this.general = false;
+      this.selectedActivityType = "";
+    }, (err) => {
+      //this.loading.dismiss();
+      console.log(err);
+    });
   }
 
   onselectedActivityType(type){
     this.model.activitytype = type;
+    if(type.indexOf('Sponsorship')>=0){
+      this.sponsorship = true;
+    }else{
+      this.sponsorship = false;
+    }
   }
 
   save(){

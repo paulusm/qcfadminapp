@@ -162,12 +162,13 @@
                     
                     </div>
             </div>
+            <button *ngIf="updateexistingcompany=='false'" (click)=save(companyForm) class="btn btn-success btn-lg"><span class="glyphicon glyphicon-plus"></span>&nbsp;Add</button>
+            <button *ngIf="updateexistingcompany=='true'" (click)=update() class="btn btn-success btn-lg"><span class="glyphicon glyphicon-floppy-disk"></span>&nbsp;Update</button>
+
         </ion-card>
         </div>
         <!--  <p>{{selectedValues | json}}</p> -->
         
-            <button *ngIf="updateexistingcompany=='false'" (click)=save(companyForm) class="btn btn-success btn-lg"><span class="glyphicon glyphicon-plus"></span>&nbsp;Add</button>
-            <button *ngIf="updateexistingcompany=='true'" (click)=update() class="btn btn-success btn-lg"><span class="glyphicon glyphicon-floppy-disk"></span>&nbsp;Update</button>
     </form>
     </div>
 </div>
