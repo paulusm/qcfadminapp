@@ -48,24 +48,6 @@ import { Companies } from '../../providers/companies/companies';
     }
 
     ngOnInit(){
-        
-       /*  this.uploader.onBeforeUploadItem = (item) => {
-          item.withCredentials = false;
-        }
-    
-        //this.uploader.
-        this.uploader.onAfterAddingFile = (fileItem) => {
-          console.log("onAfterAddingFile");
-          this.filePreviewPath  = this.sanitizer.bypassSecurityTrustUrl((window.URL.createObjectURL(fileItem._file)));
-          
-          console.log(fileItem.file.name);
-        };
-    
-        this.uploader.onCompleteItem = (item:any, response:any, status:any, headers:any) => {
-          console.log("ImageUpload:uploaded:", item, status, response);
-          let obj = JSON.parse(response);
-          this.model.filename = obj.filename;
-        }; */
     
         //get all companies and bind to select drop down
         this.companiesService.getCompanies().then((data) => {
@@ -75,8 +57,6 @@ import { Companies } from '../../providers/companies/companies';
         },(err) => {
           console.log("not allowed");
         });
-       
-        
         
       }
     

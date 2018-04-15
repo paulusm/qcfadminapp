@@ -147,15 +147,77 @@ export class SignupPage {
   }
 
 makeAdmin(user){
-
+  let details = {
+    email: user.email,
+    password: user.password,
+    role: 'BusinessAdmin',
+    forename: user.forename,
+    surname: user.surname,
+    displayname: user.displayname,
+    companyid: user.companyid,
+    imagepath:user.imagepath,
+    department:user.department
+};
+console.log(details);
+this.usersService.updateProfile(details).then((result) => {
+  //this.loading.dismiss();
+  console.log(result);
+  this.usersService.getUsersByCompanyId(user.companyid).then((result) => {
+    //this.loading.dismiss();
+    console.log(result);
+    this.users = result;
+  }, (err) => {
+      //this.loading.dismiss();
+  });
+  
+}, (err) => {
+    //this.loading.dismiss();
+});
 }
 
 removeAdmin(user){
-
+  let details = {
+    email: user.email,
+    password: user.password,
+    role: 'Employee',
+    forename: user.forename,
+    surname: user.surname,
+    displayname: user.displayname,
+    companyid: user.companyid,
+    imagepath:user.imagepath,
+    department:user.department
+};
+console.log(details);
+this.usersService.updateProfile(details).then((result) => {
+  //this.loading.dismiss();
+  console.log(result);
+  this.usersService.getUsersByCompanyId(user.companyid).then((result) => {
+    //this.loading.dismiss();
+    console.log(result);
+    this.users = result;
+  }, (err) => {
+      //this.loading.dismiss();
+  });
+  
+}, (err) => {
+    //this.loading.dismiss();
+});
 }
 
 deleteUser(user){
-
+this.usersService.deleteUser(user._id).then((result)=>{
+  //console.log(result);
+  //this.users = result;
+  this.usersService.getUsersByCompanyId(user.companyid).then((result) => {
+    //this.loading.dismiss();
+    console.log(result);
+    this.users = result;
+  }, (err) => {
+      //this.loading.dismiss();
+  });
+}, (err) => {
+  //this.loading.dismiss();
+});
 }
 
   logout(){

@@ -65,5 +65,21 @@ export class Users {
            });
      }
 
+     deleteUser(id){
+      
+         return new Promise((resolve, reject) => {
+      
+             let headers = new Headers();
+             headers.append('Authorization', this.authService.token);
+      
+             this.http.delete('https://ionic2-qcf-auth.herokuapp.com/api/users/deleteUser/' + id, {headers: headers}).subscribe((res) => {
+                 resolve(res);
+             }, (err) => {
+                 reject(err);
+             });   
+      
+         });
+      
+       }
 }
  
