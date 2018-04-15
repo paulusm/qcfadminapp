@@ -2,6 +2,9 @@
         <ion-navbar>
           <ion-title style="zoom:1.5">Company Admin</ion-title>
           <ion-buttons end>
+                 <button ion-button>&nbsp;{{role}}&nbsp;</button>
+                 <button ion-button icon-only (click)="editprofile()"><ion-icon name="contact" style="zoom:1.5"></ion-icon></button>
+               
               <button ion-button icon-only (click)="logout()"><ion-icon name="power" style="zoom:1.5"></ion-icon></button>
           </ion-buttons>
         </ion-navbar>
@@ -17,17 +20,21 @@
             <span class="glyphicon glyphicon-plus"></span> Create New
             </button>
             <button *ngIf="role == 'QCFAdmin' || role == 'BusinessAdmin'" type="button" class="btn btn-primary btn-lg"
+            (click)="updatemycompany()">
+            <span class="glyphicon glyphicon-pencil"></span> My Company
+            </button>
+            <button *ngIf="role == 'QCFAdmin'" type="button" class="btn btn-primary btn-lg"
             (click)="updateexisting()">
-            <span class="glyphicon glyphicon-pencil"></span> Update Existing
+            <span class="glyphicon glyphicon-pencil"></span> Select Company
             </button>
             </div>
       </div>
       <ion-card>
       <div class="row">
           <div class="col-md-6">
-            <label *ngIf="updateexistingcompany =='true'" item-left>Select Company...</label>
-            <ion-item *ngIf="updateexistingcompany =='true'">
-            <ion-select class="form-control" item-left  [ngModel]="selectedValue" (ngModelChange)="selectItem($event)">
+            <label *ngIf="updateexistingcompany =='true'&&updatecompany == 'false'" item-left>Select Company...</label>
+            <ion-item *ngIf="updateexistingcompany =='true'&&updatecompany == 'false'">
+            <ion-select #select1 class="form-control" item-left  [ngModel]="selectedValue" (ngModelChange)="selectItem($event)">
                     <ion-option [value]="company.companyname" *ngFor="let company of companies">{{company.companyname}}</ion-option>
             </ion-select>
         </ion-item>

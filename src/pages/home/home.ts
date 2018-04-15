@@ -24,6 +24,8 @@ export class HomePage {
   files:any;
   galleryType = 'pinterest';
   user:any;
+  forename:any;
+  surname:any;
   role:any;
   //img1:string = "https://ionic2-qcf-auth.herokuapp.com/api/files/file/" file-1519663015207.jpg
 
@@ -44,6 +46,22 @@ export class HomePage {
   
  ngOnInit(){
    
+  this.authService.getUser().then((data) => {
+    //console.log("User Data:" + data);
+    console.log(data);
+    //this.user = data;
+    this.user = data;
+    this.forename = this.user.forename;
+    this.surname = this.user.surname;
+    //this.model.storyauthor = this.user._id;
+    //console.log("User _id:"+ this.user._id);
+    //this.model.companyid = this.user.companyid;
+    //console.log("Company _id:"+ this.user.companyid);
+    
+
+  },(err) => {
+    console.log("not allowed");
+  });
 
   this.authService.checkRole().then((data) => {
     //console.log("User Data:" + data);

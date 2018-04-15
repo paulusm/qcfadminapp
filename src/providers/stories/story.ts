@@ -15,7 +15,8 @@ constructor(
     public likes:string[],
     public type:string,
     public approved:boolean,
-    public companyid:string
+    public companyid:string,
+    public themename:string
 )
 {
    

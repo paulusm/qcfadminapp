@@ -75,6 +75,7 @@ import { Companies } from '../../providers/companies/companies';
         },(err) => {
           console.log("not allowed");
         });
+       
         
         
       }

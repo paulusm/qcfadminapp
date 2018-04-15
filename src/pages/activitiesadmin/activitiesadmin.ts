@@ -32,6 +32,7 @@ export class ActivitiesAdmin {
   user:any;
   activitytypes:string[] = ['Volunteering','Sponsorship','Other'];
   selectedActivityType:any;
+  role:any;
 
 //page controls
   sponsorship:boolean = false;
@@ -55,6 +56,7 @@ export class ActivitiesAdmin {
     this.authService.getUser().then((data) => {
       console.log(data);
       this.user = data;
+      this.role = this.user.role;
       this.model.activityowner = this.user._id;
       console.log("User _id:"+ this.user._id);
       this.model.companyid = this.user.companyid;

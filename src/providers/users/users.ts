@@ -48,5 +48,22 @@ export class Users {
     
      }
 
+     getUsersByCompanyId(companyid){
+
+      return new Promise((resolve, reject) => {
+        
+             let headers = new Headers();
+             headers.append('Authorization', this.authService.token);
+        
+             this.http.get('https://ionic2-qcf-auth.herokuapp.com/api/users/getUsersByCompanyId/'+companyid, {headers: headers})
+               .map(res => res.json())
+               .subscribe(data => {
+                 resolve(data);
+               }, (err) => {
+                 reject(err);
+               });
+           });
+     }
+
 }
  

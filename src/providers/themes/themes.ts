@@ -31,6 +31,23 @@ export class Themes {
  
   }
 
+  getThemeByID(id){
+    
+        return new Promise((resolve, reject) => {
+            
+                 let headers = new Headers();
+                 headers.append('Authorization', this.authService.token);
+            
+                 this.http.get('https://ionic2-qcf-auth.herokuapp.com/api/themes/getThemeByID/' + id, {headers: headers})
+                   .map(res => res.json())
+                   .subscribe(data => {
+                     resolve(data);
+                   }, (err) => {
+                     reject(err);
+                   });
+               });
+    }
+
   createTheme(theme){
     
        return new Promise((resolve, reject) => {

@@ -3,10 +3,9 @@
     <ion-title style="zoom:1.5">Quartet Community Foundation Application Administration</ion-title>
     
     <ion-buttons end>
-            <button ion-button icon-only (click)="editprofile()"><ion-icon name="contact" style="zoom:1.5"></ion-icon></button>
-            <button ion-button>&nbsp;{{role}}&nbsp;</button>
-            
-        <button ion-button icon-only (click)="logout()"><ion-icon name="power" style="zoom:1.5"></ion-icon></button>
+             <button ion-button>&nbsp;{{role}}&nbsp;<br>{{forename}}&nbsp;{{surname}}</button>
+             <button ion-button icon-only (click)="editprofile()"><ion-icon name="contact" style="zoom:1.5"></ion-icon></button>
+            <button ion-button icon-only (click)="logout()"><ion-icon name="power" style="zoom:1.5"></ion-icon></button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
@@ -82,7 +81,7 @@
                   <div>
                       <div><ion-icon name="people"></ion-icon>
                       </div>
-                  Stories Maintanance
+                  Articles Maintanance
                   </div>
                   </button>
                   <br>
@@ -120,7 +119,7 @@
      
         <div class="images" *ngSwitchCase="'pinterest'">
            <!--  <div class="one-image" *ngFor="let image of this.files"> -->
-                <img class="image-container" src="https://ionic2-qcf-auth.herokuapp.com/api/files/file/file-1522155929029.png">
+                <img class="image-container" src="https://ionic2-qcf-auth.herokuapp.com/api/files/file/file-1523792376990.jpg">
 <!--               <button class="customBtn" ion-button icon-right small (click)="deleteImage(image._id)">Delete</button> -->
            <!--  </div> -->
         </div>

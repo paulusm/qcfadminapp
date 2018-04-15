@@ -25,6 +25,18 @@
     
     } 
     .ios, .md {
+    ion-navbar {
+        height:100px;
+    }
+
+    ion-content {
+        margin-top:10px;
+    }
+     
+    ion-title {
+        color:#834b01;
+    }
+    
     scroll-content {
         display: flex;
         flex-direction: column;
@@ -91,6 +103,9 @@
         font-size: 0.9em;
         background-color: transparent;
         border: 1px solid #fff;
+    }
+    .btn-lg {
+        width:200px;
     }
     }
     

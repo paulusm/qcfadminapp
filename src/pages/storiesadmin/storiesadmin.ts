@@ -15,21 +15,25 @@ import { HomePage } from '../home/home';
   templateUrl: 'storiesadmin.html'
 })
 
+//This component is used to edit, create and view News, Articles and Stories..
 export class StoriesAdmin {
   likes:any;
-  public model = new Story('','','','','','',this.likes,'Story', false, '5ab7dbc0bc24e3001440543c');
+  //Main model for data objects being displayed
+  public model = new Story('','','','','','',this.likes,'Story', false, '5ab7dbc0bc24e3001440543c','');
+  //File uploader
   public uploader:FileUploader = new FileUploader({url:'https://ionic2-qcf-auth.herokuapp.com/api/files/upload'});
   public filePreviewPath: SafeUrl;
   filename:string;
   loading: any;
    
-  themescontrol = new FormControl();
+  //themescontrol = new FormControl();
   themes:any;
   selectedThemes:any;
   selectedValues:string;
   articletypes:string[] = ['Article','Story','News'];
   selectedArticleType:any;
 
+  //Switches for controlling display controls
   news:boolean = false;
   article:boolean = false;
   story:boolean = false;
@@ -37,19 +41,25 @@ export class StoriesAdmin {
   approveselected:boolean = false;
   stories:any;
   user:any;
+  //Role, setting default to lowest level of access.
   role:string='Employee';
+  getall:boolean=false;
+  getunapproved:boolean=false;
+  createnew:boolean = true;
+
+
   constructor(public navCtrl: NavController, public modalCtrl: ModalController,
     public alertCtrl: AlertController, public authService: Auth, public loadingCtrl: LoadingController,
     public storiesService :Stories, public themesService:Themes, private sanitizer: DomSanitizer) {
  
   }
 
+  //Get key data on loading view and setup objects
 ngOnInit(){
   this.uploader.onBeforeUploadItem = (item) => {
     item.withCredentials = false;
   }
 
-  //this.uploader.
   this.uploader.onAfterAddingFile = (fileItem) => {
     console.log("onAfterAddingFile");
     this.filePreviewPath  = this.sanitizer.bypassSecurityTrustUrl((window.URL.createObjectURL(fileItem._file)));
@@ -63,10 +73,14 @@ ngOnInit(){
     this.model.imagepath = obj.filename;
   };
 
+  //Get logged on user object and change choice list settings.
   this.authService.getUser().then((data) => {
     console.log("User Data:" + data);
     this.user = data;
     this.role = this.user.role;
+    if(this.role=='BusinessAdmin'){
+      this.articletypes = ['Story'];
+    }
     this.model.storyauthor = this.user._id;
     console.log("User _id:"+ this.user._id);
     this.model.companyid = this.user.companyid;
@@ -76,44 +90,44 @@ ngOnInit(){
     console.log("not allowed");
   });
 
-
+  //Get themes for drop down choice.
   this.themesService.getThemes().then((result) => {
-    //this.loading.dismiss();
     console.log(result);
     this.themes = result;
   }, (err) => {
-    //this.loading.dismiss();
     console.log(err);
   });
 
 }
 
+//Theme Drop Down event handler
 onSelectTheme(themeid){
+  //update model with selected Theme.
        this.model.themeid = themeid ;
- // console.log(this.model);
 }
 
+//Article Type event handler
 onselectedArticleType(articleType){
   this.model.type = articleType;
 }
 
-createNews(){
+/* createNews(){
   this.news = true;
   this.story = false;
   this.approve = false;
   this.article = false;
   this.approveselected = false;
   this.selectedArticleType = "News";
-}
+} */
 
-createStory(){
+/* createStory(){
   this.news = false;
   this.story = true;
   this.approve = false;
   this.article = false;
   this.approveselected = false;
   this.selectedArticleType = "Story";
-}
+} */
 
 createArticle(){
   this.news = false;
@@ -124,61 +138,82 @@ createArticle(){
   this.selectedArticleType = "Article";
 }
 
+//Called only by QCF Admin
 createStories(){
   this.news = false;
   this.story = false;
   this.approve = false;
   this.article = false;
   this.selectedArticleType = "";
-  this.model = new Story('','','','','','',this.likes,'Story', false, '5ab7dbc0bc24e3001440543c');
+  this.model = new Story('','','','','','',this.likes,'Story', false, this.user.companyid,'');
+  this.createnew=true;
+  this.getall=false;
+  this.getunapproved=false;
 }
 
+//Called only by Business Admin
 approveStories(){
   this.news = false;
   this.story = false;
   this.approve = true;
   this.article = false;
   this.selectedArticleType = "";
+  var theme:any;
 
-  this.storiesService.getUnapprovedStories(this.model.companyid).then((result) => {
-    //this.loading.dismiss();
+  this.storiesService.getStoriesByCompanyId(this.user.companyid).then((result) => {
     console.log("Returned Stories:" + result);
     this.stories = result;
+    for(let i=0; i< this.stories.length;i++){
+      console.log(this.stories[i].themeid);
+      theme = this.themes.find(theme => theme._id === this.stories[i].themeid);
+      console.log("Theme:" + theme);
+      if(theme){
+        this.stories[i].themename = theme.name;
+      }
+      
+    }
   }, (err) => {
-    //this.loading.dismiss();
     console.log(err);
   });
+  this.createnew=false;
+  this.getall=false;
+  this.getunapproved=true;
 }
 
+//Called only by QCFAdmin
 updateStories(){
   this.news = false;
   this.story = true;
   this.approve = false;
   this.article = false;
   this.selectedArticleType = "";
+  var theme:any;
 
   this.storiesService.getStories().then((result) => {
-    //this.loading.dismiss();
     console.log("Returned Stories:" + result);
     this.stories = result;
+    for(let i=0; i< this.stories.length;i++){
+      console.log(this.stories[i].themeid);
+      theme = this.themes.find(theme => theme._id === this.stories[i].themeid);
+      console.log("Theme:" + theme);
+      if(theme){
+        this.stories[i].themename = theme.name;
+      }
+      
+    }
   }, (err) => {
-    //this.loading.dismiss();
     console.log(err);
   });
+  this.createnew=false;
+  this.getall=true;
+  this.getunapproved=false;
 }
 
-//Save current model.
+//Save current model as approved..
 approveStory(){
-
-          console.log(this.model);
           this.model.approved = true;
-          
           this.storiesService.updateStory(this.model).then((result) => {
-            //this.loading.dismiss();
-            console.log(result);
-            //this.causeitems = result;
             console.log("Article created");
-
             let alert = this.alertCtrl.create({
               title: 'Article Approved Successfully',
               subTitle: 'This article has been updated and saved to the database.',
@@ -208,19 +243,16 @@ approveStory(){
             }]
           });
           alert.present();
-            //this.loading.dismiss();
             console.log(err);
         });
 
 }
 
+//Call the Update method for existing story
 updateStory(){
   console.log(this.model);
-  //this.model.publisheddate = Date(); 
   this.storiesService.updateStory(this.model).then((result) => {
-      //this.loading.dismiss();
       console.log(result);
-      //this.causeitems = result;
       console.log("Article updated");
 
       let alert = this.alertCtrl.create({
@@ -252,13 +284,27 @@ updateStory(){
       }]
     });
     alert.present();
-      //this.loading.dismiss();
       console.log(err);
   });
 
 }
 
+//Called when individual article selected for update.
+editStory(story){
+this.story = true;
+this.createnew = true;
+this.getall = false;
+this.getunapproved = false;
+this.model = story;
+}
 
+//called when individual article selected for preview
+viewStory(story){
+  
+  this.model = story;
+  }
+
+//now redundant.
 onSelectStory(storyid){
   console.log("StoryID:" + storyid);
   //console.log("Stories:" + this.stories);
@@ -273,16 +319,16 @@ onSelectStory(storyid){
   
 }
 
+//Call the create method
 save(){
     // call API to save customer
     console.log(this.model);
     this.model.publisheddate = Date(); 
+    if(this.user.role == 'QCFAdmin'){
+      this.model.approved = true;
+    }
     this.storiesService.createStory(this.model).then((result) => {
-        //this.loading.dismiss();
-        console.log(result);
-        //this.causeitems = result;
         console.log("Article created");
-  
         let alert = this.alertCtrl.create({
           title: 'Article Created Successfully',
           subTitle: 'This article has been created and saved to the database.',

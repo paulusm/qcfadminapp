@@ -26,6 +26,8 @@ import { Companies } from '../providers/companies/companies';
 import { Stories } from '../providers/stories/stories';
 import { FileSelectDirective } from 'ng2-file-upload';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FAQUpdatePage } from '../pages/faq/faq';
+
 
 @NgModule({
   declarations: [
@@ -41,7 +43,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FileSelectDirective,
     ForgotPage,
     ResetPage,
-    ProfileUpdatePage
+    ProfileUpdatePage,
+    FAQUpdatePage
   ],
   imports: [
     BrowserModule,
@@ -68,7 +71,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     StoriesAdmin,
     ForgotPage,
     ResetPage,
-    ProfileUpdatePage
+    ProfileUpdatePage,
+    FAQUpdatePage
   ],
   providers: [
     StatusBar,

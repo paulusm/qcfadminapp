@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, LoadingController } from 'ionic-angular';
 import { Auth } from '../../providers/auth/auth';
+import { Users } from '../../providers/users/users';
 import { HomePage } from '../home/home';
 import { LoginPage } from '../login/login';
 import { Company } from '../../providers/companies/company';
@@ -15,6 +16,7 @@ export class SignupPage {
   roles:string[] = ['Employee','BusinessAdmin','QCFAdmin'];
   
   user:any;
+  users:any;
   role: string;
   email: string;
   password: string;
@@ -27,9 +29,14 @@ export class SignupPage {
   selectedCompany:any;
   selectedRole:any;
 
+  //Variable to control view
+  addusers:boolean = true;
+  selectcompany:boolean = false;
+  displayusers:boolean = false;
 
   constructor(public navCtrl: NavController, public authService: Auth, 
-    public loadingCtrl: LoadingController, public companiesService:Companies) {
+    public loadingCtrl: LoadingController, public companiesService:Companies,
+  public usersService:Users) {
  
   }
  
@@ -112,7 +119,45 @@ export class SignupPage {
  
   }
 
+  addUsers(){
+    this.addusers = true;
+    this.selectcompany = false;
+    this.displayusers = false;
+  }
+
+  getUsers(){
+    this.addusers = false;
+    this.selectcompany = true;
+    this.displayusers = false;
+  }
   
+  getUsersByCompanyId(companyid){
+    this.addusers = false;
+    this.selectcompany = true;
+    this.displayusers = true;
+
+    this.usersService.getUsersByCompanyId(companyid).then((result) => {
+      //this.loading.dismiss();
+      console.log(result);
+      this.users = result;
+    }, (err) => {
+        //this.loading.dismiss();
+    });
+
+  }
+
+makeAdmin(user){
+
+}
+
+removeAdmin(user){
+
+}
+
+deleteUser(user){
+
+}
+
   logout(){
     
        this.authService.logout();

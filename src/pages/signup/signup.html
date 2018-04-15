@@ -3,6 +3,8 @@
    <ion-navbar>
      <ion-title>Create Account</ion-title>
      <ion-buttons end>
+                <button ion-button>&nbsp;{{role}}&nbsp;</button>
+                <button ion-button icon-only (click)="editprofile()"><ion-icon name="contact" style="zoom:1.5"></ion-icon></button>
             <button ion-button icon-only (click)="logout()"><ion-icon name="power" style="zoom:1.5"></ion-icon></button>
         </ion-buttons>
    </ion-navbar>
@@ -11,45 +13,98 @@
   
   
  <ion-content padding>
-        <h1 item-left>Register New Administrators and Employees</h1>
+        <div class="row">
+                <div class="col-md-7" >
+                <button *ngIf="role == 'QCFAdmin' || role == 'BusinessAdmin'" type="button" class="btn btn-success btn-lg"
+                (click)="addUsers()">
+                <span class="glyphicon glyphicon-file"></span> Add Users..
+                </button>
+                <button *ngIf="role == 'BusinessAdmin'||role == 'QCFAdmin'" type="button" class="btn btn-success btn-lg"
+                (click)="getUsers()">
+                <span class="glyphicon glyphicon-ok-sign"></span> View By Company..
+                </button>
+                <br>
+                </div>
+        </div>
+        <div class="row" *ngIf="selectcompany==true">
+                <ion-card><ion-label item-left>Select Company for these Users...</ion-label>
+                        <ion-item>
+                        <ion-select item-left class="form-control"  [ngModel]="selectedCompany" (ngModelChange)="getUsersByCompanyId($event)">
+                                <ion-option [value]="company._id" *ngFor="let company of companies">{{company.companyname}}</ion-option>
+                        </ion-select>
+                      </ion-item>
+                </ion-card>
+                        
+        </div>
+
+        <div class="row"  *ngIf="addusers==true">
+        
         <ion-row>
-        <ion-col col-6>
-        <ion-card>
-        <ion-row class="account-form">
+                <ion-label item-left>Register New Administrators and Employees</ion-label>
+                        <ion-col col-12>
+                                <ion-card>
+                                        <ion-row class="account-form">
+                                                <ion-col col-12>
+                                                        <ion-label item-left>Select the Role Type for these Users...</ion-label><br>
+                                                        <ion-item>
+                                                        <ion-select item-left class="form-control"  [ngModel]="selectedRole" (ngModelChange)="selectRole($event)">
+                                                                <ion-option [value]="role" *ngFor="let role of roles">{{role}}</ion-option>
+                                                        </ion-select>
+                                                        </ion-item>
+                                                </ion-col>
+                                        </ion-row>      
+                                        <ion-row class="account-form">
+                                        <ion-col col-12>
+                                        <ion-label>Input or paste a comma delimited list of email addresses below.</ion-label>
+                                        <ion-item>
+                                                <textarea type="text" class="form-control" placeholder="list of account names..." [(ngModel)]="accountnames"></textarea>
+                                        </ion-item>
+                                        </ion-col>
+                                        </ion-row>
+                                        <ion-row class="account-form">
+                                        <ion-col col-12>
+                                                        <ion-label item-left>Select Company for these Users...</ion-label>
+                                                        <ion-item>
+                                                        <ion-select item-left class="form-control"  [ngModel]="selectedCompany" (ngModelChange)="selectCompany($event)">
+                                                                <ion-option [value]="company._id" *ngFor="let company of companies">{{company.companyname}}</ion-option>
+                                                        </ion-select>
+                                                        </ion-item>
+                                                        <ion-item>
+                                                        <button (click)="registerEmployees()" class="btn btn-success btn-lg"><span class="glyphicon glyphicon-floppy-disk"></span>&nbsp;Register</button>
+                                                        </ion-item>
+                                        </ion-col>
+                                        </ion-row>
+                                </ion-card>
+                        </ion-col>
+        </ion-row>
+        </div>
+        <div class="row" *ngIf="displayusers">
                 <ion-col col-12>
-                              <ion-label item-left>Select the Role Type for these Users...</ion-label><br>
-                              <ion-item>
-                              <ion-select item-left  [ngModel]="selectedRole" (ngModelChange)="selectRole($event)">
-                                      <ion-option [value]="role" *ngFor="let role of roles">{{role}}</ion-option>
-                              </ion-select>
-                            </ion-item>
+                                <ion-card class="ion-card-activity" *ngFor="let user of users">
+                                                <ion-card-content>
+                                                        
+                                                            <ion-card-title class="ion-card-title">
+                                                                    {{user.forename}}&nbsp;{{user.surname}}
+                                                            </ion-card-title>
+                                                            <!-- <label>Image:&nbsp; {{story.imagepath}} </label><br> -->
+                                                            <!-- <label>Text:&nbsp; {{story.story}} </label><br> -->
+                                                            <label>{{user.email}} </label><br>
+                                                            <label>{{user.role}} </label><br>
+                                                            <button type="button" class="btn btn-success btn-sm"
+                                                            (click)="makeAdmin(user)">
+                                                            <span class="glyphicon glyphicon-pencil"></span> Add Admin..
+                                                            </button>
+                                                            <button type="button" class="btn btn-success btn-sm"
+                                                            (click)="removeAdmin(user)">
+                                                            <span class="glyphicon glyphicon-pencil"></span> Remove Admin..
+                                                            </button>
+                                                            <button type="button" class="btn btn-success btn-sm"
+                                                            (click)="deleteUser(user)">
+                                                            <span class="glyphicon glyphicon-ok"></span> Delete User..
+                                                            </button>
+                                                </ion-card-content>
+                                        </ion-card>
                 </ion-col>
-        </ion-row>      
-     <ion-row class="account-form">
-         <ion-col col-12>
-             <ion-label>Input or paste a comma delimited list of email addresses below.</ion-label>
-            <ion-item>
-                 <ion-input type="text" placeholder="list of account names..." [(ngModel)]="accountnames"></ion-input>
-            </ion-item>
-          
-           
-  
-         </ion-col>
-     </ion-row>
-  <ion-row class="account-form">
-      <ion-col col-12>
-                    <ion-label item-left>Select Company for these Users...</ion-label>
-                    <ion-item>
-                    <ion-select item-left  [ngModel]="selectedCompany" (ngModelChange)="selectCompany($event)">
-                            <ion-option [value]="company._id" *ngFor="let company of companies">{{company.companyname}}</ion-option>
-                    </ion-select>
-                  </ion-item>
-                  <ion-item>
-                  <button (click)="registerEmployees()" class="btn btn-success btn-lg"><span class="glyphicon glyphicon-floppy-disk"></span>&nbsp;Register</button>
-                  </ion-item>
-      </ion-col>
-  </ion-row>
-</ion-card>
-        </ion-col>
-</ion-row>
+
+        </div>
  </ion-content>

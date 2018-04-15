@@ -1,5 +1,5 @@
-import { Component, OnInit, ElementRef, Input  } from "@angular/core";
-import { NavController, ModalController, AlertController, LoadingController } from 'ionic-angular';
+import { Component, OnInit, ElementRef, Input, ViewChild  } from "@angular/core";
+import { NavController, ModalController, AlertController, LoadingController, Select } from 'ionic-angular';
 import { Auth } from '../../providers/auth/auth';
 import { LoginPage } from '../login/login';
 import { FileUploader } from 'ng2-file-upload';
@@ -12,6 +12,7 @@ import { Theme} from '../../providers/themes/theme';
 import { Files } from '../../providers/files/files';
 import { FormControl, FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
 import { HomePage } from '../home/home';
+import { Events } from 'ionic-angular';
 
 @Component({
   selector: 'company-admin',
@@ -35,15 +36,19 @@ export class CompanyAdmin implements OnInit {
 
   updateexistingcompany:any;
   createnewcompany:any;
+  updatecompany:any;
+
   fileRetrievePath:string;
   user:any;
   role:string = 'Employee';
+
+  @ViewChild('select1') select1: Select;
 
   constructor(public navCtrl: NavController, public modalCtrl: ModalController,
     public alertCtrl: AlertController, public authService: Auth, 
     public loadingCtrl: LoadingController, private sanitizer: DomSanitizer,
     public companiesService:Companies, public themesService:Themes,
-  public filesService:Files ) {
+  public filesService:Files, public events:Events ) {
  
       
   }
@@ -102,7 +107,17 @@ export class CompanyAdmin implements OnInit {
 
   }
 
-  
+  openSelect()
+  {
+      this.select1.open();
+  }
+
+  closeSelect()
+  {
+      this.select1.close();
+  }
+
+
 get currentCompany()
 {
    return JSON.stringify(this.model); 
@@ -152,11 +167,32 @@ selectItem(company){
 updateexisting(){
   this.updateexistingcompany = 'true';
   this.createnewcompany = 'false';
+  this.updatecompany='false';
+}
+
+updatemycompany(){
+  this.updateexistingcompany = 'true';
+  this.createnewcompany = 'false';
+  this.updatecompany='true';
+  this.companiesService.getCompanyByCompanyID(this.user.companyid).then((result) => {
+    this.model.companyname =  result['company']['companyname'];
+    this.model.companydescription =  result['company']['companydescription'];
+    this.model.email =  result['company']['email'];
+    this.model.filename =  result['company']['filename'];
+    this.model.themes = result['company']['themes'];
+    this.selectedThemes = result['company']['themes'];
+    this.fileRetrievePath = "https://ionic2-qcf-auth.herokuapp.com/api/files/file/" + result['company']['filename'];
+
+  }, (err) => {
+      //this.loading.dismiss();
+      console.log(err);
+  });
 }
 
 createnew(){
   this.updateexistingcompany = 'false';
   this.createnewcompany = 'true';
+  this.updatecompany='false';
   this.model = new Company('','','','',this.themes);
 }
 

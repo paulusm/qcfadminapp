@@ -14,7 +14,7 @@ page-home {
 
    
 
-    scroll-content {
+  /*   scroll-content {
         display: flex;
         flex-direction: column;
     }
@@ -38,9 +38,9 @@ page-home {
     ion-label {
         font-size: 1.5em;
         color:#1a0155;
-    }
+    } */
 
-    .heading-text {
+   /*  .heading-text {
         flex: 1;
         align-items: center;
         text-align: center;
@@ -63,7 +63,7 @@ page-home {
         background-color: transparent;
         border: 1px solid #fff;
     }
-
+ */
     @media (min-width: 0px) {
         .images {
             column-count: 2;
