@@ -18,6 +18,7 @@ import { Events } from 'ionic-angular';
   selector: 'company-admin',
   templateUrl: 'companyadmin.html'
 })
+
 export class CompanyAdmin implements OnInit {
  
   public uploader:FileUploader = new FileUploader({url:'https://ionic2-qcf-auth.herokuapp.com/api/files/upload'});
