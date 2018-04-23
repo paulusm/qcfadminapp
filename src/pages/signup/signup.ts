@@ -1,3 +1,8 @@
+/*
+Class created by: Alistair Dewar
+Date Created: Feb 2018
+Purpose: Add batches of users and check user by company..
+*/
 import { Component } from '@angular/core';
 import { NavController, LoadingController } from 'ionic-angular';
 import { Auth } from '../../providers/auth/auth';
@@ -65,7 +70,7 @@ export class SignupPage {
 
   selectCompany(companyid){
      this.companyid =  companyid;
-     if(companyid!='5ab7dbc0bc24e3001440543c')
+     if(companyid!='5ab7dbc0bc24e3001440543c'&& this.selectedRole == 'QCFAdmin')
      {
        this.selectedRole =  null;
      }

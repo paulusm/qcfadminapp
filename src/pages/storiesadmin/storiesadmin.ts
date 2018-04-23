@@ -1,3 +1,8 @@
+/*
+Class created by: Alistair Dewar
+Date Created: Feb 2018
+Purpose: Add new articles and storeis and view and approve.
+*/
 import { Component } from "@angular/core";
 import { NavController, ModalController, AlertController, LoadingController } from 'ionic-angular';
 import { Auth } from '../../providers/auth/auth';
@@ -110,24 +115,6 @@ onSelectTheme(themeid){
 onselectedArticleType(articleType){
   this.model.type = articleType;
 }
-
-/* createNews(){
-  this.news = true;
-  this.story = false;
-  this.approve = false;
-  this.article = false;
-  this.approveselected = false;
-  this.selectedArticleType = "News";
-} */
-
-/* createStory(){
-  this.news = false;
-  this.story = true;
-  this.approve = false;
-  this.article = false;
-  this.approveselected = false;
-  this.selectedArticleType = "Story";
-} */
 
 createArticle(){
   this.news = false;
@@ -296,6 +283,8 @@ this.createnew = true;
 this.getall = false;
 this.getunapproved = false;
 this.model = story;
+this.selectedThemes = story.themeid;
+this.selectedArticleType = story.type;
 }
 
 //called when individual article selected for preview

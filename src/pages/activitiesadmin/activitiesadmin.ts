@@ -1,6 +1,11 @@
+/*
+Class created by: Alistair Dewar
+Date Created: Feb 2018
+Purpose: Code behind for activities Admin page  used to create and update activities in Civitaz.
+*/
+
 import { Component } from "@angular/core";
 import { NavController, ModalController, AlertController, LoadingController } from 'ionic-angular';
-//import { Todos } from '../../providers/to-dos/to-dos';
 import { Auth } from '../../providers/auth/auth';
 import { LoginPage } from '../login/login';
 import { Company } from '../../providers/companies/company';
@@ -10,9 +15,6 @@ import { Theme} from '../../providers/themes/theme';
 import { FormControl, FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
 import { Activities } from '../../providers/activities/activities';
 import { Activity } from '../../providers/activities/activity';
-
-//import { FileUploader } from 'ng2-file-upload';
-//import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { HomePage } from '../home/home';
 
 
@@ -22,6 +24,7 @@ import { HomePage } from '../home/home';
 })
 export class ActivitiesAdmin {
  
+  //I like to call these mini models for holding data to control view and data binding.
   todos: any;
   loading: any;
   sponsors:any;
@@ -34,13 +37,14 @@ export class ActivitiesAdmin {
   selectedActivityType:any;
   role:any;
 
-//page controls
+  //page controls, control view based on data
   sponsorship:boolean = false;
   volunteering:boolean = false;
   general:boolean = false;
   approval:boolean = false;
   activities:any;
 
+  //main model for bindingto controller
   public model = new Activity('','','','',0,false,'','','','',this.likes,this.volunteers,this.sponsors);
 
   constructor(public navCtrl: NavController, public modalCtrl: ModalController,
@@ -50,9 +54,8 @@ export class ActivitiesAdmin {
  
   }
 
+  //Initiate data model
   ngOnInit(){
-    
-
     this.authService.getUser().then((data) => {
       console.log(data);
       this.user = data;
@@ -74,11 +77,7 @@ export class ActivitiesAdmin {
     },(err) => {
       console.log("not allowed");
     });
-    
-    //console.log("User:" + this.user);
-    
-
-   
+       
     
     this.themesService.getThemes().then((result) => {
       //this.loading.dismiss();
@@ -143,7 +142,7 @@ export class ActivitiesAdmin {
     this.volunteering = false;
     this.approval = false;
     this.general = false;
-    this.selectedActivityType = "";
+    this.selectedActivityType = activity.activitytype;
   }
 
   approveActivity(activity){
@@ -189,8 +188,8 @@ export class ActivitiesAdmin {
       console.log("Activity created");
 
       let alert = this.alertCtrl.create({
-        title: 'Activity Created Successfully',
-        subTitle: 'This activity has been created and saved to the database.',
+        title: 'Activity Updated Successfully',
+        subTitle: 'This activity has been updated and saved to the database.',
         buttons: [{
           text: 'OK',
           role: 'cancel',

@@ -1,5 +1,5 @@
 //Created By AListair Dewar: 20/02/2018
-//Type definition for CauseItem collection and all behaviours...
+//Type definition for Themes collection and all behaviours...
 
 import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';

@@ -39,14 +39,15 @@
 
         <div class="row"  *ngIf="addusers==true">
         
-        <ion-row>
-                <ion-label item-left>Register New Administrators and Employees</ion-label>
+        <ion-row style="margin:10px">
+                
                         <ion-col col-12>
+                                <ion-label item-left>Register New Administrators and Employees</ion-label>
                                 <ion-card>
                                         <ion-row class="account-form">
                                                 <ion-col col-12>
                                                         <ion-label item-left>Select the Role Type for these Users...</ion-label><br>
-                                                        <ion-item>
+                                                        <ion-item style="margin-left: 12px">
                                                         <ion-select item-left class="form-control"  [ngModel]="selectedRole" (ngModelChange)="selectRole($event)">
                                                                 <ion-option [value]="role" *ngFor="let role of roles">{{role}}</ion-option>
                                                         </ion-select>
@@ -56,16 +57,16 @@
                                         <ion-row class="account-form">
                                         <ion-col col-12>
                                         <ion-label>Input or paste a comma delimited list of email addresses below.</ion-label>
-                                        <ion-item>
-                                                <textarea type="text" class="form-control" placeholder="list of account names..." [(ngModel)]="accountnames"></textarea>
+                                        <ion-item style="padding-left: 0">
+                                                <textarea style="margin-left: 0" type="text" class="form-control" placeholder="list of account names..." [(ngModel)]="accountnames"></textarea>
                                         </ion-item>
                                         </ion-col>
                                         </ion-row>
                                         <ion-row class="account-form">
                                         <ion-col col-12>
                                                         <ion-label item-left>Select Company for these Users...</ion-label>
-                                                        <ion-item>
-                                                        <ion-select item-left class="form-control"  [ngModel]="selectedCompany" (ngModelChange)="selectCompany($event)">
+                                                        <ion-item style="margin-left: 12px">
+                                                        <ion-select class="form-control"  [ngModel]="selectedCompany" (ngModelChange)="selectCompany($event)">
                                                                 <ion-option [value]="company._id" *ngFor="let company of companies">{{company.companyname}}</ion-option>
                                                         </ion-select>
                                                         </ion-item>

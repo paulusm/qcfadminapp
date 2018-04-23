@@ -1,6 +1,8 @@
-//Created By Alistair Dewar:20/02/2018
-//Type definition for Theme....
-
+/*
+Class created by: Alistair Dewar
+Date Created: Feb 2018
+Purpose: Local activity data model.
+*/
 import { Storage } from '@ionic/storage';
 
 export class Activity {

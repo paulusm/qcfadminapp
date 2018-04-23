@@ -1,6 +1,8 @@
-//Created By Alistair Dewar: 20/02/2018
-//Here you will see how we make calls to the Auth provider.......
-
+/*
+Class created by: Alistair Dewar
+Date Created: Feb 2018
+Purpose: Login, password reset and forgot password .
+*/
 import { Component } from '@angular/core';
 import { NavController, LoadingController } from 'ionic-angular';
 import { Auth } from '../../providers/auth/auth';

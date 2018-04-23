@@ -1,3 +1,8 @@
+/*
+Class created by: Alistair Dewar
+Date Created: Feb 2018
+Purpose: Forgot password view..
+*/
 import { Component } from '@angular/core';
 import { NavController, LoadingController, NavParams } from 'ionic-angular';
 import { Auth } from '../../providers/auth/auth';

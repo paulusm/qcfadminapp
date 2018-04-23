@@ -1,3 +1,8 @@
+/*
+Class created by: Alistair Dewar
+Date Created: Feb 2018
+Purpose: Maintan themes for all companies.
+*/
 import {ChangeDetectorRef, AfterViewInit, Component, OnInit,NgZone} from "@angular/core";
 import { NavController, ModalController, AlertController, LoadingController, Events } from 'ionic-angular';
 import { Theme } from '../../providers/themes/theme';

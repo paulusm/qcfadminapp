@@ -1,3 +1,8 @@
+/*
+Class created by: Alistair Dewar
+Date Created: Feb 2018
+Purpose: Edit basic profile details in Admin tool. Appears in toolbar.
+*/
 import { Component } from '@angular/core';
 import { NavController, LoadingController } from 'ionic-angular';
 import { Auth } from '../../providers/auth/auth';

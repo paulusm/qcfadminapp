@@ -111,7 +111,7 @@
         
     <div class="row" >
         <div class="col-md-12">
-            <label item-left>Select Themes...</label>
+            <label item-left>Select Theme...</label>
             <ion-item >
             
             <ion-select name="selectedThemes" class="form-control"  [(ngModel)]="selectedThemes" (ngModelChange)="onSelectTheme($event)">
@@ -136,6 +136,7 @@
         </div>
 
         <div class="col-md-6">
+            <img src="https://ionic2-qcf-auth.herokuapp.com/api/files/file/{{model.imagepath}}"/>
             <img [src]="filePreviewPath" width="200" *ngIf="filePreviewPath" />
             <img [src]="fileRetrievePath" width="200" *ngIf="fileRetrievePath" />
         </div>

@@ -12,18 +12,18 @@
 
 <ion-content padding>
 <div class="row">
-        <div class="col-md-7">
+        <div class="col-md-5">
             <button type="button" class="btn btn-success btn-lg"
             (click)="createActivity()">
             <span class="glyphicon glyphicon-plus"></span> Create New Activity..
             </button>
             <button type="button" class="btn btn-success btn-lg" 
-            (click)="approveActvities()">
-            <span class="glyphicon glyphicon-plus"></span> View and Edit Approvals..
+            (click)="approveActvities()" style="width:250px">
+            <span class="glyphicon glyphicon-pencil"></span> View and Edit Approvals..
             </button>
             
         </div>
-        <div class="col-md-5">
+        <div class="col-md-4">
             <ion-card>
                  <div class="row">
                     <div class="col-md-6">
@@ -45,7 +45,7 @@
     
 </div>
 <div class="row" *ngIf="approval==true">
-    <div class="col-md-12">
+    <div class="col-md-9">
             
             <ion-card class="ion-card-activity" *ngFor="let activity of activities">
                     <ion-card-content>
@@ -74,7 +74,7 @@
 
 <div class="row"  *ngIf="approval==false">
     <ion-card>
-    <div class="col-md-12">
+    <div class="col-md-9">
         
     <ion-card-header>Add Activity Details</ion-card-header>
             
@@ -85,14 +85,12 @@
         <div class="form-group">
                 <label item-left>Activity Name</label>
                 <ion-item>
-                       
                         <ion-input type="text" class="form-control"  name="name" [(ngModel)]="model.activityname"></ion-input>
                 </ion-item>
                 
                 <label item-left>Description</label>
-                <ion-item >
-                    
-                    <ion-textarea type="text"  class="form-control" name="activitydescription" [(ngModel)]="model.activitydescription"></ion-textarea>
+                <ion-item>
+                    <textarea type="text"  class="form-control" name="activitydescription" [(ngModel)]="model.activitydescription"></textarea>
                 </ion-item>
                 
                 <label item-left>Select Activity Type...</label>
@@ -132,23 +130,9 @@
                 <br>
 
         </div>
-            <button (click)=save() class="btn btn-success btn-lg"><span class="glyphicon glyphicon-plus"></span>&nbsp;Save</button>
-<!--             <button *ngIf="updateexistingcompany=='true'" (click)=update() class="btn btn-success btn-lg"><span class="glyphicon glyphicon-floppy-disk"></span>&nbsp;Update</button>
- -->    </form>
+            <button (click)=save() class="btn btn-success btn-lg"><span class="glyphicon glyphicon-floppy-disk"></span>&nbsp;Save</button>
+    </form>
     </div>
 </ion-card>
 </div>
-
-
-<!-- <div class="col-md-4">
-                <ion-item *ngIf="sponsorship==true">
-                    <img class="image-container" src="https://ionic2-qcf-auth.herokuapp.com/api/files/file/file-1522588467911.jpg">
-                </ion-item>
-                <ion-item *ngIf="volunteering==true">
-                        <img class="image-container" src="https://ionic2-qcf-auth.herokuapp.com/api/files/file/file-1522589085006.jpg">
-                </ion-item>
-                 <ion-item *ngIf="approval==true">
-                        <img class="image-container" src="https://ionic2-qcf-auth.herokuapp.com/api/files/file/file-1522589063351.jpg">
-                </ion-item> 
-            </div> -->
 </ion-content>

@@ -29,17 +29,17 @@
             </button>
             </div>
       </div>
-      <ion-card>
-      <div class="row">
-          <div class="col-md-6">
+     
+      <div class="row"> <ion-card>
+        <div class="col-md-3">
             <label *ngIf="updateexistingcompany =='true'&&updatecompany == 'false'" item-left>Select Company...</label>
             <ion-item *ngIf="updateexistingcompany =='true'&&updatecompany == 'false'">
-            <ion-select #select1 class="form-control" item-left  [ngModel]="selectedValue" (ngModelChange)="selectItem($event)">
+                <ion-select #select1 class="form-control" item-left  [ngModel]="selectedValue" (ngModelChange)="selectItem($event)">
                     <ion-option [value]="company.companyname" *ngFor="let company of companies">{{company.companyname}}</ion-option>
-            </ion-select>
-        </ion-item>
+                </ion-select>
+            </ion-item>
         </div>
-          <div class="col-md-6" *ngIf="updateexistingcompany =='true' || createnewcompany =='true'">
+        <div class="col-md-6" *ngIf="updateexistingcompany =='true' || createnewcompany =='true'">
             <div class="row"  *ngIf="updateexistingcompany =='true' || createnewcompany =='true'">
                 <div class="col-md-8">
                     <form>
@@ -111,15 +111,16 @@
         </div>
 
         </div>
-      </div>
-      </ion-card>
+    </ion-card>
+    </div>
+      
     <div class="row"  *ngIf="updateexistingcompany =='true' || createnewcompany =='true'">
-    <div class="col-md-12">
+    <div class="col-md-8">
     <form  novalidate >
         <!-- we will place our fields here -->
         <div >
             <ion-card>
-                <ion-card-header>Add Company Details</ion-card-header>
+                <ion-card-header>Company Details</ion-card-header>
                 <label>Company Name</label>
                 <input type="text" class="form-control" name="name" [(ngModel)]="model.companyname">
                 <!--display error message if name is not valid-->
@@ -128,7 +129,7 @@
                 </small> -->
                 <br>
                 <label>Description</label>
-                <input type="text"  class="form-control" name="companydescription" [(ngModel)]="model.companydescription">
+                <textarea type="text"  class="form-control" name="companydescription" [(ngModel)]="model.companydescription"></textarea>
                 <!--display error message if name is not valid-->
                 <!-- <small *ngIf="!themeForm.controls.areaname.valid" class="text-danger">
                     Areaname is required (minimum 5 characters).
@@ -162,8 +163,8 @@
             <div class="col-md-6">
                     <ion-list>
                             <ion-label item-left>Selected Themes...</ion-label>
-                            <ion-item item-left *ngFor="let theme of selectedThemes">
-                                    <span class="floatleft">{{theme}}</span>
+                            <ion-item item-left style="height:15px;" *ngFor="let theme of selectedThemes">
+                                    <span class="floatright">{{theme}}</span>
                             </ion-item>
                         </ion-list>
                     

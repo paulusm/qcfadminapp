@@ -1,4 +1,9 @@
 import { Component } from '@angular/core';
+/*
+Class created by: Alistair Dewar
+Date Created: Feb 2018
+Purpose: Reset password manager.
+*/
 import { NavController, LoadingController, NavParams } from 'ionic-angular';
 import { Auth } from '../../providers/auth/auth';
 import { HomePage } from '../home/home';

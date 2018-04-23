@@ -1,3 +1,8 @@
+/*
+Class created by: Alistair Dewar
+Date Created: Feb 2018
+Purpose: Controller for Stories.
+*/
 import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import { Auth } from '../auth/auth';

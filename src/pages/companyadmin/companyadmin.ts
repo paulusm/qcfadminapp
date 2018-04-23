@@ -1,3 +1,10 @@
+/*
+Class created by: Alistair Dewar
+Date Created: Feb 2018
+Purpose: Code behind for Company Admin page  used to create and update companies in Civitaz.
+*/
+
+
 import { Component, OnInit, ElementRef, Input, ViewChild  } from "@angular/core";
 import { NavController, ModalController, AlertController, LoadingController, Select } from 'ionic-angular';
 import { Auth } from '../../providers/auth/auth';
@@ -21,6 +28,7 @@ import { Events } from 'ionic-angular';
 
 export class CompanyAdmin implements OnInit {
  
+  //Handles file uploads
   public uploader:FileUploader = new FileUploader({url:'https://ionic2-qcf-auth.herokuapp.com/api/files/upload'});
   public filePreviewPath: SafeUrl;
   public companyForm : FormGroup;
@@ -29,7 +37,7 @@ export class CompanyAdmin implements OnInit {
   companies:any;
   themescontrol = new FormControl();
   themes:any;
-  model = new Company('','','','',this.themes);
+  model = new Company('','','','','',this.themes);
   
   selectedThemes:any;
   selectedValues:string;
@@ -149,7 +157,7 @@ selectItem(company){
   this.companiesService.getCompanyByCompanyName(company).then((result) => {
     //this.loading.dismiss();
     console.log("Test1" + result['company']['companydescription']);
-
+    this.model._id = result['company']['_id'];
     this.model.companyname =  result['company']['companyname'];
     this.model.companydescription =  result['company']['companydescription'];
     this.model.email =  result['company']['email'];
@@ -176,12 +184,14 @@ updatemycompany(){
   this.createnewcompany = 'false';
   this.updatecompany='true';
   this.companiesService.getCompanyByCompanyID(this.user.companyid).then((result) => {
+    this.model._id = result['company']['_id'];
     this.model.companyname =  result['company']['companyname'];
     this.model.companydescription =  result['company']['companydescription'];
     this.model.email =  result['company']['email'];
     this.model.filename =  result['company']['filename'];
     this.model.themes = result['company']['themes'];
     this.selectedThemes = result['company']['themes'];
+    //this.colourtheme = 'app-color-theme-3';
     this.fileRetrievePath = "https://ionic2-qcf-auth.herokuapp.com/api/files/file/" + result['company']['filename'];
 
   }, (err) => {
@@ -194,7 +204,7 @@ createnew(){
   this.updateexistingcompany = 'false';
   this.createnewcompany = 'true';
   this.updatecompany='false';
-  this.model = new Company('','','','',this.themes);
+  this.model = new Company('','','','','',this.themes);
 }
 
 //CRUD methods for model in this form...
@@ -252,6 +262,7 @@ save() {
 
 update(){
   let lcompany = {
+    _id: this.model._id,
     companyname : this.model.companyname,
     companydescription : this.model.companydescription,
     filename : this.model.filename,

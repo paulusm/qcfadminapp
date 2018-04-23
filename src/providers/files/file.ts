@@ -1,5 +1,5 @@
 //Created By Alistair Dewar:20/02/2018
-//Type definition for Theme....
+//Type definition for file....
 
 import { Storage } from '@ionic/storage';
 

@@ -1,3 +1,8 @@
+/*
+Class created by: Alistair Dewar
+Date Created: Feb 2018
+Purpose: Users controller.
+*/
 import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import { Auth } from '../auth/auth';
